@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 # return number of records in df that have
 # missing values for education
@@ -52,4 +53,9 @@ def q8(df):
    countries = ['United-States', 'Canada', 'India', 'England', 'Germany']
    filtered = df[(df.income == '>50K') & (df.native_country.isin(countries))]
    results = filtered.groupby(['native_country']).hours_per_week.mean()
-   return results.to_dict()
+   results = results.to_dict()
+   keys = results.keys()
+   for country in countries:
+      if country not in keys:
+         results[country] = np.nan
+   return results

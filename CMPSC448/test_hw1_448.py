@@ -100,8 +100,13 @@ class TestHWQuestions(unittest.TestCase):
                 {'income': '<=50K', 'native_country': 'Canada', 'hours_per_week': 9999},
                 {'income': '<=50K', 'native_country': 'India', 'hours_per_week': 2}]
         df = pd.DataFrame(data, index = range(len(data)))
-        output = {'United-States': (25 / 3), 'Canada': 10.0, 'India': np.nan, 'England': 0.0, 'Germany': 0.0}
-        self.assertEqual(hw.q8(df), output)
+        output = {'United-States': (25 / 3), 'Canada': 10.0, 'India': np.nan, 'England': np.nan, 'Germany': np.nan}
+        result = hw.q8(df)
+        self.assertEqual(result['United-States'], output['United-States'])
+        self.assertEqual(result['Canada'], output['Canada'])
+        self.assertTrue(np.isnan(result['India']))
+        self.assertTrue(np.isnan(result['England']))
+        self.assertTrue(np.isnan(result['Germany']))
 
 
 if __name__ == '__main__':
