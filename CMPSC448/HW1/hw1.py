@@ -32,8 +32,16 @@ def q5(df):
    result = filtered.age.std()
    return result
 
+# return true if those in workclass a who earn >50K
+# is greater than those in workclass b who earn >50K
 def q6(df, a, b):
-   pass
+   income_filter = df[(df.income == '>50K')]
+   work_a = df[(df.workclass == a)].shape[0]
+   work_b = df[(df.workclass == b)].shape[0]
+   if work_a > work_b:
+      return True
+   return False
+
 
 def q7(df):
    pass
