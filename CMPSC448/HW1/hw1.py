@@ -36,8 +36,8 @@ def q5(df):
 # is greater than those in workclass b who earn >50K
 def q6(df, a, b):
    income_filter = df[(df.income == '>50K')]
-   work_a = df[(df.workclass == a)].shape[0]
-   work_b = df[(df.workclass == b)].shape[0]
+   work_a = income_filter[(income_filter.workclass == a)].shape[0]
+   work_b = income_filter[(income_filter.workclass == b)].shape[0]
    if work_a > work_b:
       return True
    return False

@@ -53,6 +53,20 @@ class TestHWQuestions(unittest.TestCase):
         std = stat.stdev([26, 33, 36])
         self.assertEqual(hw.q5(self.df), std)
 
+    # return true if those in workclass a who earn >50K
+    # is greater than those in workclass b who earn >50K
+    def test_q6(self):
+        data = [{'workclass': 'Private', 'income': '>50K'},
+                {'workclass': 'Private', 'income': '>50K'},
+                {'workclass': 'Local-gov', 'income': '>50K'},
+                {'workclass': 'Local-gov', 'income': '<=50K'},
+                {'workclass': 'Local-gov', 'income': '<=50K'},
+                {'workclass': 'Local-gov', 'income': '<=50K'},
+                {'workclass': 'Private', 'income': '<=50K'}]
+        df = pd.DataFrame(data, index = range(len(data)))
+        self.assertEqual(hw.q6(df, 'Private', 'Local-gov'), True)
+        self.assertEqual(hw.q6(df, 'Local-gov', 'Private'), False)
+
 
 
 
