@@ -66,8 +66,38 @@ class TestHWQuestions(unittest.TestCase):
         df = pd.DataFrame(data, index = range(len(data)))
         self.assertEqual(hw.q6(df, 'Private', 'Local-gov'), True)
         self.assertEqual(hw.q6(df, 'Local-gov', 'Private'), False)
+        # test if a is equal
+        df = df[1:][['workclass', 'income']]
+        self.assertEqual(hw.q6(df, 'Private', 'Local-gov'), False)
 
+    # return nuber of people who work >20 hours a week
+    # and earn <50K in income
+    def test_q7(self):
+        data = [{'income': '<=50K', 'hours_per_week': 20},
+                {'income': '<=50K', 'hours_per_week': 45},
+                {'income': '>50K', 'hours_per_week': 20},
+                {'income': '>50K', 'hours_per_week': 999},
+                {'income': '<=50K', 'hours_per_week': 18},
+                {'income': '<=50K', 'hours_per_week': 0}]
+        df = pd.DataFrame(data, index = range(len(data)))
+        self.assertEqual(hw.q7(df), 2)
+        # test zero
+        df = df[2:][['income', 'hours_per_week']]
+        self.assertEqual(hw.q7(df), 0)
 
+    # returns average work hours for income >50k
+    # United-States, Canada, India, England, Germany
+    def test_q8(self):
+        data = [{'income': '>50k', 'native_country': 'United-States', 'hours_per_week': 0},
+                {'income': '>50k', 'native_country': 'United-States', 'hours_per_week': 10},
+                {'income': '>50k', 'native_country': 'United-States', 'hours_per_week': 15},
+                {'income': '<=50k', 'native_country': 'United-States', 'hours_per_week': 9999},
+                {'income': '>50k', 'native_country': 'Canada', 'hours_per_week': 0},
+                {'income': '>50k', 'native_country': 'Canada', 'hours_per_week': 20},
+                {'income': '<=50k', 'native_country': 'Canada', 'hours_per_week': 9999}]
+        df = pd.DataFrame(data, index = range(len(data)))
+        output = {'United-States': (25 / 3), 'Canada': 10, 'India': 0, 'England': 0, 'Germany': 0}
+        self.assertEqual(hw.q8(df), output)
 
 
 if __name__ == '__main__':

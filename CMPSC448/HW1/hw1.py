@@ -42,9 +42,16 @@ def q6(df, a, b):
       return True
    return False
 
-
+# return nuber of people who work >20 hours a week
+# and earn <50K in income
 def q7(df):
-   pass
+   result = df[(df.income == '<=50K') & (df.hours_per_week >= 20)].shape[0]
+   return result
 
+# returns average work hours for income >50k
+# United-States, Canada, India, England, Germany
 def q8(df):
-   pass
+   countries = ['United-States', 'Canada', 'India', 'England', 'Germany']
+   filtered = df[(df.income == '>50K') & (df.native_country.isin(countries))]
+   results = filtered.groupby(['native_country']).hours_per_week.mean()
+   return results.to_dict()
