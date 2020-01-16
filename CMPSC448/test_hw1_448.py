@@ -88,15 +88,15 @@ class TestHWQuestions(unittest.TestCase):
     # returns average work hours for income >50k
     # United-States, Canada, India, England, Germany
     def test_q8(self):
-        data = [{'income': '>50k', 'native_country': 'United-States', 'hours_per_week': 0},
-                {'income': '>50k', 'native_country': 'United-States', 'hours_per_week': 10},
-                {'income': '>50k', 'native_country': 'United-States', 'hours_per_week': 15},
-                {'income': '<=50k', 'native_country': 'United-States', 'hours_per_week': 9999},
-                {'income': '>50k', 'native_country': 'Canada', 'hours_per_week': 0},
-                {'income': '>50k', 'native_country': 'Canada', 'hours_per_week': 20},
-                {'income': '<=50k', 'native_country': 'Canada', 'hours_per_week': 9999}]
+        data = [{'income': '>50K', 'native_country': 'United-States', 'hours_per_week': 0},
+                {'income': '>50K', 'native_country': 'United-States', 'hours_per_week': 10},
+                {'income': '>50K', 'native_country': 'United-States', 'hours_per_week': 15},
+                {'income': '<=50K', 'native_country': 'United-States', 'hours_per_week': 9999},
+                {'income': '>50K', 'native_country': 'Canada', 'hours_per_week': 0},
+                {'income': '>50K', 'native_country': 'Canada', 'hours_per_week': 20},
+                {'income': '<=50K', 'native_country': 'Canada', 'hours_per_week': 9999}]
         df = pd.DataFrame(data, index = range(len(data)))
-        output = {'United-States': (25 / 3), 'Canada': 10, 'India': 0, 'England': 0, 'Germany': 0}
+        output = {'United-States': (25 / 3), 'Canada': 10.0, 'India': 0.0, 'England': 0.0, 'Germany': 0.0}
         self.assertEqual(hw.q8(df), output)
 
 
