@@ -1,6 +1,7 @@
 # import statements
 import unittest
 import pandas as pd
+import numpy as np
 import HW1.hw1 as hw
 
 
@@ -37,7 +38,7 @@ class TestHWQuestions(unittest.TestCase):
         average = (33 + 40 + 60) / 3
         self.assertEqual(hw.q3(self.df), average) # average of test data
         df = self.df[self.df.sex == 'Female']
-        self.assertEqual(hw.q3(df), 0) # make sure no males is zero
+        self.assertTrue(np.isnan(hw.q3(df))) # make sure no males is nan
 
     # return number of females in df who
     # come from England
@@ -52,6 +53,8 @@ class TestHWQuestions(unittest.TestCase):
         import statistics as stat
         std = stat.stdev([26, 33, 36])
         self.assertEqual(hw.q5(self.df), std)
+        df = self.df[(self.df.income == '<=50K')]
+        self.assertTrue(np.isnan(hw.q5(df)))
 
     # return true if those in workclass a who earn >50K
     # is greater than those in workclass b who earn >50K
@@ -97,7 +100,7 @@ class TestHWQuestions(unittest.TestCase):
                 {'income': '<=50K', 'native_country': 'Canada', 'hours_per_week': 9999},
                 {'income': '<=50K', 'native_country': 'India', 'hours_per_week': 2}]
         df = pd.DataFrame(data, index = range(len(data)))
-        output = {'United-States': (25 / 3), 'Canada': 10.0, 'India': 0.0, 'England': 0.0, 'Germany': 0.0}
+        output = {'United-States': (25 / 3), 'Canada': 10.0, 'India': np.nan, 'England': 0.0, 'Germany': 0.0}
         self.assertEqual(hw.q8(df), output)
 
 

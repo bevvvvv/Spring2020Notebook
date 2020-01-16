@@ -15,8 +15,6 @@ def q2(df):
 # return average age of males in df
 def q3(df):
    result = df[df.sex == 'Male'].age.mean()
-   if df[df.sex == 'Male'].age.count() == 0:
-      return 0
    return result
 
 # return number of females in df who
