@@ -9,9 +9,14 @@ student_name = "Joseph Peter Sepich"
 ############################################################
 
 python_concepts_question_1 = """
-Type your response here.
-Your response may span multiple lines.
-Do not include these instructions in your response.
+Python is both strongly and dynamically typed. Since python is a strongly
+typed language, every object has a fixed type. This is why you cannot use
+the + operator on a string and integer togeter: \"Age: \" + 21. The integer in
+this case would have to be cast to a string for concatenation. Dynamic typing means
+that typing for a variable is determined a run time (when it is assigned). There are
+two lines of code: x = 420; x = "april". Python would then make x an integer on the first
+assignment and a string on the second assigment. This differs from static typing in that
+as soon as x is assigned to an integer then it must remain an integer through its scope.
 """
 
 python_concepts_question_2 = """
