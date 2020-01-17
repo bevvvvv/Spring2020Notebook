@@ -41,7 +41,7 @@ new string object.
 ############################################################
 
 def extract_and_apply(l, p, f):
-    pass
+    return [f(x) for x in l if p(x)]
 
 def concatenate(seqs):
     pass
