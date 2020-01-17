@@ -20,9 +20,12 @@ as soon as x is assigned to an integer then it must remain an integer through it
 """
 
 python_concepts_question_2 = """
-Type your response here.
-Your response may span multiple lines.
-Do not include these instructions in your response.
+The problem for the proposed dictionary is that keys cannot be lists.
+An easy solution for this would be to flip the key-value pairs in the example
+so that the associated names are the keys for the 2-D points:
+points_to_names = {"home": [0, 0], "school": [1, 2], "market": [-1, 1]}.
+An interesting concept to note is that the coordinates could be use as keys
+if they were tuple types (which are immutable and ordered).
 """
 
 python_concepts_question_3 = """
