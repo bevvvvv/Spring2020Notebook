@@ -29,9 +29,11 @@ if they were tuple types (which are immutable and ordered).
 """
 
 python_concepts_question_3 = """
-Type your response here.
-Your response may span multiple lines.
-Do not include these instructions in your response.
+Of the two concatenation functions given the second function would
+be significantly faster for larger inputs. Strings are immutable data types
+and the first function has to create a new string object for each element in the
+list of the strings. The second function however only requires creating a single
+new string object.
 """
 
 ############################################################
