@@ -18,7 +18,12 @@ class TestHWQuestions(unittest.TestCase):
         self.assertEqual(hw.extract_and_apply(test_list, test_predicate, test_function), [0,1,2])
 
     def test_concatenate(self):
-        pass
+        test_input = [[1, 2], [3, 4]]
+        test_output = [1, 2, 3, 4]
+        self.assertEqual(hw.concatenate(test_input), test_output)
+        test_input = ["abc", (0, [0])]
+        test_output = ['a', 'b', 'c', 0, [0]]
+        self.assertEqual(hw.concatenate(test_input), test_output)
 
     def test_transpose(self):
         pass

@@ -44,7 +44,7 @@ def extract_and_apply(l, p, f):
     return [f(x) for x in l if p(x)]
 
 def concatenate(seqs):
-    pass
+    return [item for iterator in seqs for item in iterator]
 
 def transpose(matrix):
     pass
