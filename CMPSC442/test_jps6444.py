@@ -170,28 +170,66 @@ class TestHWQuestions(unittest.TestCase):
         self.assertEqual(p.get_polynomial(), ((-2, 1), (1, 0)))
 
     def test__add__(self):
-        test_input = [(2, 1), (-1, 0)]
+        test_input = [(2, 1), (1, 0)]
         p = hw.Polynomial(test_input)
         q = p + p
-        self.assertEqual(q.get_polynomial(), ((4, 1), (-2, 0)))
-        q = hw.Polynomial([(4, 3), (3, 2), (2, 1)])
+        self.assertEqual(q.get_polynomial(), ((2, 1), (1, 0), (2, 1), (1, 0)))
+        q = hw.Polynomial([(4, 3), (3, 2)])
         r = p + q
-        self.assertEqual(r.get_polynomial(), ((4, 3), (3, 2), (4, 1), (-1, 0)))
+        self.assertEqual(r.get_polynomial(), ((2, 1), (1, 0), (4, 3), (3, 2)))
 
     def test__sub__(self):
-        pass
+        test_input = [(2, 1), (1, 0)]
+        p = hw.Polynomial(test_input)
+        q = p - p
+        self.assertEqual(q.get_polynomial(), ((2, 1), (1, 0), (-2, 1), (-1, 0)))
+        q = hw.Polynomial([(4, 3), (3, 2)])
+        r = p - q
+        self.assertEqual(r.get_polynomial(), ((2, 1), (1, 0), (-4, 3), (-3, 2)))
 
     def test__mul__(self):
-        pass
+        p = hw.Polynomial([(2, 1), (1, 0)])
+        q = hw.Polynomial([(4, 3), (3, 2)])
+        r = p * p
+        self.assertEqual(r.get_polynomial(), ((4, 2), (2, 1), (2, 1), (1, 0)))
+        r = p * q
+        self.assertEqual(r.get_polynomial(), ((8, 4), (6, 3), (4, 3), (3, 2)))
 
     def test__call__(self):
-        pass
+        p = hw.Polynomial([(2, 1), (1, 0)])
+        self.assertEqual([p(x) for x in range(5)], [1, 3, 5, 7, 9])
+        q = -(p * p) + p
+        self.assertEqual([q(x) for x in range(5)], [0, -6, -20, -42, -72])
 
     def test_simplify(self):
-        pass
+        p = hw.Polynomial([(2, 1), (1, 0)])
+        q = -p + (p * p)
+        self.assertEqual(q.get_polynomial(), ((-2, 1), (-1, 0), (4, 2), (2, 1), (2, 1), (1, 0)))
+        q.simplify()
+        self.assertEqual(q.get_polynomial(), ((4, 2), (2, 1)))
+        q = p - p
+        self.assertEqual(q.get_polynomial(), ((2, 1), (1, 0), (-2, 1), (-1, 0)))
+        q.simplify()
+        self.assertEqual(q.get_polynomial(), ((0, 0),))
 
     def test__str__(self):
-        pass
+        p = hw.Polynomial([(1, 1), (1, 0)])
+        qs = (p, p + p, -p, -p - p, p * p)
+        for q in qs:
+            q.simplify()
+        self.assertEqual(str(qs[0]), 'x + 1')
+        self.assertEqual(str(qs[1]), '2x + 2')
+        self.assertEqual(str(qs[2]), '-x - 1')
+        self.assertEqual(str(qs[3]), '-2x - 2')
+        self.assertEqual(str(qs[4]), 'x^2 + 2x + 1')
+        p = hw.Polynomial([(0, 1), (2, 3)])
+        self.assertEqual(str(p), '0x + 2x^3')
+        self.assertEqual(str(p * p), '0x^2 + 0x^4 + 0x^4 + 4x^6')
+        self.assertEqual(str(-p * p), '0x^2 + 0x^4 + 0x^4 - 4x^6')
+        q = hw.Polynomial([(1, 1), (2, 3)])
+        self.assertEqual(str(q), 'x + 2x^3')
+        self.assertEqual(str(q * q), 'x^2 + 2x^4 + 2x^4 + 4x^6')
+        self.assertEqual(str(-q * q), '-x^2 - 2x^4 - 2x^4 - 4x^6')
 
 # main function
 if __name__ == '__main__':

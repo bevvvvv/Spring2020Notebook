@@ -140,6 +140,26 @@ class Polynomial(object):
         return Polynomial(neg)
 
     def __add__(self, other):
+        add = []
+        for tup in self.get_polynomial():
+            add.append(tup)
+        for tup in other.get_polynomial():
+            add.append(tup)
+        return Polynomial(add)
+
+    def __sub__(self, other):
+        neg_other = -other
+        return self + neg_other
+
+    def __mul__(self, other):
+        mul = [(pair[0] * other_pair[0],pair[1] + other_pair[1]) for pair in self.get_polynomial() \
+            for other_pair in other.get_polynomial()]
+        return Polynomial(mul)
+
+    def __call__(self, x):
+        return sum([pair[0] * x ** pair[1] for pair in self.get_polynomial()])
+
+    def simplify(self):
         coeffs = {}
         for pair in self.get_polynomial():
             key = pair[1]
@@ -148,50 +168,68 @@ class Polynomial(object):
                 coeffs[key] += value
             else:
                 coeffs[key] = value
-        for pair in other.get_polynomial():
-            key = pair[1]
-            value = pair[0]
-            if key in coeffs:
-                coeffs[key] += value
-            else:
-                coeffs[key] = value
-        add = [(coeffs[key], key) for key in coeffs.__iter__()]
-        add.sort(key = lambda x: x[1], reverse = True)
-        return Polynomial(add)
-
-    def __sub__(self, other):
-        pass
-
-    def __mul__(self, other):
-        pass
-
-    def __call__(self, x):
-        pass
-
-    def simplify(self):
-        pass
+        delete = []
+        for key in coeffs.__iter__():
+            if coeffs[key] == 0:
+                delete.append(key)
+        for key in delete:
+            del coeffs[key]
+        simp = [(coeffs[key], key) for key in coeffs.__iter__()]
+        simp.sort(key = lambda x: x[1], reverse = True)
+        if len(simp) == 0:
+            simp = [(0, 0)]
+        self.poly_tuple = tuple(simp)
 
     def __str__(self):
-        pass
+        string = ""
+        first = True
+        for pair in self.get_polynomial():
+            coeff = pair[0]
+            exp = pair[1]
+            if first == True: # First term
+                if coeff < 0:
+                    string += "-"
+                    coeff = coeff * -1
+                first = False
+            else:
+                string += " " # operator
+                if coeff < 0:
+                    string += "- "
+                    coeff = coeff * -1
+                else:
+                    string += "+ "
+            use_coeff = coeff != 1
+            if exp == 0:
+                string += str(coeff)
+            elif exp == 1:
+                if use_coeff:
+                    string += str(coeff)
+                string += "x"
+            else:
+                if use_coeff:
+                    string += str(coeff)
+                string += "x^" + str(exp)
+        return string
 
 ############################################################
 # Section 7: Feedback
 ############################################################
 
 feedback_question_1 = """
-Type your response here.
-Your response may span multiple lines.
-Do not include these instructions in your response.
+I spent approximately three hours on this assignment.
 """
 
 feedback_question_2 = """
-Type your response here.
-Your response may span multiple lines.
-Do not include these instructions in your response.
+I found the polynomial section most challenging, because
+I had not read the instructions correctly and I was trying
+to put the simplify functionality built into each operator.
+Most questions were pretty straightforward from lecture.
 """
 
 feedback_question_3 = """
-Type your response here.
-Your response may span multiple lines.
-Do not include these instructions in your response.
+I liked the variety of topics in the assignment and I
+really liked having the test cases. This made writing
+unit tests for the program really easy. The variety
+also helped to cover all the python features we
+learned about in lecture and put them in a real setting.
 """
