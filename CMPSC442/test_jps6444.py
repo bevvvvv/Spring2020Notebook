@@ -83,13 +83,28 @@ class TestHWQuestions(unittest.TestCase):
     ############################################################
 
     def test_prefixes(self):
-        pass
+        test_input = [1, 2, 3]
+        test_output = [[], [1], [1, 2], [1, 2, 3]]
+        self.assertEqual(list(hw.prefixes(test_input)), test_output)
+        test_input = "abc"
+        test_output = ['', 'a', 'ab', 'abc']
+        self.assertEqual(list(hw.prefixes(test_input)), test_output)
 
     def test_suffixes(self):
-        pass
+        test_input = [1, 2, 3]
+        test_output = [[1, 2, 3], [2, 3], [3], []]
+        self.assertEqual(list(hw.suffixes(test_input)), test_output)
+        test_input = "abc"
+        test_output = ['abc', 'bc', 'c', '']
+        self.assertEqual(list(hw.suffixes(test_input)), test_output)
 
     def test_slices(self):
-        pass
+        test_input = [1, 2, 3]
+        test_output = [[1], [1, 2], [1, 2, 3], [2], [2, 3], [3]]
+        self.assertEqual(list(hw.slices(test_input)), test_output)
+        test_input = "abc"
+        test_output = ['a', 'ab', 'abc', 'b', 'bc', 'c']
+        self.assertEqual(list(hw.slices(test_input)), test_output)
 
     ############################################################
     # Section 5: Text Processing

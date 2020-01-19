@@ -67,13 +67,28 @@ def every_other(seq):
 ############################################################
 
 def prefixes(seq):
-    pass
+    stop = 0
+    while stop <= len(seq):
+        yield seq[0:stop]
+        stop += 1
 
 def suffixes(seq):
-    pass
+    start = 0
+    while start <= len(seq):
+        yield seq[start:len(seq)]
+        start += 1
 
 def slices(seq):
-    pass
+    first_point = 0
+    second_point = 0
+    while first_point <= len(seq):
+        while second_point <= len(seq):
+            out = seq[first_point:second_point]
+            if len(out) > 0:
+                yield out
+            second_point += 1
+        first_point += 1
+        second_point = 0
 
 ############################################################
 # Section 5: Text Processing
