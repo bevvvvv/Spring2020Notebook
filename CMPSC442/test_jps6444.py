@@ -26,20 +26,57 @@ class TestHWQuestions(unittest.TestCase):
         self.assertEqual(hw.concatenate(test_input), test_output)
 
     def test_transpose(self):
-        pass
+        test_input = [[1, 2, 3]]
+        test_output = [[1], [2], [3]]
+        self.assertEqual(hw.transpose(test_input), test_output)
+        test_input = [[1, 2], [3, 4], [5, 6]]
+        test_output = [[1, 3, 5], [2, 4, 6]]
+        self.assertEqual(hw.transpose(test_input), test_output)
 
     ############################################################
     # Section 3: Sequence Slicing
     ############################################################
 
     def test_copy(self):
-        pass
+        test_input = "abc"
+        test_output = "abc"
+        self.assertEqual(hw.copy(test_input), test_output)
+        test_input = (1, 2, 3)
+        test_output = (1, 2, 3)
+        self.assertEqual(hw.copy(test_input), test_output)
+        test_input = [0, 0, 0]
+        test_output = [0, 0, 0]
+        case = hw.copy(test_input)
+        test_input[0] = 1
+        self.assertNotEqual(test_input, test_output)
 
     def test_all_but_last(self):
-        pass
+        test_input = "abc"
+        test_output = 'ab'
+        self.assertEqual(hw.all_but_last(test_input), test_output)
+        test_input = (1, 2, 3)
+        test_output = (1, 2)
+        self.assertEqual(hw.all_but_last(test_input), test_output)
+        test_input = ""
+        test_output = ""
+        self.assertEqual(hw.all_but_last(test_input), test_output)
+        test_input = []
+        test_output = []
+        self.assertEqual(hw.all_but_last(test_input), test_output)
 
     def test_every_other(self):
-        pass
+        test_input = [1, 2, 3, 4, 5]
+        test_output = [1, 3, 5]
+        self.assertEqual(hw.every_other(test_input), test_output)
+        test_input = "abcde"
+        test_output = 'ace'
+        self.assertEqual(hw.every_other(test_input), test_output)
+        test_input = "abcdef"
+        test_output = 'ace'
+        self.assertEqual(hw.every_other(test_input), test_output)
+        test_input = [1, 2, 3, 4, 5, 6]
+        test_output = [1, 3, 5]
+        self.assertEqual(hw.every_other(test_input), test_output)
 
     ############################################################
     # Section 4: Combinatorial Algorithms

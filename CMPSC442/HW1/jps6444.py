@@ -47,20 +47,20 @@ def concatenate(seqs):
     return [item for iterator in seqs for item in iterator]
 
 def transpose(matrix):
-    pass
+    return [[matrix[r][c] for r in range(len(matrix))] for c in range(len(matrix[0]))]
 
 ############################################################
 # Section 3: Sequence Slicing
 ############################################################
 
 def copy(seq):
-    pass
+    return seq[:]
 
 def all_but_last(seq):
-    pass
+    return seq[0:-1]
 
 def every_other(seq):
-    pass
+    return seq[::2]
 
 ############################################################
 # Section 4: Combinatorial Algorithms
