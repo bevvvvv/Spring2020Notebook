@@ -111,16 +111,42 @@ class TestHWQuestions(unittest.TestCase):
     ############################################################
 
     def test_normalize(self):
-        pass
+        test_input = "This is an example."
+        test_output = 'this is an example.'
+        self.assertEqual(hw.normalize(test_input), test_output)
+        test_input = "   EXTRA   SPACE   "
+        test_output = 'extra space'
+        self.assertEqual(hw.normalize(test_input), test_output)
 
     def test_no_vowels(self):
-        pass
+        test_input = "This is an example."
+        test_output = 'Ths s n xmpl.'
+        self.assertEqual(hw.no_vowels(test_input), test_output)
+        test_input = "We love Python!"
+        test_output = 'W lv Pythn!'
+        self.assertEqual(hw.no_vowels(test_input), test_output)
 
     def test_digits_to_words(self):
-        pass
+        test_input = "Zip Code: 19104"
+        test_output = 'one nine one zero four'
+        self.assertEqual(hw.digits_to_words(test_input), test_output)
+        test_input = "Pi is 3.1415..."
+        test_output = 'three one four one five'
+        self.assertEqual(hw.digits_to_words(test_input), test_output)
+        test_input = "123456789"
+        test_output = 'one two three four five six seven eight nine'
+        self.assertEqual(hw.digits_to_words(test_input), test_output)
+        test_input = "Pi is..."
+        test_output = ''
+        self.assertEqual(hw.digits_to_words(test_input), test_output)
 
     def test_to_mixed_case(self):
-        pass
+        test_input = "to_mixed_case"
+        test_output = 'toMixedCase'
+        self.assertEqual(hw.to_mixed_case(test_input), test_output)
+        test_input = "__EXAMPLE__NAME__"
+        test_output = 'exampleName'
+        self.assertEqual(hw.to_mixed_case(test_input), test_output)
 
     ############################################################
     # Section 6: Polynomials

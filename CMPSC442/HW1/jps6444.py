@@ -95,16 +95,33 @@ def slices(seq):
 ############################################################
 
 def normalize(text):
-    pass
+    result = text.split(' ')
+    result = [x for x in result if len(x) > 0]
+    result = " ".join(result)
+    return result.lower()
 
 def no_vowels(text):
-    pass
+    vowels = ['a', 'e', 'i', 'o', 'u']
+    result = text
+    for letter in vowels:
+        result = result.replace(letter, '')
+    return result
 
 def digits_to_words(text):
-    pass
+    digits = [int(digit) for digit in text if digit.isdigit()]
+    english = {0: 'zero', 1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five', 6: 'six', 7: 'seven', 8: 'eight', 9: 'nine'}
+    output = [english[digit] for digit in digits]
+    return " ".join(output)
 
 def to_mixed_case(name):
-    pass
+    words = name.split('_')
+    words = [word for word in words if len(word) > 0]
+    for i in range(len(words)):
+        if i == 0:
+            words[i] = words[i].lower()
+        else:
+            words[i] = words[i].lower().capitalize()
+    return "".join(words)
 
 ############################################################
 # Section 6: Polynomials
