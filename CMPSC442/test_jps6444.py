@@ -153,16 +153,30 @@ class TestHWQuestions(unittest.TestCase):
     ############################################################
 
     def test__init__(self):
-        pass
+        test_input = [(2, 1), (1, 0)]
+        p = hw.Polynomial(test_input)
 
     def test_get_polynomial(self):
-        pass
+        test_input = [(2, 1), (1, 0)]
+        p = hw.Polynomial(test_input)
+        self.assertEqual(p.get_polynomial(), ((2, 1), (1, 0)))
 
     def test__neg__(self):
-        pass
+        test_input = [(2, 1), (-1, 0)]
+        p = hw.Polynomial(test_input)
+        p = -p
+        self.assertEqual(p.get_polynomial(), ((-2, 1), (1, 0)))
+        p = -(-p)
+        self.assertEqual(p.get_polynomial(), ((-2, 1), (1, 0)))
 
     def test__add__(self):
-        pass
+        test_input = [(2, 1), (-1, 0)]
+        p = hw.Polynomial(test_input)
+        q = p + p
+        self.assertEqual(q.get_polynomial(), ((4, 1), (-2, 0)))
+        q = hw.Polynomial([(4, 3), (3, 2), (2, 1)])
+        r = p + q
+        self.assertEqual(r.get_polynomial(), ((4, 3), (3, 2), (4, 1), (-1, 0)))
 
     def test__sub__(self):
         pass

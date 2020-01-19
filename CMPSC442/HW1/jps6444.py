@@ -130,16 +130,34 @@ def to_mixed_case(name):
 class Polynomial(object):
 
     def __init__(self, polynomial):
-        pass
+        self.poly_tuple = tuple(polynomial)
 
     def get_polynomial(self):
-        pass
+        return self.poly_tuple
 
     def __neg__(self):
-        pass
+        neg = [(-pair[0], pair[1]) for pair in self.poly_tuple]
+        return Polynomial(neg)
 
     def __add__(self, other):
-        pass
+        coeffs = {}
+        for pair in self.get_polynomial():
+            key = pair[1]
+            value = pair[0]
+            if key in coeffs:
+                coeffs[key] += value
+            else:
+                coeffs[key] = value
+        for pair in other.get_polynomial():
+            key = pair[1]
+            value = pair[0]
+            if key in coeffs:
+                coeffs[key] += value
+            else:
+                coeffs[key] = value
+        add = [(coeffs[key], key) for key in coeffs.__iter__()]
+        add.sort(key = lambda x: x[1], reverse = True)
+        return Polynomial(add)
 
     def __sub__(self, other):
         pass
