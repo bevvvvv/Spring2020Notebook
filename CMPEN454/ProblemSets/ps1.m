@@ -50,7 +50,7 @@ function ps1()
     disp(crossCorr)
     
     % 2c new filter
-    disp('Second derivative convulution')
+    disp('Laplace convulution')
     filter = [1 -2 1];
     convu = zeros(1,5);
     for pixel = 1:length(pixels)
@@ -64,7 +64,7 @@ function ps1()
     disp(convu)
     
     % 2d would previous be different with cross?
-    disp('Second derivative cross correlation')
+    disp('Laplace cross correlation')
     crossCorr = zeros(1,5);
     for pixel = 1:length(pixels)
         if pixel == 1
@@ -78,13 +78,51 @@ function ps1()
     
     %%
     disp('------------ QUESTION 2E-----------------')
-    % Border handling methods
-    % Zero padding
+    disp('Zero padding Laplace')
+    pixels = [0, 40, 50, 60, 80, 80, 80, 30, 0];
+    filter = [1 -2 1];
+    convu = zeros(1,5);
+    for pixel = 2:length(pixels)
+        if pixel == length(pixels)
+            break
+        end
+        convu(pixel-1) = sum(filter .* pixels(pixel-1:pixel+1));
+    end
+    disp(convu)
     
     % Replication
+    disp('Replication padding Laplace')
+    pixels = [40, 40, 50, 60, 80, 80, 80, 30, 30];
+    crossCorr = zeros(1,5);
+    for pixel = 2:length(pixels)
+        if pixel == length(pixels)
+            break
+        end
+        crossCorr(pixel-1) = sum(filter .* pixels(pixel-1:pixel+1));
+    end
+    disp(crossCorr)
     
     % Reflection
+    disp('Reflection Padding LaPlace')
+    pixels = [40, 40, 50, 60, 80, 80, 80, 30, 30];
+    convu = zeros(1,5);
+    for pixel = 2:length(pixels)
+        if pixel == length(pixels)
+            break
+        end
+        convu(pixel-1) = sum(filter .* pixels(pixel-1:pixel+1));
+    end
+    disp(convu)
     
     % Wraparound
-
+    disp('Wraparound Padding LaPlace')
+    pixels = [30, 40, 50, 60, 80, 80, 80, 30, 40];
+    crossCorr = zeros(1,5);
+    for pixel = 2:length(pixels)
+        if pixel == length(pixels)
+            break
+        end
+        crossCorr(pixel-1) = sum(filter .* pixels(pixel-1:pixel+1));
+    end
+    disp(crossCorr)
 end
