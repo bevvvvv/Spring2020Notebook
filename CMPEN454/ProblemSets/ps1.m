@@ -125,4 +125,38 @@ function ps1()
         crossCorr(pixel-1) = sum(filter .* pixels(pixel-1:pixel+1));
     end
     disp(crossCorr)
+    
+    %%
+    disp('------------ QUESTION 3-----------------')
+    % 2D  Convolution
+    disp('2D Convulution')
+    filter_f = [1,-1,-1; 1,2,-1; 1,1,1];
+    row_length = length(filter_f(:,1));
+    col_length = length(filter_f(1,:));
+    diff_r = (row_length - 1) / 2;
+    diff_c = (col_length - 1) / 2;
+    image_h = [0,0,0,0,0,0;
+               0,2,2,2,3,0;
+               0,2,1,3,3,0;
+               0,2,2,1,2,0;
+               0,1,3,2,2,0;
+               0,0,0,0,0,0];
+    convu = zeros(4,4);
+    for r = 2:(length(image_h(1,:))-diff_r)
+        for c = 2:(length(image_h(:,1))-diff_c)
+            image_elem = image_h(r-diff_r:r+diff_r,c-diff_c:c+diff_c);
+            filter = flipud(fliplr(filter_f));
+            convu(r-1, c-1) = sum(sum(filter .* image_elem));
+        end
+    end
+    disp(convu)
+    
+    %%
+    disp('------------ QUESTION 4-----------------')
+    % Computing Gradients
+    % Problem: Used cross correlation with filter [1/2, 0, -1/2] instead of
+    % convolution
+    
+    % 4a: The computed gradient is perpendicular to correct
+    % False
 end
