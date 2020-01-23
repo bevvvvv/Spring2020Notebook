@@ -158,5 +158,49 @@ function ps1()
     % convolution
     
     % 4a: The computed gradient is perpendicular to correct
-    % False
+    % False, the convuluted gradient will be parallel, but in the opposite
+    % direction as the correlated gradient (left versus right)
+    filter_r = [0.5, 0, -0.5];
+    filter_c = [1;1;1];
+    filter_2d = filter_c * filter_r;
+    disp('Filter in 2D (Cross)');
+    disp(filter_2d);
+    disp('Filter in 2D (Convulution)');
+    disp(flipud(fliplr(filter_2d)));
+    
+    % 4b - will point downhill instaed of uphill
+    % true, the opposite direction
+    
+    % 4c - still have same local min/max
+    % true, magnitude should remain the same
+    
+    % 4d - still have same magnitude
+    % true
+    
+    %%
+    disp('------------ QUESTION 5-----------------')
+    % Use convulution, but wrong values
+    % 5a - Computed gradient will be perpendicular
+    disp('Right value filter')
+    convu = zeros(4,4);
+    for r = 2:(length(image_h(1,:))-diff_r)
+        for c = 2:(length(image_h(:,1))-diff_c)
+            image_elem = image_h(r-diff_r:r+diff_r,c-diff_c:c+diff_c);
+            filter = flipud(fliplr(filter_2d));
+            convu(r-1, c-1) = sum(sum(filter .* image_elem));
+        end
+    end
+    disp(convu)
+    filter_r2 = [1, 0, -1];
+    filter_2d2 = filter_c * filter_r2 ;
+    disp('Wrong value gradient filter');
+    convu = zeros(4,4);
+    for r = 2:(length(image_h(1,:))-diff_r)
+        for c = 2:(length(image_h(:,1))-diff_c)
+            image_elem = image_h(r-diff_r:r+diff_r,c-diff_c:c+diff_c);
+            filter = flipud(fliplr(filter_2d2));
+            convu(r-1, c-1) = sum(sum(filter .* image_elem));
+        end
+    end
+    disp(convu)
 end
