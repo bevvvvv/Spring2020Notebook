@@ -42,14 +42,29 @@ def q2(p,testCost,treatHealthy, treatCDS, notTreatHealthy, notTreatCDS):
    :param treatCDS: cost of treating a sick patient
    :param notTreatHealthy: cost of not treating a healthy patient
    :param notTreatCDS: cost of not treating a sick patient
+
+   Example: ``q2(0.05, 10, 5, 1, 10, 50)``
+
+   :return decision: an integer 1, 0, -1 that determines whether to
+   treat, order tests, or not treat the patient
    """
    # probabilities
    prob_cds = p
    prob_healthy = (1 - p)
 
    # cost of treatment
-   treat_cost = treatHealthy * prob_healthy
-   pass
+   treat_cost = treatHealthy * prob_healthy + treatCDS * prob_cds
+   # cost of not treating
+   not_treat_cost = notTreatHealthy * prob_healthy + notTreatCDS * prob_cds
+
+   # return the minimum cost (defaults to lowest index)
+   choices = [treat_cost, testCost, not_treat_cost]
+   choice = choices.index(min(choices))
+   if choice == 0:
+      return 1
+   elif choice == 1:
+      return 0
+   return -1 
    
    
    
