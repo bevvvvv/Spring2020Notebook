@@ -1,7 +1,7 @@
 %% Initials
 
 % load the image
-raw = imread('data/banana_slug.tiff');
+raw = imread('../data/banana_slug.tiff');
 
 % print its size: 2856 x 4290
 [Ysize, Xsize] = size(raw)
