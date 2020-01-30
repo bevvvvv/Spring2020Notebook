@@ -39,5 +39,11 @@ class TestHWQuestions(unittest.TestCase):
         self.assertAlmostEqual(hw.question1(5), 0.77, 2)
         self.assertAlmostEqual(hw.question1(20), 0.870, 3)
 
+    def test_question2(self):
+        (a, b, c) = hw.question2(2)
+        self.assertAlmostEqual(a, 0.68, 2)
+        self.assertAlmostEqual(b, 0.10, 2)
+        self.assertAlmostEqual(c, 0.21, 2)
+
 if __name__ == '__main__':
     unittest.main()
