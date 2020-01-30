@@ -5,11 +5,7 @@ Author: Joseph Sepich (jps6444)
 """
 import numpy as np
 
-MAX_ITERATIONS = 10000
-TEST_SIZE = 10
-
-# DELETE EXTRA PARAMETER USED FOR TESTING BEFORE SUBMITTING
-def question1(num_models, itera=MAX_ITERATIONS):
+def question1(num_models):
     """States best performing model of n models with baseline of p=0.6
     on a validation set of size n=10
 
@@ -17,12 +13,15 @@ def question1(num_models, itera=MAX_ITERATIONS):
 
     :return accuracy: accuracy of empirically best performing model
     """
+    TEST_SIZE = 10
+    MAX_ITERATIONS = 10000
+
     accuracy = 0
-    for i in range(itera):
+    for i in range(MAX_ITERATIONS):
         # run a trial on each model
         model_results = [np.random.binomial(n=TEST_SIZE, p=0.6) for model in range(num_models)]
         accuracy += max(model_results) / TEST_SIZE
-    return accuracy / itera
+    return accuracy / MAX_ITERATIONS
 
 
 
