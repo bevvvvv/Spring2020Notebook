@@ -6,6 +6,7 @@ Author: Joseph Sepich (jps6444)
 TESTING SCRIPT
 """
 import unittest
+import numpy as np
 import HW3.hw3 as hw
 
 """
@@ -44,6 +45,10 @@ class TestHWQuestions(unittest.TestCase):
         self.assertAlmostEqual(a, 0.68, 2)
         self.assertAlmostEqual(b, 0.10, 2)
         self.assertAlmostEqual(c, 0.21, 2)
+
+    def test_question3(self):
+        results = np.array([[0, 1],[0, 1],[0, 1],[0, 1],[0, 1],[0, 1],[0, 1]])
+        self.assertAlmostEqual(hw.question3(results), 0)
 
 if __name__ == '__main__':
     unittest.main()

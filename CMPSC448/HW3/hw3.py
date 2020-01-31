@@ -59,4 +59,25 @@ def question2(num_models):
     return (count_win / MAX_ITERATIONS, count_tie / MAX_ITERATIONS, count_loss / MAX_ITERATIONS)
     
 def question3(results):
-    pass
+    """Determines the likelihood of seeing the correlation
+    between two columns in results (being the same)
+
+    :param results: 2D numpy array where results[i,0] and results[j,1] have
+    the value of either 0 or 1
+
+    :return p-value: likelihood of the number of correct guesses
+    """
+    MAX_ITERATIONS = 100000
+
+    test_stats = []
+    result_stat = 0
+    result_stat += 1 for row in results if row[0] == row[1]
+    for i in range(MAX_ITERATIONS):
+        # single sim is one permutation and calc test stat
+        np.random.shuffle(reuslts[:, 0]) # permute a single column should break corr
+        test_stat = 0
+        test_stat += 1 for row in results if row[0] == row[1] 
+        test_stat.appen(test_stats)
+    p_value = 0
+    p_value += 1 for stat in test_stats if stat >= 
+    p_value = p_value / MAX_ITERATIONS
