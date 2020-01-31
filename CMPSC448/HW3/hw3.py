@@ -70,14 +70,12 @@ def question3(results):
     MAX_ITERATIONS = 100000
 
     test_stats = []
-    result_stat = 0
-    result_stat += 1 for row in results if row[0] == row[1]
+    result_stat = len([row for row in results if row[0] == row[1]])
     for i in range(MAX_ITERATIONS):
         # single sim is one permutation and calc test stat
-        np.random.shuffle(reuslts[:, 0]) # permute a single column should break corr
-        test_stat = 0
-        test_stat += 1 for row in results if row[0] == row[1] 
-        test_stat.appen(test_stats)
-    p_value = 0
-    p_value += 1 for stat in test_stats if stat >= 
+        np.random.shuffle(results[:, 0]) # permute a single column should break corr
+        test_stat = len([row for row in results if row[0] == row[1]]) 
+        test_stats.append(test_stat)
+    p_value = len([stat for stat in test_stats if stat >= result_stat])
     p_value = p_value / MAX_ITERATIONS
+    return p_value
