@@ -14,15 +14,13 @@ def question1(num_models):
     :return accuracy: accuracy of empirically best performing model
     """
     TEST_SIZE = 10
-    MAX_ITERATIONS = 10000
+    MAX_ITERATIONS = 100000
     MODEL_BASELINE = 0.6
 
-    accuracy = 0
-    for i in range(MAX_ITERATIONS):
-        # run a trial on each model
-        model_results = [np.random.binomial(n=TEST_SIZE, p=MODEL_BASELINE) for model in range(num_models)]
-        accuracy += max(model_results) / TEST_SIZE
-    return accuracy / MAX_ITERATIONS
+    best_acc = sum([max(np.random.binomial(n=TEST_SIZE, p=MODEL_BASELINE) for model in range(num_models)) \
+        / TEST_SIZE for i in range(MAX_ITERATIONS)]) / MAX_ITERATIONS
+
+    return best_acc
 
 
 
@@ -35,7 +33,7 @@ def question2(num_models):
     :return (a, b, c): (prob of outperform, prob of tie, prob of underperform)
     """
     TEST_SIZE = 20
-    MAX_ITERATIONS = 1000000
+    MAX_ITERATIONS = 500000
     MODEL_BASELINE = 0.5
     MODEL_TEST = 0.6
     THRESHOLD = 0.001
@@ -67,7 +65,7 @@ def question3(results):
 
     :return p-value: likelihood of the number of correct guesses
     """
-    MAX_ITERATIONS = 100000
+    MAX_ITERATIONS = 500000
 
     test_stats = []
     result_stat = len([row for row in results if row[0] == row[1]])

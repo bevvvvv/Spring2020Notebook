@@ -41,10 +41,13 @@ class TestHWQuestions(unittest.TestCase):
         # Almost correct. Expected: 0.8267 +/- 0.000464, got:0.8274999999999946. Input: num_models = 10
 
     def test_question2(self):
-        (a, b, c) = hw.question2(2)
-        self.assertAlmostEqual(a, 0.68, 2)
-        self.assertAlmostEqual(b, 0.10, 2)
-        self.assertAlmostEqual(c, 0.21, 2)
+        (a, b, c) = hw.question2(10)
+        diff = abs(a - 0.2448069)
+        diff = abs(b - 0.1399243)
+        diff = abs(c - 0.6152688)
+        self.assertLess(diff, 0.00129)
+        self.assertLess(diff, 0.00278)
+        self.assertLess(diff, 0.00146)
         # Correct. Expected: [0.2448069, 0.1399243, 0.6152688] +/- [0.00129, 0.00278, 0.00146], got: (0.244968, 0.14025, 0.614782) Input: num_models = 10
 
     def test_question3(self):
