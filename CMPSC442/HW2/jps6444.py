@@ -2,14 +2,14 @@
 # CMPSC 442: Homework 2
 ############################################################
 
-student_name = "Type your full name here."
+student_name = "Joseph Sepich"
 
 ############################################################
 # Imports
 ############################################################
 
 # Include your imports here, if any are used.
-
+import math
 
 
 ############################################################
@@ -17,10 +17,28 @@ student_name = "Type your full name here."
 ############################################################
 
 def num_placements_all(n):
-    pass
+    """Calculates the number of possible ways to place n
+    queens on an n x n chessboard.
+
+    :param n: number of queens/size of board
+
+    :return combinations: number of possible arrangements
+    """
+    # one in row x of n * one in row x of n ...
+    # n ^ n
+    return n ** n
 
 def num_placements_one_per_row(n):
-    pass
+    """Calculates the number of possible ways to place n
+    queens on an n x n chessboard with only one per row.
+
+    :param n: number of queens/size of board
+
+    :return permutations: number of possible arrangements
+    """
+    # one in row x of n * one in row x of n-1 ...
+    # n!
+    return math.factorial(n)
 
 def n_queens_valid(board):
     pass
