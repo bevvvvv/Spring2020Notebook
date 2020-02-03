@@ -64,7 +64,14 @@ def n_queens_valid(board):
     return True
 
 def n_queens_solutions(n):
-    pass
+    """Finds and yields valid solutions of placing
+    n queens on an n by n board.
+
+    :param n: size of board/number of queens
+
+    :return solutions: list of possible solutions in board structure
+    """
+    # place queens row by row
 
 ############################################################
 # Section 2: Lights Out
