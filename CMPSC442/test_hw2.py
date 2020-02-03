@@ -27,7 +27,9 @@ class TestHWQuestions(unittest.TestCase):
         self.assertEqual(hw.n_queens_valid([0, 3, 1]), True)
 
     def test_n_queens_solutions(self):
-        pass
+        solutions = hw.n_queens_solutions(4)
+        self.assertEqual(next(solutions), [1, 3, 0, 2])
+        self.assertEqual(next(solutions), [2, 0, 3, 1])
 
     ############################################################
     # Section 2: Lights Out

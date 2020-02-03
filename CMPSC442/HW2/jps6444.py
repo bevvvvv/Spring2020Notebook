@@ -71,7 +71,42 @@ def n_queens_solutions(n):
 
     :return solutions: list of possible solutions in board structure
     """
-    # place queens row by row
+    # given that board is a list a[1....k]
+    # goal state: len(board) == n and n_queens_valid(board) == true
+    solutions = []
+    frontier = [] # LIFO stack, append/pop
+    frontier.append([]) # root is empty
+    
+    while len(frontier) > 0:
+        board = frontier.pop()
+        # goal check
+        if len(board) == n:
+            yield board # only valid options in stack from helper
+        next_level = n_queens_helper(n, board)
+        # add next level to frontier
+        while len(board) < n:
+            try:
+                next_board = next(next_level)[:]
+                frontier.append(next_board)
+            except StopIteration:
+                break
+
+def n_queens_helper(n, board):
+    """Generator function for valid solutions of adding
+    one additional queen to an n by n chess board.
+
+    :param n: size of board/number of queens
+    :param board: a list a[0...k] where a[i] is the row of the ith queen
+
+    :return valid: valid is a valid solution in the format of the board struct
+    """
+    for i in range(n):
+        # try adding to each column
+        # yield if column is valid
+        board.append(i)
+        if n_queens_valid(board):
+            yield board
+        board.pop() # reset to original value
 
 ############################################################
 # Section 2: Lights Out
