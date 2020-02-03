@@ -21,7 +21,10 @@ class TestHWQuestions(unittest.TestCase):
         self.assertEqual(hw.num_placements_one_per_row(10), 3628800)
 
     def test_n_queens_valid(self):
-        pass
+        self.assertEqual(hw.n_queens_valid([0, 0]), False)
+        self.assertEqual(hw.n_queens_valid([0, 2]), True)
+        self.assertEqual(hw.n_queens_valid([0, 1]), False)
+        self.assertEqual(hw.n_queens_valid([0, 3, 1]), True)
 
     def test_n_queens_solutions(self):
         pass

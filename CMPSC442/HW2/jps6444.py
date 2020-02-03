@@ -41,7 +41,27 @@ def num_placements_one_per_row(n):
     return math.factorial(n)
 
 def n_queens_valid(board):
-    pass
+    """Checks whether a board configuration is valid
+    meaning no queen can attack another queen.
+
+    :param board: a list a[0...k] where a[i] is the row of the ith queen
+
+    :return is_valid: true if the configuration and false otherwise 
+    """
+    # queens attack along column - same number
+    # queens attack along rows - implicitly valid from data type
+    # queens attack along diagonal - difference in row and col are same
+    for i in range(len(board)):
+        for other in range(i+1, len(board)):
+            col_i = board[i]
+            col_other = board[other]
+            if col_i == col_other:
+                return False
+            diff_col = abs(col_i - col_other)
+            diff_row = abs(i - other)
+            if diff_col == diff_row:
+                return False
+    return True
 
 def n_queens_solutions(n):
     pass
