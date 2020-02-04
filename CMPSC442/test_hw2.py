@@ -86,7 +86,15 @@ class TestHWQuestions(unittest.TestCase):
         self.assertNotEqual(p.get_board(), p2.get_board())
 
     def test_successors(self):
-        pass
+        p = hw.create_puzzle(2, 2)
+        successors = list(p.successors())
+        self.assertEqual(successors, [((0, 0), [[True, True], [True, False]]), \
+            ((0, 1), [[True, True], [False, True]]), ((1, 0), [[True, False], [True, True]]), \
+            ((1, 1), [[False, True], [True, True]])])
+        test_results = [6, 12, 20, 30]
+        for i in range(2, 6):
+            p = hw.create_puzzle(i, i + 1)
+            self.assertEqual(len(list(p.successors())), test_results[i - 2])
 
     def test_find_solution(self):
         pass

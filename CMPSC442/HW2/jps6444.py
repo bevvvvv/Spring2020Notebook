@@ -188,7 +188,19 @@ class LightsOutPuzzle(object):
         return LightsOutPuzzle(b)
 
     def successors(self):
-        pass
+        """Generator that will yield all possible successors of the current
+        Lights Out game board.
+
+        :return (move, new_puzzle): a tuple with move as a (row, col) tuple representing
+        the light toggled and new_puzzle a 2D boolean array of the new game board
+        """
+        for row in range(self.m):
+            for col in range(self.n):
+                move = (row, col)
+                new_puzzle = self.copy()
+                new_puzzle.perform_move(row, col)
+                new_puzzle = new_puzzle.get_board()
+                yield (move, new_puzzle)
 
     def find_solution(self):
         pass
