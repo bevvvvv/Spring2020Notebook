@@ -180,7 +180,12 @@ class LightsOutPuzzle(object):
         return True
 
     def copy(self):
-        pass
+        """Creates and returns a deep copy of the Lights Out board object.
+
+        :return board: LightsOutPuzzle object
+        """
+        b = [row[:] for row in self.board]
+        return LightsOutPuzzle(b)
 
     def successors(self):
         pass

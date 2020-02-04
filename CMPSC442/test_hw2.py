@@ -77,7 +77,13 @@ class TestHWQuestions(unittest.TestCase):
 
 
     def test_copy(self):
-        pass
+        p = hw.create_puzzle(3, 3)
+        p2 = p.copy()
+        self.assertEqual(p.get_board(), p2.get_board())
+        p = hw.create_puzzle(3, 3)
+        p2 = p.copy()
+        p.perform_move(1, 1)
+        self.assertNotEqual(p.get_board(), p2.get_board())
 
     def test_successors(self):
         pass
