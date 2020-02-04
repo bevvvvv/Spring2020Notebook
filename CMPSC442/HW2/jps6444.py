@@ -117,10 +117,12 @@ def n_queens_helper(n, board):
 class LightsOutPuzzle(object):
 
     def __init__(self, board):
-        pass
+        self.board = board
+        self.m = len(board)
+        self.n = len(board[0])
 
     def get_board(self):
-        pass
+        return self.board
 
     def perform_move(self, row, col):
         pass
@@ -141,7 +143,8 @@ class LightsOutPuzzle(object):
         pass
 
 def create_puzzle(rows, cols):
-    pass
+    b = [[False for c in range(cols)] for r in range(rows)]
+    return LightsOutPuzzle(b)
 
 ############################################################
 # Section 3: Linear Disk Movement

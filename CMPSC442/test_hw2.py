@@ -37,11 +37,18 @@ class TestHWQuestions(unittest.TestCase):
     ############################################################
     # Section 2: Lights Out
     ############################################################
-    def test__init__(self):
-        pass
-
-    def test_get_board(self):
-        pass
+    def test_get_board_init(self):
+        b = [[True, False], [False, True]]
+        p = hw.LightsOutPuzzle(b)
+        self.assertEqual(p.get_board(), [[True, False], [False, True]])
+        b = [[True, True], [True, True]]
+        p = hw.LightsOutPuzzle(b)
+        self.assertEqual(p.get_board(), [[True, True], [True, True]])
+        b = [[True, False, True], [True, True, False]]
+        p = hw.LightsOutPuzzle(b)
+        self.assertEqual(p.get_board(), [[True, False, True], [True, True, False]])
+        self.assertEqual(p.m, 2)
+        self.assertEqual(p.n, 3)
 
     def test_perform_move(self):
         pass
@@ -62,7 +69,10 @@ class TestHWQuestions(unittest.TestCase):
         pass
 
     def test_create_puzzle(self):
-        pass
+        p = hw.create_puzzle(2, 2)
+        self.assertEqual(p.get_board(), [[False, False], [False, False]])
+        p = hw.create_puzzle(2, 3)
+        self.assertEqual(p.get_board(), [[False, False, False], [False, False, False]])
 
     ############################################################
     # Section 3: Linear Disk Movement
