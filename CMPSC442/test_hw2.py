@@ -97,7 +97,15 @@ class TestHWQuestions(unittest.TestCase):
             self.assertEqual(len(list(p.successors())), test_results[i - 2])
 
     def test_find_solution(self):
-        pass
+        p = hw.create_puzzle(2, 3)
+        for row in range(2):
+            for col in range(3):
+                p.perform_move(row, col)
+        self.assertEqual(p.find_solution(), [(0, 0), (0, 2)])
+        b = [[False, False, False], [False, False, False]]
+        b[0][0] = True
+        p = hw.LightsOutPuzzle(b)
+        p.find_solution() is None
 
     def test_create_puzzle(self):
         p = hw.create_puzzle(2, 2)

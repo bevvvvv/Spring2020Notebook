@@ -203,7 +203,40 @@ class LightsOutPuzzle(object):
                 yield (move, new_puzzle)
 
     def find_solution(self):
-        pass
+        """Finds a solution to the Lights Out Puzzle such that the list of
+        (row, col) moves results in a 2D list of False boolean values or all
+        lights are off. Uses breadth-first graph search.
+
+        :return solution: a list of (row, col) tuple pairs that lead to a solution
+        """
+        # to check if nodes have been checked use a tuple representation of state
+
+        moves_frontier = [[]] # match move sequences to states
+        frontier = [self.get_board()] # FIFO queue
+        explored = [] # graph search must track explored board states
+        # here explored means expanded or in frontier
+
+        while len(frontier) > 0:
+            expand_state = frontier.pop(0)
+            expand_move = moves_frontier.pop(0)
+            next_level = LightsOutPuzzle(expand_state).successors()
+            for move, board in next_level:
+                # check if solution
+                new_moves = expand_move[:]
+                new_moves.append(move)
+                if LightsOutPuzzle(board).is_solved():
+                    return new_moves
+                board_tuple = tuple(map(tuple, board))
+                if board_tuple in explored or board_tuple in frontier:
+                    continue # state already found
+                # store move
+                moves_frontier.append(new_moves)
+                # add new state to frontier
+                explored.append(board_tuple)
+                frontier.append(board)
+        return None
+
+
 
 def create_puzzle(rows, cols):
     b = [[False for c in range(cols)] for r in range(rows)]
