@@ -51,7 +51,13 @@ class TestHWQuestions(unittest.TestCase):
         self.assertEqual(p.n, 3)
 
     def test_perform_move(self):
-        pass
+        p = hw.create_puzzle(3, 3)
+        p.perform_move(1, 1)
+        self.assertEqual(p.get_board(), [[False, True, False], [True,  True, True ], \
+            [False, True, False]])
+        p.perform_move(0, 0)
+        self.assertEqual(p.get_board(), [[True, False, False], [False,  True, True ], \
+            [False, True, False]])
 
     def test_scramble(self):
         pass

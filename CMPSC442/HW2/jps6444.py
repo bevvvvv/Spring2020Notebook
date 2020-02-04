@@ -125,7 +125,22 @@ class LightsOutPuzzle(object):
         return self.board
 
     def perform_move(self, row, col):
-        pass
+        try:
+            self.board[row][col] = not self.board[row][col]
+        except:
+            return # invalid indices
+        # left
+        if row > 0:
+                self.board[row - 1][col] = not self.board[row - 1][col]
+        # right
+        if row < (self.m - 1):
+                self.board[row + 1][col] = not self.board[row + 1][col]
+        # up
+        if col > 0:
+                self.board[row][col - 1] = not self.board[row][col - 1]
+        # down
+        if col < (self.n - 1):
+                self.board[row][col + 1] = not self.board[row][col + 1]
 
     def scramble(self):
         pass
