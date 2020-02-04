@@ -60,10 +60,21 @@ class TestHWQuestions(unittest.TestCase):
             [False, True, False]])
 
     def test_scramble(self):
-        pass
-
+        import random
+        random.seed(1738)
+        p = hw.create_puzzle(3, 3)
+        p.scramble()
+        self.assertEqual(p.get_board(), [[False, False, False], [True, True, False], \
+            [False, False, False]])
+        
     def test_is_solved(self):
-        pass
+        b = [[True, False], [False, True]]
+        p = hw.LightsOutPuzzle(b)
+        self.assertFalse(p.is_solved())
+        b = [[False, False], [False, False]]
+        p = hw.LightsOutPuzzle(b)
+        self.assertTrue(p.is_solved())
+
 
     def test_copy(self):
         pass

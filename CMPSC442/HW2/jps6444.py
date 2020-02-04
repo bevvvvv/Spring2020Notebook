@@ -10,6 +10,7 @@ student_name = "Joseph Sepich"
 
 # Include your imports here, if any are used.
 import math
+import random
 
 
 ############################################################
@@ -117,14 +118,29 @@ def n_queens_helper(n, board):
 class LightsOutPuzzle(object):
 
     def __init__(self, board):
+        """Initializes the lights out puzzle.
+
+        :param board: board is a 2D array of boolean values determining
+        light status
+        """
         self.board = board
         self.m = len(board)
         self.n = len(board[0])
 
     def get_board(self):
+        """Returns the state of the Lights Out Puzzle board.
+
+        :return board: 2D array of boolean values
+        """
         return self.board
 
     def perform_move(self, row, col):
+        """Performs a move on the light's out puzzle. This will
+        toggle the given row and column along with neighbors.
+
+        :param row: row of toggled light
+        :param col: column of toggled light
+        """
         try:
             self.board[row][col] = not self.board[row][col]
         except:
@@ -143,10 +159,25 @@ class LightsOutPuzzle(object):
                 self.board[row][col + 1] = not self.board[row][col + 1]
 
     def scramble(self):
-        pass
+        """Scrambles the baord of the Lights Out Puzzle
+        object. Will perform a move on each space with p = 0.5
+        """
+        for row in range(self.m):
+            for col in range(self.n):
+                if random.random() < 0.5:
+                    self.perform_move(row, col)
 
     def is_solved(self):
-        pass
+        """Determines whether the Lights Out Puzzle is solved. Solved
+        state is when all lights are off or False
+
+        :return is_solved: returns True if solved; false otherwise 
+        """
+        for row in range(self.m):
+            for col in range(self.n):
+                if self.board[row][col] == True:
+                    return False
+        return True
 
     def copy(self):
         pass
