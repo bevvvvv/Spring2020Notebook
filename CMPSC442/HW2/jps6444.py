@@ -73,23 +73,25 @@ def n_queens_solutions(n):
     """
     # given that board is a list a[1....k]
     # goal state: len(board) == n and n_queens_valid(board) == true
-    solutions = []
     frontier = [] # LIFO stack, append/pop
-    frontier.append([]) # root is empty
+    # frontier contains generator for next node
+    # check for empty with StopIteration
+    frontier.append(n_queens_helper(n, []))
     
     while len(frontier) > 0:
-        board = frontier.pop()
+        expand_board = []
+        try:
+            # get next node
+            expand_board = next(frontier[len(frontier) - 1])[:]
+        except StopIteration:
+            # last generator is done
+            frontier.pop()
+            continue
         # goal check
-        if len(board) == n:
-            yield board # only valid options in stack from helper
-        next_level = n_queens_helper(n, board)
-        # add next level to frontier
-        while len(board) < n:
-            try:
-                next_board = next(next_level)[:]
-                frontier.append(next_board)
-            except StopIteration:
-                break
+        if len(expand_board) == n:
+            yield expand_board # only valid options in stack from helper
+        # add next level
+        frontier.append(n_queens_helper(n, expand_board))
 
 def n_queens_helper(n, board):
     """Generator function for valid solutions of adding

@@ -30,6 +30,9 @@ class TestHWQuestions(unittest.TestCase):
         solutions = hw.n_queens_solutions(4)
         self.assertEqual(next(solutions), [1, 3, 0, 2])
         self.assertEqual(next(solutions), [2, 0, 3, 1])
+        self.assertEqual(list(hw.n_queens_solutions(6)), [[1, 3, 5, 0, 2, 4], \
+            [2, 5, 1, 4, 0, 3], [3, 0, 4, 1, 5, 2], [4, 2, 0, 5, 3, 1]])
+        self.assertEqual(len(list(hw.n_queens_solutions(8))), 92)
 
     ############################################################
     # Section 2: Lights Out
