@@ -121,12 +121,44 @@ class TestHWQuestions(unittest.TestCase):
         self.assertEqual(hw.create_disk_puzzle(3, 1), [1, 0, 0])
         self.assertEqual(hw.create_disk_puzzle(4, 3), [1, 1, 1, 0])
         self.assertEqual(hw.create_disk_puzzle(3, 3), [1, 1, 1])
+        self.assertEqual(hw.create_disk_puzzle(3, 1, True), [1, 0, 0])
+        self.assertEqual(hw.create_disk_puzzle(4, 3, True), [1, 2, 3, 0])
+        self.assertEqual(hw.create_disk_puzzle(3, 3, True), [1, 2, 3])
+
+    def test_expand_disk_puzzle(self):
+        p = [1, 0, 0, 1, 1, 0]
+        successors = list(hw.expand_disk_puzzle(p))
+        self.assertEqual(successors, [((0, 1), [0, 1, 0, 1, 1, 0]), ((3, 5), [1, 0, 0, 0, 1, 1]),\
+            ((4, 5), [1, 0, 0, 1, 0, 1])])
+        test_results = [2, 2, 2, 2]
+        for i in range(4, 8):
+            p = hw.create_disk_puzzle(i, i - 2)
+            self.assertEqual(len(list(hw.expand_disk_puzzle(p))), test_results[i - 4])
+
+    def test_disk_puzzle_solved(self):
+        p = [0, 0, 1, 1, 0]
+        self.assertFalse(hw.disk_puzzle_solved(p, 2))
+        p = [0, 0, 2, 1, 0]
+        self.assertFalse(hw.disk_puzzle_solved(p, 2, True))
+        p = [0, 0, 0, 1, 2]
+        self.assertFalse(hw.disk_puzzle_solved(p, 2, True))
+        p = [0, 0, 1, 1, 1, 1]
+        self.assertTrue(hw.disk_puzzle_solved(p, 4))
+        p = [0, 0, 4, 3, 2, 1]
+        self.assertTrue(hw.disk_puzzle_solved(p, 4, True))
 
     def test_solve_identical_disks(self):
-        pass
+        self.assertEqual(hw.solve_identical_disks(4, 2), [(0, 2), (1, 3)])
+        self.assertEqual(hw.solve_identical_disks(5, 2), [(0, 2), (1, 3), (2, 4)])
+        self.assertEqual(hw.solve_identical_disks(4, 3), [(1, 3), (0, 1)])
+        self.assertEqual(hw.solve_identical_disks(5, 3), [(1, 3), (0, 1), (2, 4), (1, 2)])
 
     def test_solve_distinct_disks(self):
-        pass
+        self.assertEqual(hw.solve_distinct_disks(4, 2), [(0, 2), (2, 3), (1, 2)])
+        self.assertEqual(hw.solve_distinct_disks(5, 2), [(0, 2), (1, 3), (2, 4)])
+        self.assertEqual(hw.solve_distinct_disks(4, 3), [(1, 3), (0, 1), (0, 2),\
+            (2, 3), (1, 3), (0, 1)])
+        self.assertEqual(hw.solve_distinct_disks(5, 3), [(2, 3), (0, 2), (2, 4), (2, 3), (1, 3)])
 
     # main function
 if __name__ == '__main__':

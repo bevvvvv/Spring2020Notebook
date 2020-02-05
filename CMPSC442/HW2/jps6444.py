@@ -209,8 +209,6 @@ class LightsOutPuzzle(object):
 
         :return solution: a list of (row, col) tuple pairs that lead to a solution
         """
-        # to check if nodes have been checked use a tuple representation of state
-
         moves_frontier = [[]] # match move sequences to states
         frontier = [self.get_board()] # FIFO queue
         explored = [] # graph search must track explored board states
@@ -249,7 +247,7 @@ def create_puzzle(rows, cols):
 # The list will contain 0 for empty spaces and 1 for spaces
 # that contain a disk. The size of this list is L
 
-def create_disk_puzzle(length, n):
+def create_disk_puzzle(length, n, distinct=False):
     """Creates a list to represent a linear disk puzzle.
     The list will be of size length and contain n disks.
 
@@ -258,13 +256,108 @@ def create_disk_puzzle(length, n):
 
     :return puzzle: list of binary values
     """
+    if distinct:
+        return [i + 1 if i < n else 0 for i in range(length)] # index + 1 for distinct
     return [1 if i < n else 0 for i in range(length)]
 
+def expand_disk_puzzle(puzzle):
+    """Generator that will yield all possible successors of the current
+    disk puzzle list.
+
+    :return (move, new_puzzle): a tuple with move as a (from, to) tuple representing
+    the disk moved and new_puzzle a list of the new puzzle
+    """
+    for i in range(len(puzzle)):
+        new_puzzle = puzzle[:]
+        if puzzle[i] == 0:
+            continue
+        if (i + 1) < len(puzzle) and puzzle[i + 1] == 0:
+            # adjacent space open
+            new_puzzle[i + 1] = new_puzzle[i]
+            new_puzzle[i] = 0
+            yield ((i, i + 1), new_puzzle)
+        elif (i + 2) < len(puzzle) and puzzle[i + 2] == 0:
+            # can jump
+            new_puzzle[i + 2] = new_puzzle[i]
+            new_puzzle[i] = 0
+            yield ((i, i + 2), new_puzzle)
+        elif (i - 1) >= 0 and puzzle[i - 1] == 0:
+            # adjacent space open
+            new_puzzle[i - 1] = new_puzzle[i]
+            new_puzzle[i] = 0
+            yield ((i - 1, i), new_puzzle)
+        elif (i - 2) >= 0 and puzzle[i - 2] == 0:
+            # can jump
+            new_puzzle[i - 2] = new_puzzle[i]
+            new_puzzle[i] = 0
+            yield ((i - 2, i), new_puzzle)
+
+def disk_puzzle_solved(puzzle, n, distinct=False):
+    """Checks to see if disk puzzle has been solved.
+
+    :param puzzle: puzzle state to check
+    :param distinct: boolean that determines goal state to check for
+
+    :return is_solved: true if puzzle is solved; false otherwise
+    """
+    length = len(puzzle)
+    if distinct:
+        # order in distinct matters
+        return puzzle[(length - n):length] == [n - i for i in range(n)]
+    # checks to see disks are in last n spots
+    return sum(puzzle[(length - n):length]) == n
+
 def solve_identical_disks(length, n):
-    pass
+    """Solves identical disk puzzle
+
+    :param length: length of puzzle
+    :param n: number of disks
+
+    :return solution: moves to get to solution (from, to) pairs
+    """
+    return solve_disks(length, n, distinct=False)
 
 def solve_distinct_disks(length, n):
-    pass
+    """Solves distinct disk puzzle
+
+    :param length: length of puzzle
+    :param n: number of disks
+
+    :return solution: moves to get to solution (from, to) pairs
+    """
+    return solve_disks(length, n, distinct=True)
+
+def solve_disks(length, n, distinct=False):
+    """Finds a solution to the disks puzzle such that the list of
+    (from, to) moves results in a valid states.
+    Uses breadth-first graph search, just like Lights Out Puzzle.
+
+    :return solution: a list of (from, to) tuple pairs that lead to a solution
+    """
+    moves_frontier = [[]] # match move sequences to states
+    frontier = [create_disk_puzzle(length, n, distinct)] # FIFO queue
+    explored = [] # graph search must track explored board states
+    # here explored means expanded or in frontier
+
+    while len(frontier) > 0:
+        expand_state = frontier.pop(0)
+        expand_move = moves_frontier.pop(0)
+        next_level = expand_disk_puzzle(expand_state)
+        for move, puzzle in next_level:
+            # check if solution
+            new_moves = expand_move[:]
+            new_moves.append(move)
+            if disk_puzzle_solved(puzzle, n, distinct):
+                return new_moves
+            puzzle_tuple = tuple(puzzle)
+            if puzzle_tuple in explored or puzzle_tuple in frontier:
+                continue # state already found
+            # store move
+            moves_frontier.append(new_moves)
+            # add new state to frontier
+            explored.append(puzzle_tuple)
+            frontier.append(puzzle)
+    return None
 
 ############################################################
 # Section 4: Feedback
