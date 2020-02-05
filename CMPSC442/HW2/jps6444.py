@@ -245,6 +245,20 @@ def create_puzzle(rows, cols):
 ############################################################
 # Section 3: Linear Disk Movement
 ############################################################
+# Data structure for linear disk puzzle will be a single list
+# The list will contain 0 for empty spaces and 1 for spaces
+# that contain a disk. The size of this list is L
+
+def create_disk_puzzle(length, n):
+    """Creates a list to represent a linear disk puzzle.
+    The list will be of size length and contain n disks.
+
+    :param length: size of puzzle
+    :param n: number of disks in puzzle
+
+    :return puzzle: list of binary values
+    """
+    return [1 if i < n else 0 for i in range(length)]
 
 def solve_identical_disks(length, n):
     pass

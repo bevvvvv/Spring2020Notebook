@@ -117,6 +117,11 @@ class TestHWQuestions(unittest.TestCase):
     # Section 3: Linear Disk Movement
     ############################################################
 
+    def test_create_disk_puzzle(self):
+        self.assertEqual(hw.create_disk_puzzle(3, 1), [1, 0, 0])
+        self.assertEqual(hw.create_disk_puzzle(4, 3), [1, 1, 1, 0])
+        self.assertEqual(hw.create_disk_puzzle(3, 3), [1, 1, 1])
+
     def test_solve_identical_disks(self):
         pass
 
