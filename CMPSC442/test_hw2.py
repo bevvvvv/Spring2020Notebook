@@ -156,9 +156,9 @@ class TestHWQuestions(unittest.TestCase):
     def test_solve_distinct_disks(self):
         self.assertEqual(hw.solve_distinct_disks(4, 2), [(0, 2), (2, 3), (1, 2)])
         self.assertEqual(hw.solve_distinct_disks(5, 2), [(0, 2), (1, 3), (2, 4)])
-        self.assertEqual(hw.solve_distinct_disks(4, 3), [(1, 3), (0, 1), (0, 2),\
-            (2, 3), (1, 3), (0, 1)])
-        self.assertEqual(hw.solve_distinct_disks(5, 3), [(2, 3), (0, 2), (2, 4), (2, 3), (1, 3)])
+        self.assertEqual(hw.solve_distinct_disks(4, 3), [(1, 3), (0, 1), (2, 0),\
+            (3, 2), (1, 3), (0, 1)])
+        self.assertEqual(hw.solve_distinct_disks(5, 3), [(2, 3), (0, 2), (2, 4), (3, 2), (1, 3)])
 
     # main function
 if __name__ == '__main__':

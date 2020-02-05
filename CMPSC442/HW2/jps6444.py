@@ -47,7 +47,7 @@ def n_queens_valid(board):
 
     :param board: a list a[0...k] where a[i] is the row of the ith queen
 
-    :return is_valid: true if the configuration and false otherwise 
+    :return is_valid: true if the configuration and false otherwise
     """
     # queens attack along column - same number
     # queens attack along rows - implicitly valid from data type
@@ -78,7 +78,7 @@ def n_queens_solutions(n):
     # frontier contains generator for next node
     # check for empty with StopIteration
     frontier.append(n_queens_helper(n, []))
-    
+
     while len(frontier) > 0:
         expand_board = []
         try:
@@ -147,16 +147,16 @@ class LightsOutPuzzle(object):
             return # invalid indices
         # left
         if row > 0:
-                self.board[row - 1][col] = not self.board[row - 1][col]
+            self.board[row - 1][col] = not self.board[row - 1][col]
         # right
         if row < (self.m - 1):
-                self.board[row + 1][col] = not self.board[row + 1][col]
+            self.board[row + 1][col] = not self.board[row + 1][col]
         # up
         if col > 0:
-                self.board[row][col - 1] = not self.board[row][col - 1]
+            self.board[row][col - 1] = not self.board[row][col - 1]
         # down
         if col < (self.n - 1):
-                self.board[row][col + 1] = not self.board[row][col + 1]
+            self.board[row][col + 1] = not self.board[row][col + 1]
 
     def scramble(self):
         """Scrambles the baord of the Lights Out Puzzle
@@ -285,12 +285,12 @@ def expand_disk_puzzle(puzzle):
             # adjacent space open
             new_puzzle[i - 1] = new_puzzle[i]
             new_puzzle[i] = 0
-            yield ((i - 1, i), new_puzzle)
+            yield ((i, i - 1), new_puzzle)
         elif (i - 2) >= 0 and puzzle[i - 2] == 0:
             # can jump
             new_puzzle[i - 2] = new_puzzle[i]
             new_puzzle[i] = 0
-            yield ((i - 2, i), new_puzzle)
+            yield ((i, i - 2), new_puzzle)
 
 def disk_puzzle_solved(puzzle, n, distinct=False):
     """Checks to see if disk puzzle has been solved.
@@ -364,19 +364,19 @@ def solve_disks(length, n, distinct=False):
 ############################################################
 
 feedback_question_1 = """
-Type your response here.
-Your response may span multiple lines.
-Do not include these instructions in your response.
+I spent approximately 10 hours on this homework assignment.
 """
 
 feedback_question_2 = """
-Type your response here.
-Your response may span multiple lines.
-Do not include these instructions in your response.
+I found it challenging creating the appropriate data structures and helper
+functions for section 3, but once I was able to complete the functions
+it was easy to complete using the same BFS graph search algorithm that
+was required in section 2.
 """
 
 feedback_question_3 = """
-Type your response here.
-Your response may span multiple lines.
-Do not include these instructions in your response.
+I really liked the transition of walking us through the easier data structure
+part and leaving the search algorithm up to us to asking us to create our own
+data structure scheme. This enabled me to understand how to convert the
+problem into a structure that could be solved by a generic search algorithm.
 """
