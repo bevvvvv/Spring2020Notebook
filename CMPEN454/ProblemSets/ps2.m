@@ -8,8 +8,8 @@ function ps1()
     % 1. Gaussian filter sigma = 3 will have smoothing effect (same mode) D
     % 2. Gaussian filter sigma = 6 will smooth more (same mode) -> F
     % 3. Finite difference filter  will be derivative -> B
-    % 4. Derivative of Gaussian - edges are modes -> 
-    % 5. Second Derivative of Gaussian is LaPlace - edges are zeros ->
+    % 4. Derivative of Gaussian - edges are modes -> C
+    % 5. Second Derivative of Gaussian is LaPlace - edges are zeros -> E
     
     %%
     disp('------------QUESTION 2-----------------')
