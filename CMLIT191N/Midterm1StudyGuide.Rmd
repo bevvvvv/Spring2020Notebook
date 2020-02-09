@@ -3,13 +3,39 @@ title: "CMLIT 191M Midterm 1 Study Guide"
 subtitle: "Josepeh Sepich Sept 27"
 output:
   pdf_document:
-    toc: false
+    toc: true
     toc_depth: 2
-    number_sections: true
+    number_sections: false
     keep_tex: false
 ---
 
+# Day One: The Etruscan Vase
 
+The main goal of this course is the understand how the world works through video
+games. In order to achieve this goal, we will have to look at video games as
+cultural artifacts. Artifacts exist through all of human history, because work
+does not necessarily come before "play". We may think of having to go to a 9-5
+job before performing leisure, but humans have always produced stories and art.
+This is why to understand culture we must be able to analyze the artifacts it 
+produces.
+
+## Facing the Artifact
+
+## The Etruscan Vase
+
+# Day Two
+
+# Day Three
+
+# Day Four
+
+# Day Five
+
+# Day Six
+
+# Day Seven
+
+# Day Eight
 
 
 
