@@ -19,9 +19,40 @@ job before performing leisure, but humans have always produced stories and art.
 This is why to understand culture we must be able to analyze the artifacts it 
 produces.
 
+In this way this course brings together both the arts and humanities. **Art** is
+the study of the history and making of objects we call art. **Humanities** is the
+study of the history of all human life and activity.
+
 ## Facing the Artifact
 
+When examining an artifact there are some basic questions you may ask of it.
+
+### Questions
+
+* When is this from?
+* What is it?
+* Who made it?
+* How is the object exchanged?
+* Why was it made?
+* What is it for?
+* What information can I gather about the manufacturer/maker?
+* Is this object priceless or sentimental?
+* What influenced the making of this object?
+* What did this object influence?
+* What does it depict and why?
+
+### Primary vs. Secondary Characteristic
+
+Primary and secondary characteristics are important aspects of analyzing a cultural
+artifact. A **primary** characteristic is something included for the intended and
+conscious use of the object. For a statue the shape would be a primary characteristic.
+For a game the dialogue would be a primary characteristic. A **secondary** characteristic
+is something non-primary that happened to be there. For a statue the weight is a
+secondary characteristic. For a video game the storage size is a secondary characteristic.
+
 ## The Etruscan Vase
+
+## Phatic Exchange
 
 # Day Two
 
