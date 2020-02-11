@@ -52,7 +52,33 @@ secondary characteristic. For a video game the storage size is a secondary chara
 
 ## The Etruscan Vase
 
+```{r, out.width = "200px", echo=FALSE}
+knitr::include_graphics("./Images/EtruscanVase.PNG")
+```
+
+The Etruscan Vase is an example of a cultural artifact. To get some context about
+where this artifact was made we could find out that Etruia is in Northern Italy
+and the people existed there from about 800 to 300 BCE. The image on the vase depicts
+Artemis and her stags. So something to question is what aspects are intentional and
+what is unintentional?
+
+### Passage
+
+```{r, out.width = "400px", echo=FALSE}
+knitr::include_graphics("./Images/PassageGame.PNG")
+```
+
+Passage is another example of a cultural artifact. In this case passage is a video
+game. Some important context for this game is that it was actually made around 2010.
+The game looks as if it was an older game from the 80s perhaps, but since it was
+manufactured recently it must be a design choice and not a secondary characteristic.
+In this class we will use video games such as passage as an Etruscan Vase.
+
 ## Phatic Exchange
+
+A phatic exchange between two people is an exchange in which the words are meaningless
+and it is mostly to build rapport between the two parties. An example of this is
+the We Are chant or saying I love you to a partner after establishing that as a fact.
 
 # Day Two
 
