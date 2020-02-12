@@ -262,7 +262,71 @@ What we know about genres:
 
 # Day Five
 
+## Shift recently to create moral choices
+
+1. Undertale genocide/pacifist
+2. Modern Warfare baby killing example
+
+Someone also claimed that every story is composed of a mixure of story parts.
+
+## Early History
+
+* 1961 Spacewar! debuts in MIT lab on PDP-1 computer
+* 1969 Ralph Baer develops Pong for Brown Box
+* 1971 Galaxy Game, fist coin-operated video game
+* 1972 First console Magnavox Odyssey
+* 1972 Atari founded by Norman Bushnell and Ted Dabney
+* 1973 Taito launches Elepong, first Japanese arcade video game
+* 1974 Dungeons and Dragons role-playing system launched by TSR
+* 1975 Sears Tele-games Pong consoles first major home console
+* 1976 Death Race launches first "moral panic"
+* 1976 Steve Jobs and Steve Wozniak launch Apple I (found Apple Computer)
+* 1977 Adventure programmed by Will Crowther
+* 1977 Commodore PET and TRS-80 launched
+* 1977 Apple II launched
+* 1978 Flight Simulator debuts on Apple II
+
+## Dates to Know!
+
+* 1961 Spacewar!
+* 1976 Death Race moral panic
+* 1976 Fairchild Channel F
+* 1976-77 Mattel and others release handheld games
+* 1977 Adventure, Combat
+* 1977 RCA Studio II
+* 1977 Atari 2600 with Combat
+* 1978 Space Invaders launched in Japan
+* 1979 Asteroids (Atari, arcade)
+* 1979 Mattel Intellivision
+* 1980 Zork! released by Infocom
+* 1980 Richard Garriot released Ultima
+* 1980 Pac-man (Namco, Toru Iwatani)
+* 1981 Eastern Front 1941 for Atari (1st war game)
+* 1981 Wizardy (Sir Tech) released
+
+## Useful Concepts
+
+**Remediation** is teaching new things using a familiar format.
+
+### Harware and Development
+
+1. Shift from hardwiring to microprocessors
+2. Vector graphics (1979), color (1979), Wizardy on Apple II 1981
+
+### Computers and Intelligence
+
+1. Turing Test, Alan Turing 1950 (Can you tell you are speaking to a computer?)
+2. Elize AI chatbot
+
+Atari bilateral symmetry is a secondary characteristic from RAM limit.
+
 # Day Six
+
+All culture happens in a tech or economic space. Video games were developed due to
+two reasons:
+
+1. WWII investment in tech for enryption and misssle system guidance (Claude Shannon)
+2. Arcade gaming, which started with mechanical machines
 
 # Day Seven
 
