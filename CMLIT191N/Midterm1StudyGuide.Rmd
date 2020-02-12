@@ -169,15 +169,96 @@ on a Public Enemy song.
 
 ### Agon
 
+Agon is the type of play that is competition.
+
 ### Alea
+
+Alea is the type of play that is chance.
 
 ### Mimicry
 
+Mimicry is the type of play that is imitation. Where do we draw the line between
+mimicry and simulation? To understand the differencce between mimicry/imitation
+and simulation we must understand the distinction between **simulation and representation**.
+Gonzalo Frasca argues that games incorporate simulation in a way that traditional
+media does not. He also argues that instead of the narratie being the main thing,
+the simulation rather is the main subject. Gotschall also agrees that we cannot
+**not** tell stories. Our brains put data together to construct a narrative.
+
+An example of how our brain creates stories is the Kuleshov effect. This was demonstrated
+in lecture using a picture of a man with different photos in the middle. While both
+groups saw the same man, they saw different stories, because of the context in the
+middle.
+
 ### Ilinx
+
+Illinx is the type of play that is flow or also known as vertigo. The example of
+this used in class was a game called Flower. The main point of that game was the
+movement of it. Another game example is Katamari Damancy which is the game where
+you roll around in a ball of stuff.
 
 ### Muthos
 
+From what was mentioned in mimicry it is implied that storytelling **must** be
+a part of play.
+
 # Day Four
+
+## Game Studies
+
+Game studies began in the 1990s. This is when the first generation of gamers became
+professors in academia. Game studies focuses on three main questions.
+
+1. What is a game?
+2. Why are there games and what social function do they serve?
+3. How do games affect players and what effects do they have?
+
+### Areas of Research
+
+1. Representation: How are games talked about in culture?
+2. Ethnography/Social Analysis: How do games affect players?
+3. Close Reading/Literary Analysis: What does an individual game mean?
+4. Philosophy of Games: What are games?
+
+People have been claiming that there is a move away from linear media such as
+television towards interactive media like games. This is not necessarily true.
+
+## Basic Theories of Games
+
+1. The magic circle that encloses the world of a game.
+2. Popular culture vs. high vs. middle
+    + High would be classical music
+    + Low would be reality tv or wrestling
+    + "It's fun to hate people for liking stuff"
+3. The question of winning. Most games emphasize effort, but some skill.
+4. We cannot produce a clear definition of a game.
+
+## Diegesis
+
+Diegesis is the story world. The examples used in lecture to describe this concept
+was some movies with an intro where there is extradiegetic music that becomes diegetic.
+This means that there is music playing that is not a part of the story world, but
+becomes a part of the story world. We must also understand **metadiegesis** which
+would be a story world within a story world like the Princess Bride.
+
+## Form/Content Distinction
+
+The way a story is told and the actual content of the story are two very different
+aspects to a story. The story itself is a set of events or the form. The way the
+set of events or form is told is called the discourse or content. **The same events
+can be told in different ways.**
+
+## Lessons About Genre
+
+What we know about genres:
+
+* They emerge historically due to tech or social conditions
+* They repeat themselves
+* They have some relation to technique and technology
+* They represent large scale cultural modes of interaction
+* There are no pure examples of a genre
+* Genres are fuzzy
+* Genres compete in an ecosystem for attention
 
 # Day Five
 
