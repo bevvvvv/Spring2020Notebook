@@ -1,0 +1,115 @@
+---
+title: "ECON 444 Problem Set 2"
+subtitle: "Josepeh Sepich Feb 14"
+output:
+  pdf_document:
+    toc: false
+    toc_depth: 2
+    number_sections: true
+    keep_tex: false
+---
+
+```{r include=FALSE}
+library(tidyverse)
+```
+
+# Problem 1
+
+Problem Constraints
+
+* Market Demand: $Q(p) = 1000 * p^x$
+* Marginal Cost (Supply): $p = 2$
+* $x = -3$
+
+What price would a monopolist choose?
+
+In order to maximize profits a monopolist would set marginal revenue equal to marginal cost:
+
+\[\text{MR} = \text{MC}\]
+
+We already have that marginal cost is a constant, but what is marginal revenue? We can
+determine this value by defining total revenue:
+
+\[\text{TR} = p * Q\]
+
+We know that marginal revenue is the first derivative of total revenue, since it is 
+the additional revenue for each additional unit.
+
+\[\text{MR} = \frac{d\text{TR}}{dQ}\]
+\[\frac{d\text{TR}}{dQ} = \frac{d(p * Q)}{dQ}\]
+
+Here we must use our market demand equation and we can put $p$ in terms of $Q$:
+
+\[Q = 1000 * p^x\]
+\[\frac{Q}{1000} = p^x\]
+\[p = (\frac{Q}{1000})^{1/x}\]
+
+Plugging this back in we can continue.
+
+\[\frac{d((\frac{Q}{1000})^{1/x} * Q)}{dQ}\]
+
+According to our problem constraints $x = 3$.
+
+\[\frac{d((\frac{Q}{1000})^{-1/3} * Q)}{dQ} = \frac{d(\frac{Q^{2/3}}{1000^{-1/3}})}{dQ} = \frac{2}{3}(\frac{Q}{1000})^{-1/3}\]
+\[\text{MR} = \frac{2}{3}(\frac{Q}{1000})^{-1/3}\]
+
+Now solve for monopolist price:
+
+\[\text{MR} = \text{MC}\]
+\[\frac{2}{3}(\frac{Q}{1000})^{-1/3} = 2\]
+\[\frac{Q}{1000} = 3^{-3}\]
+\[Q = 1000(3)^{-3} \approx 37.04\]
+
+To get the price of sale, plug this quantity into demand (translated into terms of price above):
+
+\[p = (\frac{Q}{1000})^{-1/3} = (\frac{37.04}{1000})^{-1/3} = 3\]
+
+The monopolist would choose a **price of 3**. Now let's calculate profit if $\text{FC} = 25$.
+
+\[\pi = \text{TR} - \text{TC} = p * Q - (FC + Q * \text{MC})\]
+\[\pi = 3 * 37.04 - (25 + 37.04 * 2) = 12.03704\]
+
+The monopoly's profit level is **$12.04**.
+
+We can reinforce this with the following plot:
+
+```{r}
+Q <- seq(0, 50, 0.01)
+demand <- (Q / 1000) ^ (-1 / 3)
+mc <- rep(2, length(Q))
+mr <- (2 / 3) * (Q / 1000) ^ (-1 / 3)
+
+data <- data.frame(Q = Q, demand = demand, mc = mc, mr = mr)
+
+data %>%
+  ggplot(aes(x = Q)) +
+  geom_line(aes(y = demand)) +
+  geom_line(aes(y = mc)) +
+  geom_line(aes(y = mr)) +
+  ylim(0, 10)
+```
+
+# Problem 2
+
+## Part a
+
+## Part b
+
+## Part c
+
+# Problem 3
+
+## Part a
+
+## Part b
+
+## Part c
+
+# Problem 4
+
+## Part a
+
+## Part b
+
+
+

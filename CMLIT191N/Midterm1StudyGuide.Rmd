@@ -1,6 +1,6 @@
 ---
 title: "CMLIT 191M Midterm 1 Study Guide"
-subtitle: "Josepeh Sepich Sept 27"
+subtitle: "Josepeh Sepich Feb 12 2020"
 output:
   pdf_document:
     toc: true
