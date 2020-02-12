@@ -285,11 +285,21 @@ Someone also claimed that every story is composed of a mixure of story parts.
 * 1977 Commodore PET and TRS-80 launched
 * 1977 Apple II launched
 * 1978 Flight Simulator debuts on Apple II
+* 1981 Football Manager released for ZX81 - first data driven sports sim
+* 1982 Atari loses millions on ET (buried cartidges in New Mexico)
+* 1983 Xevios and Dragon's Lair
+    + Visuals made possible by laser disk
+* 1983 Apple Lisa, first home PC with GUI for 10k (23k today)
+* 1984 Croucher release Deus Ex Machina
+    + Uses audiotape for a soundtrack
+* 1985 Balance of Power
+* 1985 Garriot releases Ultima IV: Quest of the Avatar
 
 ## Dates to Know!
 
 * 1961 Spacewar!
 * 1976 Death Race moral panic
+    + A moral panic is anxiety people have about a cultural artifact because they think it is doing something wicked to children
 * 1976 Fairchild Channel F
 * 1976-77 Mattel and others release handheld games
 * 1977 Adventure, Combat
@@ -297,12 +307,52 @@ Someone also claimed that every story is composed of a mixure of story parts.
 * 1977 Atari 2600 with Combat
 * 1978 Space Invaders launched in Japan
 * 1979 Asteroids (Atari, arcade)
+    + Remediation of Spacewar!
 * 1979 Mattel Intellivision
 * 1980 Zork! released by Infocom
 * 1980 Richard Garriot released Ultima
+    + First majorly successful MMO
+    + Sold in ziplock bags with floppy disks
 * 1980 Pac-man (Namco, Toru Iwatani)
+* 1980 Clive Sinclair develops Sinclair ZX80 in Europe
+    + 1982 ZX Spectrum widly popular and assembled at home
+* 1980-1983 PC Price Wars
+    + Commodore vs Texas Instruments
+    + 1980 Commodore VIC-20
+    + 1982 Commodore 64
+    + 1983 TI drops out of PC business
 * 1981 Eastern Front 1941 for Atari (1st war game)
 * 1981 Wizardy (Sir Tech) released
+* 1981 Pimania by Mel Croucher - puzzle took four years to solve
+* 1982 Great Video Game Crash
+    + Overinvestment in arcades
+    + Games became too difficult
+    + Consoles hurt arcades
+    + Poor quality of games
+    + Aging technology in Atari 2600
+    + US Economic Recession
+    + Arrival of VCR
+    + PC Price war
+* 1982 Custer's Revenge
+    + Result of Atari's console not being regulated
+* 1982 Donkey Kong (really 81) by Miyamoto
+* 1983 Infogrames founded in France. Became Atari in 2008 after buying them out.
+* 1986 Console sales bottom out at $100 million from $3.2 billion in 1983
+* 1986 Ubisoft founded in France. Now top 5 company
+    + EA (1982)
+    + Activision Blizzard (1979)
+    + Nintendo
+* 1988 Freedom: Rebels in the Darkness
+* 1988 Captain Blood by Philippe Ulrich with soundtrack from Jean-Michael Jarre
+    + Symbol alien language
+* 1980s Rise of "cracking" anti-piracy culture and "demoscene"
+
+GUI:
+
+* 1983 Lode Runner, first game with player made levels
+* 1984 Apple Macintosh for $1,995 (5k today)
+* 1984 Roberta and Ken Williams release Kings Quest - beginning of end text adventure
+* 1986 Infocom bought by Activision; discontinued in 1989
 
 ## Useful Concepts
 
@@ -317,6 +367,7 @@ Someone also claimed that every story is composed of a mixure of story parts.
 
 1. Turing Test, Alan Turing 1950 (Can you tell you are speaking to a computer?)
 2. Elize AI chatbot
+    + Eric says humans like sex -> AI have female names
 
 Atari bilateral symmetry is a secondary characteristic from RAM limit.
 
@@ -328,10 +379,96 @@ two reasons:
 1. WWII investment in tech for enryption and misssle system guidance (Claude Shannon)
 2. Arcade gaming, which started with mechanical machines
 
+## Interaction Fiction
+
+Video games created connected to existing culture. Below are some examples of interactive
+fiction.
+
+### Choose Your Own Adventure
+
+CYOA books were books you read and flipped to different pages based on different
+decisions that you wanted to make. These books sold 250 million copies between 1979
+and 1998.
+
+An example like this in history was the Homeric poet who knew the basic story structure, 
+but would present the same story differently depending on the audience. This was
+a seperation of story and discourse (form/content distinction).
+
+A similar book that was sold in 1969 was The Unfortunates by B.S. Johnson. Essentially
+the first and last chapters were labeled and you shuffled the rest into a random
+order.
+
+### Electronic Fiction
+
+Espen Aarseth created Cybertext in 1997, which was a novel that you navigated pages
+by clicking on any word in the current page.
+
+## Story and Discourse
+
+Coming back to story and discourse there is different ways that they are thought
+to be created. **Expired** means that story comes before and dictates the discourse.
+**Tired** means that the discourse comes before the story, which is merely a back
+formation from the discourse. **Wired** is when story and discourse are created
+together.
+
+Lion King One and a Half is a great example of how discourse can affect the story.
+The entire Lion King story is told from Timon and Pumbaa's point of view.
+
+An example of a game at the limit of fiction is Beginner's Guide by Davey Wreden
+who also made the Stanely Parable. It is presented as if it is a factual retelling, but
+in fact it is completely constructed story by the creator. Davey uses the language
+of a documentary, but the content is not that of a documentary.
+
 # Day Seven
 
-# Day Eight
+## Culture
 
+Our claim is that culture changes people. For example, people are more beautiful
+the more that you like them. People also ban a movie or a book. One example we talked
+about was the Modern Warefare baby again. We somehow all know the "rules", becuase they
+are dictated by a rating system.
+
+Gotschall points to two findings of research:
+
+1. People who consume stories tend to be more empathetic
+2. People will reproduce the behavior that they see (priming)
+
+Art both reflects society and helps to reproduce itself.
+
+### The idiot/asshole
+
+When you see someone who does something different than you it is somehow always wrong.
+When you see someone walking faster than you on the sidewalk they must be an asshole,
+but anyone walking slowly you call an idiot. Also can be seen in amount of studying
+calling people nerds or a slacker.
+
+## Taste
+
+Taste is a social phenomenon. What you like is determined by your experience. This
+sometimes involves feeling superior. We talked about how a hipster is someone well off
+that likes what a working class person likes to try to fit in.
+
+## Gameplay and Representation
+
+**Gameplay** is what is being performed such as shooting, and isometric game, or climbing.
+**Representation** is what makes uncharted and tomb raider different even though they have
+the same gameplay. This is essentially the same as the story versus discourse discussion
+where you can present a story in different forms. Ian Bogost refers to the force
+of gameplay as procedural rheotric. Tone also has a huge affect on representation. Think
+of how different Borderlands would be without its art stye or the way guns were named.
+
+Is play subversive and active or escapist and passive?
+
+Feeling of impotence is very power. Freud call this castration. This produces anger
+and you are rarely impotent in video games.
+
+## Five Reasons to play
+
+1. Flow
+2. For the experience of satisfying work
+3. For the experience of being successful
+4. For social connection
+5. To pretend to be another person
 
 
 
