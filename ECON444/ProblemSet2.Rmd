@@ -198,9 +198,68 @@ The markup rule is satisfied at our monopoly equilibrium.
 
 # Problem 3
 
+Problem Constraints (Clothes Hangars)
+
+* Inverse Market Demand: $p = 3-\frac{Q}{16,000}$
+* Marginal Cost $p = 1$
+
 ## Part a
 
+In competition the price is dictated by the intersection of supply and demand.
+This will occur where margincal costs intersects demand. The price therefore must
+equal marginal cost, since any firm will produce as long as price is at least one
+and consumers will consume as much as they can. The price in competition is 1.
+We can plug this into our demand equation and get Q.
+
+\[1 = 3-\frac{Q}{16,000}\]
+\[16000 - 48000 - Q\]
+\[Q = 48000 - 16000 = 32000\]
+
+Under perfect competition **Q will be 32,000** and **price will be 1**.
+
 ## Part b
+
+In a monopolized market the price will be dictated by the firm's optimal profit point.
+This occurse when $\text{MR} = \text{MC}$. First we find marginal revenue as in
+previous problems.
+
+\[\text{MR} = \frac{d(p * Q)}{dQ}\]
+\[\text{MR} = \frac{d((3-\frac{Q}{16,000}) * Q)}{dQ} = \frac{d(3Q - \frac{Q^2}{16,000})}{dQ} = 3-\frac{Q}{8,000}\]
+
+\[\text{MR} = \text{MC}\]
+\[1 = 3-\frac{Q}{8,000}\]
+\[8000 = 24000 - Q\]
+\[Q = 24000 - 8000 = 16000\]
+
+We need to get price by plugging our quanity back into market demand.
+
+\[p = 3-\frac{Q}{16,000} = 3-\frac{16,000}{16,000} = 3 - 1 = 2\]
+
+Under a monopoly **Q will be 16,000** and **price will be 2**.
+
+We can see these two values below:
+
+```{r echo=FALSE}
+Q <- seq(0, 40000, 1)
+demand <- 3 - (Q / 16000)
+mc <- rep(1, length(Q))
+mr <- 3 - (Q / 8000)
+
+data <- data.frame(Q = Q, p = demand, label = rep("Demand", length(Q)))
+data <- data %>%
+  rbind(data.frame(Q = Q, p = mc, label = rep("MC", length(Q))))
+data <- data %>%
+  rbind(data.frame(Q = Q, p = mr, label = rep("MR", length(Q))))
+
+
+data %>%
+  ggplot(aes(x = Q, y = p, color = label)) +
+  geom_line() +
+  geom_vline(xintercept = 32000) +
+  geom_vline(xintercept = 16000) +
+  geom_hline(yintercept = 2) + 
+  ylim(0, 3)
+```
 
 ## Part c
 
