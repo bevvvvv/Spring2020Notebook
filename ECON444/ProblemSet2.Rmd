@@ -263,11 +263,71 @@ data %>%
 
 ## Part c
 
+What is the deadweight loss of a monopoly in this market?
+
+The deadweight loss in this case is the triangle between the Q a monopoly produces,
+market demand, and marginal cost. This is defined visually below:
+
+```{r echo=FALSE}
+region <- data.frame(Q = Q, mc = mc, demand = demand) %>%
+  filter(16000 <= Q & Q <= 32000)
+
+
+data %>%
+  ggplot(aes(x = Q, y = p, color = label)) +
+  geom_line() +
+  geom_vline(xintercept = 32000) +
+  geom_vline(xintercept = 16000) +
+  geom_hline(yintercept = 2) +
+  geom_ribbon(data=region, aes(x = Q, ymin = mc, ymax = demand, fill = "DWL"), inherit.aes = FALSE) +
+  ylim(0, 3)
+```
+
+In order to determine the deadweight loss we merely have to calculate the area of
+the triangle.
+
+\[\text{DWL} = \frac12(Q_1 - Q_0)(p_0 - p_1) = \frac12(32000 - 16000)(2-1) = 16000 / 2 = 8,000\]
+
+The value of the deadweight loss from a monopoly is **8,000**.
+
 # Problem 4
+
+Problem Constraints (Pizza production)
+
+* Total Cost $C(q) = 2q + 2q^2$
 
 ## Part a
 
+Show that the competitive supply behavior of the typical pizza firm is $q = \frac{p}{4} - \frac12$
+
+Any firm looks to optimize their profits. This means that $\text{MR} = \text{MC}$.
+In this example the marginal cost is:
+
+\[MC = \frac{dC(q)}{dq} = \frac{d(2q + 2q^2)}{dq} = 2 + 4q\]
+
+Since we are looking at competitive behavior we assume that $\text{MR} = \text{MC} = p$.
+
+\[p = 2 + 4q\]
+\[4q = p - 2\]
+\[q = \frac{p}{4} - \frac12\]
+
+This means the firm will select their supply relative to the given price.
+
 ## Part b
+
+We now have that n = 100 firms. We can determine total market supply. Since we have
+100 firms with identical behavior in this compeitive market. A single firm's inverse
+form would be:
+
+\[q = \frac{p}{4} - \frac12\]
+\[q + \frac12 = \frac{p}4\]
+\[4q + 2 = p\]
+
+Now if instead of having a single firm we had 100 firms we would have $Q = \frac{q}{n} = \frac{q}{100}$:
+
+\[p = \frac{q}{100}4 + 2 = \frac{Q}{25} + 2\]
+
+
 
 
 
