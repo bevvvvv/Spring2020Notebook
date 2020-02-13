@@ -73,25 +73,56 @@ The monopoly's profit level is **$12.04**.
 
 We can reinforce this with the following plot:
 
-```{r}
+```{r echo=FALSE}
 Q <- seq(0, 50, 0.01)
 demand <- (Q / 1000) ^ (-1 / 3)
 mc <- rep(2, length(Q))
 mr <- (2 / 3) * (Q / 1000) ^ (-1 / 3)
 
-data <- data.frame(Q = Q, demand = demand, mc = mc, mr = mr)
+data <- data.frame(Q = Q, p = demand, label = rep("Demand", length(Q)))
+data <- data %>%
+  rbind(data.frame(Q = Q, p = mc, label = rep("MC", length(Q))))
+data <- data %>%
+  rbind(data.frame(Q = Q, p = mr, label = rep("MR", length(Q))))
+
 
 data %>%
-  ggplot(aes(x = Q)) +
-  geom_line(aes(y = demand)) +
-  geom_line(aes(y = mc)) +
-  geom_line(aes(y = mr)) +
-  ylim(0, 10)
+  ggplot(aes(x = Q, y = p, color = label)) +
+  geom_line() +
+  geom_vline(xintercept = 37.04) +
+  geom_hline(yintercept = 3) + 
+  ylim(0, 5)
 ```
 
 # Problem 2
 
+Problem Constraints (T-Shirts)
+
+* Market Demand $Q(p) = 1000 - 50p$
+* Marginal Cost (Supply and AC) $p = 10$
+
 ## Part a
+
+Calculate the market output and price under perfect compeition and under monopoly.
+
+### Perfect Competition
+
+In perfect competition we know that price is marginal revenue. Let's calculate
+marginal revenue from market demand. We will use the same method as in problem 1.
+
+\[\text{MR} = \frac{d(p * Q)}{dQ}\]
+\[\text{MR} = \frac{d((\frac{Q - 1000}{-50}) * Q)}{dQ} = \frac{d(\frac{Q^2 - 1000Q}{-50})}{dQ} = 50 (1000 - 2Q)\]
+
+Since firms will be at profit max, $\text{MR} = \text{MC} = p$.
+
+\[10 = 50 (1000 - 2Q)\]
+\[\frac15 = 1000 - 2Q\]
+\[10Q = 5000\]
+\[Q = 500\]
+
+In perfect compeition **Q will be 500** and **price will be 10**.
+
+### Monopoly
 
 ## Part b
 
