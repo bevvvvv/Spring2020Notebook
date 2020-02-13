@@ -107,26 +107,94 @@ Calculate the market output and price under perfect compeition and under monopol
 
 ### Perfect Competition
 
-In perfect competition we know that price is marginal revenue. Let's calculate
-marginal revenue from market demand. We will use the same method as in problem 1.
+In perfect competition the price is dictated by the market. Since price is equal
+to marginal cost (or else firms will not be in the market), the price in perfect
+competition is 10. We can plug this into our demand equation and get Q.
 
-\[\text{MR} = \frac{d(p * Q)}{dQ}\]
-\[\text{MR} = \frac{d((\frac{Q - 1000}{-50}) * Q)}{dQ} = \frac{d(\frac{Q^2 - 1000Q}{-50})}{dQ} = 50 (1000 - 2Q)\]
+\[Q(p) = 1000 - 50p\]
+\[Q(10) = 1000 - 50*10\]
+\[Q(10) = 1000 - 500 = 500\]
 
-Since firms will be at profit max, $\text{MR} = \text{MC} = p$.
-
-\[10 = 50 (1000 - 2Q)\]
-\[\frac15 = 1000 - 2Q\]
-\[10Q = 5000\]
-\[Q = 500\]
-
-In perfect compeition **Q will be 500** and **price will be 10**.
+Under perfect competition **Q will be 500** and **price will be 10**.
 
 ### Monopoly
 
+For a monopolist they will choose a price to optimize profit. This is where marginal
+revenue and marginal cost are equivalent. Let's calculate marginal revenue from market
+demand. We will use the same method as in problem 1.
+
+\[\text{MR} = \frac{d(p * Q)}{dQ}\]
+\[\text{MR} = \frac{d((\frac{Q - 1000}{-50}) * Q)}{dQ} = \frac{d(\frac{Q^2 - 1000Q}{-50})}{dQ} = \frac{(1000 - 2Q)}{50}\]
+
+Since firms will be at profit max, $\text{MR} = \text{MC}$.
+
+\[10 = \frac{(1000 - 2Q)}{50}\]
+\[500 = 1000 - 2Q\]
+\[2Q = 500\]
+\[Q = 250\]
+
+Let's plug this back into demand.
+
+\[p = \frac{Q - 1000}{-50} = \frac{250 - 1000}{-50} = 10.002\]
+
+Under a monopoly **Q will be 250** and **price will be 15**.
+
+We can see these two values below:
+
+```{r echo=FALSE}
+Q <- seq(0, 600, 0.1)
+demand <- (1000 - Q) / 50
+mc <- rep(10, length(Q))
+mr <- (1000 - 2 * Q) / 50
+
+data <- data.frame(Q = Q, p = demand, label = rep("Demand", length(Q)))
+data <- data %>%
+  rbind(data.frame(Q = Q, p = mc, label = rep("MC", length(Q))))
+data <- data %>%
+  rbind(data.frame(Q = Q, p = mr, label = rep("MR", length(Q))))
+
+
+data %>%
+  ggplot(aes(x = Q, y = p, color = label)) +
+  geom_line() +
+  geom_vline(xintercept = 500) +
+  geom_vline(xintercept = 250) +
+  geom_hline(yintercept = 15) + 
+  ylim(0, 20)
+```
+
 ## Part b
 
+What is the elasticity of demand at competitive equilibrium? 
+
+Recall elasticity definition
+
+\[\epsilon = \frac{dQ}{dP}\frac{P}{Q}\]
+
+So we find the derivative and multiply by the equilibrium values from part a.
+
+\[\frac{dQ}{dP}\frac{P}{Q} = \frac{d(1000 - 50p)}{dP}\frac{P}{Q} = \frac{-50 * 10}{500} = -1\]
+
+The elasticity of demand at competitive equilibrium is **unit elastic**.
+
+What is the elasticity of demand at monopoly equilibrium?
+
+We find the derivative and multiply by the equilibrium values from part a.
+
+\[\frac{dQ}{dP}\frac{P}{Q} = \frac{d(1000 - 50p)}{dP}\frac{P}{Q} = \frac{-50 * 15}{250} = -0.6\]
+
+The elasticity of demand at monopoly equilibrium is **-0.6**.
+
 ## Part c
+
+Let's check if the markup rule is satisfied at our monopoly equilibrium. The markup
+rule is:
+
+\[\frac{p - MC}{p} = \frac{1}{-\epsilon}\]
+\[\frac{15 - 10}{15} = \frac{1}{0.6}\]
+\[\frac13 \neq \frac{10}6\]
+
+The markup rule is not satisfied at our monopoly equilibrium.
 
 # Problem 3
 
