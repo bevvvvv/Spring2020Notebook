@@ -181,9 +181,9 @@ What is the elasticity of demand at monopoly equilibrium?
 
 We find the derivative and multiply by the equilibrium values from part a.
 
-\[\frac{dQ}{dP}\frac{P}{Q} = \frac{d(1000 - 50p)}{dP}\frac{P}{Q} = \frac{-50 * 15}{250} = -0.6\]
+\[\frac{dQ}{dP}\frac{P}{Q} = \frac{d(1000 - 50p)}{dP}\frac{P}{Q} = \frac{-50 * 15}{250} = -3\]
 
-The elasticity of demand at monopoly equilibrium is **-0.6**.
+The elasticity of demand at monopoly equilibrium is **-3**.
 
 ## Part c
 
@@ -191,10 +191,10 @@ Let's check if the markup rule is satisfied at our monopoly equilibrium. The mar
 rule is:
 
 \[\frac{p - MC}{p} = \frac{1}{-\epsilon}\]
-\[\frac{15 - 10}{15} = \frac{1}{0.6}\]
-\[\frac13 \neq \frac{10}6\]
+\[\frac{15 - 10}{15} = \frac{1}{3}\]
+\[\frac13 = \frac13\]
 
-The markup rule is not satisfied at our monopoly equilibrium.
+The markup rule is satisfied at our monopoly equilibrium.
 
 # Problem 3
 
