@@ -1,6 +1,6 @@
 ---
 title: "ECON 444 Problem Set 2"
-subtitle: "Josepeh Sepich Feb 14"
+subtitle: "Joseph Sepich Feb 14"
 output:
   pdf_document:
     toc: false
