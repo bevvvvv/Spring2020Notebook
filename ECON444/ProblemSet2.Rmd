@@ -1,6 +1,6 @@
 ---
 title: "ECON 444 Problem Set 2"
-subtitle: "Josepeh Sepich Feb 14"
+subtitle: "Joseph Sepich Feb 14"
 output:
   pdf_document:
     toc: false
@@ -20,6 +20,16 @@ Problem Constraints
 * Market Demand: $Q(p) = 1000 * p^x$
 * Marginal Cost (Supply): $p = 2$
 * $x = -3$
+
+To find the elasticity of demand we can first state the elasticity defition:
+
+\[\epsilon = \frac{dQ}{dP}\frac{P}{Q}\]
+
+Then we can plug in using the market demand function:
+
+\[\epsilon = \frac{d(1000 * P^x)}{dP}\frac{P}{1000 * P^x} = \frac{ln(P)1000P^{x+1}}{1000P^x}=Pln(P)\]
+
+The elasticity of demand for coffee is $\epsilon = P * ln(P)$.
 
 What price would a monopolist choose?
 
@@ -48,7 +58,7 @@ Plugging this back in we can continue.
 
 \[\frac{d((\frac{Q}{1000})^{1/x} * Q)}{dQ}\]
 
-According to our problem constraints $x = 3$.
+According to our problem constraints $x = -3$.
 
 \[\frac{d((\frac{Q}{1000})^{-1/3} * Q)}{dQ} = \frac{d(\frac{Q^{2/3}}{1000^{-1/3}})}{dQ} = \frac{2}{3}(\frac{Q}{1000})^{-1/3}\]
 \[\text{MR} = \frac{2}{3}(\frac{Q}{1000})^{-1/3}\]
@@ -135,7 +145,7 @@ Since firms will be at profit max, $\text{MR} = \text{MC}$.
 
 Let's plug this back into demand.
 
-\[p = \frac{Q - 1000}{-50} = \frac{250 - 1000}{-50} = 10.002\]
+\[p = \frac{Q - 1000}{-50} = \frac{250 - 1000}{-50} = 15\]
 
 Under a monopoly **Q will be 250** and **price will be 15**.
 
@@ -212,7 +222,7 @@ and consumers will consume as much as they can. The price in competition is 1.
 We can plug this into our demand equation and get Q.
 
 \[1 = 3-\frac{Q}{16,000}\]
-\[16000 - 48000 - Q\]
+\[16000 = 48000 - Q\]
 \[Q = 48000 - 16000 = 32000\]
 
 Under perfect competition **Q will be 32,000** and **price will be 1**.
@@ -220,7 +230,7 @@ Under perfect competition **Q will be 32,000** and **price will be 1**.
 ## Part b
 
 In a monopolized market the price will be dictated by the firm's optimal profit point.
-This occurse when $\text{MR} = \text{MC}$. First we find marginal revenue as in
+This occurs when $\text{MR} = \text{MC}$. First we find marginal revenue as in
 previous problems.
 
 \[\text{MR} = \frac{d(p * Q)}{dQ}\]
@@ -323,9 +333,9 @@ form would be:
 \[q + \frac12 = \frac{p}4\]
 \[4q + 2 = p\]
 
-Now if instead of having a single firm we had 100 firms we would have $Q = \frac{q}{n} = \frac{q}{100}$:
+Now if instead of having a single firm we had 100 firms we would have $q = \frac{Q}{n} = \frac{Q}{100}$:
 
-\[p = \frac{q}{100}4 + 2 = \frac{Q}{25} + 2\]
+\[p = q4 + 2 = \frac{Q}{100}4 + 2 = \frac{Q}{25} + 2\]
 
 
 
