@@ -29,9 +29,29 @@ class TestHWQuestions(unittest.TestCase):
         with self.assertRaisesRegex(Exception, 'Dimension Mismatch'):
             hw.question_matmat(mat, vec)
         vec = [[1], [1], [1], [1], [2]]
-        self.assertEqual(hw.question_matmat(mat, vec), [[6, 12, 18, 24]])
+        self.assertEqual(hw.question_matmat(mat, vec), [[6], [12], [18], [24]])
         vec = [[1, 3], [1, 3], [1, 3], [1, 3], [2, 3]]
-        self.assertEqual(hw.question_matmat(mat, vec), [[6, 12, 18, 24], [15, 30, 45, 60]])
+        self.assertEqual(hw.question_matmat(mat, vec), [[6, 15], [12, 30], [18, 45], [24, 60]])
+
+    def test_matrixaddition(self):
+        x = [[1, 1, 1, 1],[2, 2, 2, 2],[3,3,3,3],[4,4,4,4]]
+        b = [[1, 1, 1, 1],[2, 2, 2, 2],[3,3,3,3],[4,4,4,4]]
+        self.assertEqual(hw.matrix_addition(x, b),
+        [[2, 2, 2, 2],[4, 4, 4, 4],[6,6,6,6],[8,8,8,8]])
+        x = [[1, 1, 1, 1],[2, 2, 2, 2],[3,3,3,3],[4,4,4,4]]
+        self.assertEqual(hw.matrix_addition(x, b, True),
+        [[0, 0, 0, 0],[0, 0, 0, 0],[0,0,0,0],[0,0,0,0]])
+
+    def test_vectoraddition(self):
+        x = [1, 2, 3, 4]
+        b = [1, 2, 3, 4]
+        self.assertEqual(hw.vector_addition(x, b), [2, 4, 6, 8])
+        self.assertEqual(hw.vector_addition(x, b, True), [0, 0, 0, 0])
+
+    def test_transpose(self):
+        A = [[1, 2, 3],
+            [4, 5, 6]]
+        self.assertEqual(hw.transpose(A), [[1, 4], [2, 5], [3, 6]])
 
 
 if __name__ == '__main__':
