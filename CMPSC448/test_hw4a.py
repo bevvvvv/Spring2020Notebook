@@ -5,6 +5,7 @@ Author: Joseph Sepich (jps6444)
 """
 import unittest
 import HW4.hw4a as hw
+import numpy as np
 
 class TestHWQuestions(unittest.TestCase):
     def test_matvec(self):
@@ -53,6 +54,44 @@ class TestHWQuestions(unittest.TestCase):
             [4, 5, 6]]
         self.assertEqual(hw.transpose(A), [[1, 4], [2, 5], [3, 6]])
 
+    def test_question3(self):
+        A = [[1.2, 1.4, 1], [2, 1.5, 4]]
+        W = [[1.2, 1], [1, 1.6]]
+        x = [1, 1.4, 1.5] 
+        b = [1, 1]
+        self.assertEqual(hw.question3(A, W, x, b), [105.2608, 92.4376, 172.744])
+
+    def test_question4(self):
+        A = [[1, 3, 2.5], [0, 1, 2.125]]
+        C = [[4, 7, 1.5], [1, 2, 1.125]]
+        W = [[1, 1], [1.125, 1.5]]
+        x = [1, 5, 1]
+        b = [4, 2]
+        d = [3, 5]
+        self.assertEqual(hw.question4(A, C, W, x, b, d), [147.875, 372.984375, 279.28125 ])
+
+    def test_question5(self):
+        A = [[4, 1, 6, 8], [2, 5, 1, 0], [1, 2, 1, 5]]
+        x = [9, 0, 8, 5]
+        self.assertEqual(hw.question5(A, x, sigmoid),0)
+
+    def test_question6(self):
+        pass
+
+    def test_question7(self):
+        pass
+
+    def test_question8(self):
+            pass
+
+def sigmoid(x):
+    result = 1.0/(1 + np.exp(-np.array(x)))
+    return result.tolist()
+
+def huber(x):
+    myval = np.array(x)
+    result = np.where(np.abs(myval) <= 1, 0.5*myval**2, np.abs(myval)-0.5)
+    return result.sum()
 
 if __name__ == '__main__':
     unittest.main()

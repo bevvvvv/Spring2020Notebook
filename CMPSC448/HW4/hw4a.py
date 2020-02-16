@@ -95,7 +95,15 @@ def question4(A,C,W,x,b,d):
    return vector_addition(left_term, right_term)
    
 def question5(A,x,sigmoid):
-   pass
+   # function is (Asig(x))'Asig(x)
+   # derivative is 2A'Asig(x)*d_sig(x)
+   # recall sig deriv = sig(x) * (1 - sig(x))
+   #A_prime = transpose(A)
+   left = scalar_mult(2, A)
+   #left = question_matmat(left, A)
+   left = question_matvec(left, func_vec(sigmoid, x))
+   left = func_vec(lambda z: z * (sigmoid(z) * (1 - sigmoid(z))), left)
+   return left
    
 def question6(A,x,b,sigmoid):
    pass
@@ -135,3 +143,17 @@ def transpose(A):
          A_prime[new_row].append(A[row][col])
       new_row += 1
    return A_prime
+
+def scalar_mult(const, A):
+   result = A[:][:]
+   for row in range(len(A)):
+      for col in range(len(A[0])):
+         result[row][col] = const * A[row][col]
+   return result
+
+def func_vec(func, vec):
+   result = vec[:]
+   for i in range(len(vec)):
+      result[i] = func(vec[i])
+   return result
+            
