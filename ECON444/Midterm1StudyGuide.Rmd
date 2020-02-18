@@ -1,0 +1,68 @@
+---
+title: "CMLIT 191M Midterm 1 Study Guide"
+subtitle: "Josepeh Sepich Feb 12 2020"
+output:
+  pdf_document:
+    toc: true
+    toc_depth: 2
+    number_sections: false
+    keep_tex: false
+---
+
+# Maket Theories
+
+## Price Theory
+
+## Structure-Conduct-Performance Model
+
+# Perfect Competition
+
+### Assumptions
+
+### Behavior
+
+### Shutdown Rule
+
+## Supply Curve and Equilibrium
+
+### Short Run
+
+### Long Run
+
+## Elasticity
+
+### Residual Elasticity of Demand
+
+## Welfare Analysis
+
+### Definitions
+
+# Monopoly
+
+## Behavior
+
+### Decision Problem
+
+### Marginal Revenue
+
+## Markup Rule
+
+### Elasticity and Margin
+
+## Kinds of Elasticity
+
+## Multiproduct Firms
+
+## Welfare Analysis
+
+## Rent Seeking Behavior
+
+## Benefits of Monopoly
+
+## Creation of Monopoly
+
+### Knowledge Advantage
+
+## Monopoly profits
+
+# Monopsony
