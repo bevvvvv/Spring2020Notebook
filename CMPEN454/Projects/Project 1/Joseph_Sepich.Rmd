@@ -37,32 +37,16 @@ df %>%
 
 Since in hough space the parameters are instead $\rho$ and $\theta$, this means
 the same function in Hough space would be written as $\rho = cos(\theta) + sin(\theta)$.
+This makes the form of a line equation in (x,y) space $\rho = xcos\theta+ysin\theta$ show
+as a sinusoid in Hough space.
 
-Since we want to analyze the equation $\rho = xcos\theta+ysin\theta$, we already
-know that this line equation is clearly a sinusoid in Hough space, but what do
-the parameters x and y affect? X and y both affect the amplitude and phase of the
-sinusoid. If X >> y then the phase lines up with cosine, but if y >> x then the
-phase lines up with sine. When $x \approx y$ then the phase is a mixture of the two.
-This can be seen with the following plots with $x = [0.05, 1, 5], y=[5, 1, 0.05]$:
-
-```{r echo=FALSE}
-theta <- seq(0, 2 * 3.14159, 0.001)
-x <- c(0.05, 1, 5)
-y <- c(5, 1, 0.05)
-rho_1 <- y[1]*sin(theta) + x[1]*cos(theta)
-rho_2 <- y[2]*sin(theta) + x[2]*cos(theta)
-rho_3 <- y[3]*sin(theta) + x[3]*cos(theta)
-
-
-df <- data.frame(theta = theta, rho = rho_1, label=rep("(0.05,5)", length(theta)))
-df <- df %>%
-  rbind(data.frame(theta = theta, rho = rho_2, label = rep("(1,1)", length(theta))))
-df <- df %>%
-  rbind(data.frame(theta = theta, rho = rho_3, label = rep("(5,0.05)", length(theta))))
-df %>%
-  ggplot(aes(x=theta,y=rho,color = label)) +
-  geom_line()
-```
+We know that in $x\cos\theta+y\sin\theta$ we can write $x = R\cos\alpha,y=R\sin\alpha$.
+Furthermore $R\cos\alpha\cos\theta+R\sin\alpha\sin\theta = R\cos(\alpha - \theta)$.
+From here we can determine that R is the amplitude of the function and $\alpha$ is
+the phase. We know that $x^2 + y^2 = R^2\cos^2\alpha + R^2\sin^2\alpha = R^2(1)$, so
+$R = \sqrt{x^2 + y^2}$. This would be the sinusoid **amplitude** in terms of (x,y).
+We also know that $\frac{R\sin\alpha}{R\cos\alpha} = \frac{y}{x} = \tan\alpha$, so
+the **phase** is $\alpha = \arctan\frac{y}{x}$ in terms of (x,y).
 
 ## Problem 2
 
@@ -100,7 +84,7 @@ us see lines as unique points. Take our line equation and phrase it as $y = mx +
 \[y = -\cot\theta*x + \csc\theta * rho\]
 
 We can now see in the slope intercept form that the slope would be $m = -\cot\theta$
-and the intercept would be $\csc\theta * rho$.
+and the intercept would be $c = \csc\theta * rho$.
 
 ## Problem 3
 
@@ -108,11 +92,45 @@ Assuming that the image points (x,y) are in an image of width W and height H, th
 is $x \in [1, W], y\in [1,H]$, what is the maximum absolute value of $\rho$, and what
 is the range for $\theta$?
 
+The maximum absolute value of $\rho = \sqrt{W^2 + H^2}$, since this is the value of the
+amplitude of the line function found in problem 1.
+
+For $\theta$ we would only have to look between 0 and $2\pi$ to see all values of $\rho$.
+
 ## Problem 4
 
 For point (10, 10) and points (20, 20) and (30, 30) in the image, plot the corresponding
 sinusoid waves in Hough space, and visualize how their intersection point defines
 the line. What is (m, c) for this line?
+
+```{r echo=FALSE}
+m <- seq(-3, 3, 0.1)
+b <- -1 * m *10 + 10 # (4,0)
+df <- data.frame(m = m, b = b, label=rep("(10,10)", length(m)))
+df <- df %>% rbind(data.frame(m = m, b = (-1 * m * 20 + 20), label=rep("(20,20)", length(m))))
+df <- df %>% rbind(data.frame(m = m, b = (-1 * m * 30 + 30), label=rep("(30,30)", length(m))))
+
+df %>%
+  ggplot(aes(x=m,y=b,color=label)) +
+  geom_line()
+```
+
+It is clear that in Hough space, these three image points intersect at (m,c) = (1,0). This corresponds
+to the line $y = mx + b = x$. This can be seen below.
+
+```{r echo=FALSE}
+m <- seq(0, 35, 0.1)
+b <- m
+df <- data.frame(m = m, b = b)
+m <- c(10, 20, 30)
+b <- m
+df_points <- data.frame(m=m, b=b)
+
+df %>%
+  ggplot(aes(x=m,y=b)) +
+  geom_line() +
+  geom_point(data = df_points, aes(x=m, y=b), inherit.aes = FALSE)
+```
 
 
 
