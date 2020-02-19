@@ -69,6 +69,39 @@ df %>%
 Why do we parameterize the line in terms of ($\rho, \theta$) instead of the slope
 and intercept (m,c)? Express the slope and intercept in terms of ($\rho, \theta$).
 
+One of the reasons we parameterize the line in terms of ($\rho, \theta$) instead
+of the slope and intercept is to be able to identify vertical lines. They appear
+as parallel when casting to parameter space: $b = -mx + y$, since x is constant.
+
+Say we have the lines $x = 4$, and $y = 5$. On the first line we could have the points
+(4,0), (4, 3), and (4, -2). The second line we could have (0,5), (-3, 5) and (2, 5).
+Below we can compare the image space points to the lines in Hough Space.
+
+```{r echo=FALSE}
+m <- seq(-5, 5, 0.1)
+b <- -1 * m *4 # (4,0)
+df <- data.frame(m = m, b = b, label=rep("(4,0)", length(m)))
+df <- df %>% rbind(data.frame(m = m, b = (-1 * m * 4 + 3), label=rep("(4,3)", length(m))))
+df <- df %>% rbind(data.frame(m = m, b = (-1 * m * 4 - 2), label=rep("(4,-2)", length(m))))
+
+df %>%
+  ggplot(aes(x=m,y=b,color=label)) +
+  geom_line()
+```
+
+So let's express the slope and intercept as ($\rho, \theta$). This lets use see
+points as sinusoids instead of lines (so they will not be parallel), and it lets
+us see lines as unique points. Take our line equation and phrase it as $y = mx + b$.
+
+\[\rho = xcos\theta+ysin\theta\]
+\[\rho - xcos\theta = ysin\theta\]
+\[y = \frac{\rho - xcos\theta}{sin\theta}\]
+\[y = \frac{-xcos\theta}{sin\theta} + \frac{\rho}{sin\theta}\]
+\[y = -\cot\theta*x + \csc\theta * rho\]
+
+We can now see in the slope intercept form that the slope would be $m = -\cot\theta$
+and the intercept would be $\csc\theta * rho$.
+
 ## Problem 3
 
 Assuming that the image points (x,y) are in an image of width W and height H, that
