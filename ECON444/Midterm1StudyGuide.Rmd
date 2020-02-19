@@ -1,5 +1,5 @@
 ---
-title: "CMLIT 191M Midterm 1 Study Guide"
+title: "IO Midterm 1 "
 subtitle: "Josepeh Sepich Feb 12 2020"
 output:
   pdf_document:
@@ -9,11 +9,58 @@ output:
     keep_tex: false
 ---
 
+```{r include=FALSE}
+library(tidyverse)
+```
+
 # Maket Theories
+
+Industrial Organization (IO) studies imperfectly competitive markets. It does so
+by adding complications to a perfectly competitive setting. These complications
+include:
+
+* Limited Information
+* Cost of adjusting prices
+* Barriers to entry
+* Government actions
 
 ## Price Theory
 
+Price theory uses microeconomic models to explain firm behavior and market structure.
+There are three theoretical applications:
+
+* Transaction cost analysis
+* Game theory
+* Contestable market analysis
+
 ## Structure-Conduct-Performance Model
+
+There are three factors to this model: structure, conduct, and performance. Structure
+(factors determining competitiveness of the market) depends on basic conditions
+(elasticity of demand, substitutes, technology, scale economies, etc) and vice versa.
+Government regulations affect basic conditions, structure, conduct, performance.
+Conduct affects government regulations.
+
+### Structure Factors
+
+* # of buyers
+* # of sellers
+* Barriers to entry
+* Product differentiation
+
+### Conduct Factors
+
+* Advertising
+* Research and Development
+* Pricing Behavior
+* Collusion
+
+### Performance Factors
+
+* Price
+* Efficiency (DWL?)
+* Product Quality
+* Profits
 
 # Perfect Competition
 
@@ -21,9 +68,29 @@ output:
 
 ### Behavior
 
+We assume that every firm wants to maximize profits. From this we can dervie behavior:
+
+\[\text{max}\pi  = TR - TC = p(q)-C(q) = (p - AC(q))q\]
+\[\frac{d\pi}{dq} = p - AC(q) = 0\]
+\[p = AC(q) = MC\]
+
+In a perfectly competitive market firms will take a price equal to marginal cost.
+
 ### Shutdown Rule
 
+Firms will only produce if it is more profitable than not producing (even if profit
+is not positive). This means the firm will produce as long as revenues exceed avoidable
+costs. The excess revenue is called **quasi-rents**.
+
+\[\pi_{\text{quasi}} = TR(q) - C_{\text{avoid}}(q)\]
+\[TR(q) - C_{\text{avoid}}(q) < 0\]
+\[pq < C_{\text{avoid}}(q)\]
+\[p < \frac{C_{\text{avoid}}(q)}{q}\]
+\[p < AC_{\text{avoid}}(q)\]
+
 ## Supply Curve and Equilibrium
+
+Look at homework.
 
 ### Short Run
 
