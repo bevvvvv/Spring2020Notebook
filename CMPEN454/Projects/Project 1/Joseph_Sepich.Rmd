@@ -9,6 +9,10 @@ output:
     keep_tex: false
 ---
 
+```{r include=FALSE}
+library(tidyverse)
+```
+
 # Theory Questions
 
 ## Problem 1
@@ -16,6 +20,49 @@ output:
 Show that if you use the line equations $\rho = xcos\theta+ysin\theta$, each image
 point (x,y) results in a sinusoid in ($\rho,\theta$) Hough space. Relate the amplitude
 and phase of the sinusoid to the point(x,y).
+
+In Hough space the coordinates are $\rho$ and $\theta$. Say we have a simple sin
+formula in x,y space. This is represented as $y = sin(x)$. Similarly $y = cos(x) + sin(x)$
+is also a sinusoidal equation, which can be seen below.
+
+```{r echo=FALSE}
+x <- seq(0, 2 * 3.14159, 0.001)
+y <- sin(x) + cos(x)
+
+df <- data.frame(y = y, x = x)
+df %>%
+  ggplot(aes(x=x,y=y)) +
+  geom_line()
+```
+
+Since in hough space the parameters are instead $\rho$ and $\theta$, this means
+the same function in Hough space would be written as $\rho = cos(\theta) + sin(\theta)$.
+
+Since we want to analyze the equation $\rho = xcos\theta+ysin\theta$, we already
+know that this line equation is clearly a sinusoid in Hough space, but what do
+the parameters x and y affect? X and y both affect the amplitude and phase of the
+sinusoid. If X >> y then the phase lines up with cosine, but if y >> x then the
+phase lines up with sine. When $x \approx y$ then the phase is a mixture of the two.
+This can be seen with the following plots with $x = [0.05, 1, 5], y=[5, 1, 0.05]$:
+
+```{r echo=FALSE}
+theta <- seq(0, 2 * 3.14159, 0.001)
+x <- c(0.05, 1, 5)
+y <- c(5, 1, 0.05)
+rho_1 <- y[1]*sin(theta) + x[1]*cos(theta)
+rho_2 <- y[2]*sin(theta) + x[2]*cos(theta)
+rho_3 <- y[3]*sin(theta) + x[3]*cos(theta)
+
+
+df <- data.frame(theta = theta, rho = rho_1, label=rep("(0.05,5)", length(theta)))
+df <- df %>%
+  rbind(data.frame(theta = theta, rho = rho_2, label = rep("(1,1)", length(theta))))
+df <- df %>%
+  rbind(data.frame(theta = theta, rho = rho_3, label = rep("(5,0.05)", length(theta))))
+df %>%
+  ggplot(aes(x=theta,y=rho,color = label)) +
+  geom_line()
+```
 
 ## Problem 2
 
