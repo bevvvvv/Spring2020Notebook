@@ -1,0 +1,40 @@
+---
+title: "CMPEN 454 Project 1"
+subtitle: "Joseph Sepich Feb 28"
+output:
+  pdf_document:
+    toc: false
+    toc_depth: 2
+    number_sections: true
+    keep_tex: false
+---
+
+# Theory Questions
+
+## Problem 1
+
+Show that if you use the line equations $\rho = xcos\theta+ysin\theta$, each image
+point (x,y) results in a sinusoid in ($\rho,\theta$) Hough space. Relate the amplitude
+and phase of the sinusoid to the point(x,y).
+
+## Problem 2
+
+Why do we parameterize the line in terms of ($\rho, \theta$) instead of the slope
+and intercept (m,c)? Express the slope and intercept in terms of ($\rho, \theta$).
+
+## Problem 3
+
+Assuming that the image points (x,y) are in an image of width W and height H, that
+is $x \in [1, W], y\in [1,H]$, what is the maximum absolute value of $\rho$, and what
+is the range for $\theta$?
+
+## Problem 4
+
+For point (10, 10) and points (20, 20) and (30, 30) in the image, plot the corresponding
+sinusoid waves in Hough space, and visualize how their intersection point defines
+the line. What is (m, c) for this line?
+
+
+
+
+
