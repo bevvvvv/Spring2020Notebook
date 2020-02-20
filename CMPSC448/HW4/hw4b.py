@@ -163,7 +163,8 @@ def question6_grad(w,X,y,indices,lamb,eploss, epsilon):
         y {list} -- vector of true values
         indices {list} -- indices of minibatch
         lamb {numeric} -- regulariation constant
-        huber {function} -- huber loss function
+        eploss {function} -- epsilon insensitive loss function
+        epsilon {numeric} -- eploss epsilon constant
     
     Returns:
         list -- gradient vector w.r.t w
@@ -181,11 +182,11 @@ def question6_grad(w,X,y,indices,lamb,eploss, epsilon):
             y_hat = dot_product(w, X[i])
             # eploss derivative
             eploss_input = (y[i] - y_hat)
-            if abs(eploss_input) < epsilon:
-                next_grad_val += 0
-            else:
-                next_grad_val += (2 * eploss_input * -1 * X[i][col])
-            next_grad_val += (2 * lamb * len(indices) / len(X) * w[col]) # gradient from regularization?
+            if eploss_input > epsilon:
+                next_grad_val += (2 * (eploss_input - epsilon) * -1 * X[i][col])
+            elif eploss_input < epsilon:
+                next_grad_val += (2 * (eploss_input + epsilon) * -1 * X[i][col])
+            next_grad_val += (2 * lamb * len(indices) / len(X) * w[col]) # gradient from regularization
         huber_grad.append(next_grad_val)
     return huber_grad
     
@@ -241,7 +242,7 @@ def question6_n_updates(w,X,y,lamb,eta,mbatch,n,eploss,epsilon,shuffle):
     dataset_size = len(X)
     update_count = 0
     while start_index + mbatch <= dataset_size and update_count < n:
-        indices = range(start_index, (start_index + mbatch -1))
+        indices = range(start_index, (start_index + mbatch))
         w = question6_update(w, X, y, indices, lamb, eta, eploss, epsilon)
         update_count += 1
         start_index += mbatch
