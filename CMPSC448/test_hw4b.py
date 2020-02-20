@@ -11,16 +11,42 @@ import HW4.hw4b as hw
 
 class TestHWQuestions(unittest.TestCase):
     def test_question1_loss(self):
-        pass
+        w = [0.3, 1.2, 1.7]
+        indices=[1, 3, 5]
+        lamb=0.8
+        X, y = read_data()
+        self.assertAlmostEqual(hw.question1_loss(w, X, y, indices, lamb, huber), 136.68026640000002, 7)
 
     def test_question2_grad(self):
-        pass
+        w=[0.125, 0.5, 0.75 ]
+        indices=[1, 2, 5]
+        lamb=0.001
+        X, y = read_data()
+        result = hw.question2_grad(w, X, y, indices, lamb, huber)
+        self.assertAlmostEqual(result[0], -2.99999724, 7)
+        self.assertAlmostEqual(result[1], -22.66056697, 7)
+        self.assertAlmostEqual(result[2], -8.01598346, 7)
         
     def test_question3_update(self):
-        pass
+        w=[0.125, 0.5, 0.75]
+        indices=[1, 2, 5]
+        lamb=0.001
+        eta=0.1
+        X, y = read_data()
+        result = hw.question3_update(w,X,y,indices,lamb,eta,huber)
+        self.assertAlmostEqual(result[0], 0.42499972, 7)
+        self.assertAlmostEqual(result[1], 2.7660567, 7)
+        self.assertAlmostEqual(result[2], 1.55159835, 7)
         
     def test_question4_n_updates(self):
-        pass
+        w=[0.125, 0.5, 0.75 ]
+        mbatch=32
+        lamb=0.1
+        eta=1e-07
+        n=10
+        X, y = read_data()
+        shuffle = makeshuffler()
+        result = hw.question4_n_updates(w,X,y,lamb,eta,mbatch,n,huber,shuffle)
         
     def test_question5_nepochs(self):
         pass
@@ -39,7 +65,7 @@ if __name__ == '__main__':
 # canvas files
 
 def read_data():
-    df = pd.read_csv("oldfaithful.csv", sep ="\s+", header ='infer', index_col=0)
+    df = pd.read_csv(r"C:\GitRepos\Spring2020Notebook\CMPSC448\HW4\oldfaithful.csv", sep ="\s+", header ='infer', index_col=0)
     df.insert (0 , 'bias', 1) # add bias as first column
     df.insert (1 , 'sq', df.EruptionLength.values**2)
     X = df [["bias", "sq", "EruptionLength"]]. values
