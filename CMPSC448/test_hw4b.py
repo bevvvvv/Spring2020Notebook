@@ -47,12 +47,36 @@ class TestHWQuestions(unittest.TestCase):
         X, y = read_data()
         shuffle = makeshuffler()
         result = hw.question4_n_updates(w,X,y,lamb,eta,mbatch,n,huber,shuffle)
+        self.assertAlmostEqual(result[0], 0.1250272, 3)
+        self.assertAlmostEqual(result[1], 0.50036617, 3)
+        self.assertAlmostEqual(result[2], 0.75009485, 3)
         
     def test_question5_nepochs(self):
-        pass
+        w=[0.1, 0.2, 0.8]
+        mbatch=10
+        lamb=0.2
+        eta=1e-07
+        nepochs=100
+        X, y = read_data()
+        shuffle = makeshuffler()
+        result = hw.question5_nepochs(w,X,y,lamb,eta,mbatch,nepochs,huber,shuffle)
+        self.assertAlmostEqual(result[0], 0.1026996, 7)
+        self.assertAlmostEqual(result[1], 0.23634267, 7)
+        self.assertAlmostEqual(result[2], 0.80941317, 7)
         
     def test_question6_sgd(self):
-        pass
+        w=[5.0, 1.6, 1.9]
+        mbatch=15
+        lamb=5
+        eta=0.001
+        nepochs=150
+        epsilon=100
+        X, y = read_data()
+        shuffle = makeshuffler()
+        result = hw.question6_sgd(w,X,y,lamb,eta,mbatch,nepochs,epsilon,shuffle)
+        self.assertAlmostEqual(result[0], 1.12756068, 7)
+        self.assertAlmostEqual(result[1], 0.36081942, 7)
+        self.assertAlmostEqual(result[2], 0.42847306, 7)
 
 if __name__ == '__main__':
     unittest.main()

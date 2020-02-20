@@ -62,10 +62,10 @@ def question2_grad(w,X,y,indices,lamb,huber):
             # huber derivative
             huber_input = (y[i] - y_hat)
             if huber_input > 1:
-                next_grad_val += (huber_input / abs(huber_input) * X[i][col])
+                next_grad_val += (huber_input / abs(huber_input) * -1 * X[i][col])
             else:
-                next_grad_val += (huber_input * X[i][col])
-            next_grad_val += (2 * lamb * len(indices) / len(X) * w[col]) # gradient from regularization?
+                next_grad_val += (huber_input * -1 * X[i][col])
+            next_grad_val += (2 * lamb * len(indices) / len(X) * w[col]) # gradient from regularization
         huber_grad.append(next_grad_val)
     return huber_grad
     
@@ -89,7 +89,7 @@ def question3_update(w,X,y,indices,lamb,eta,huber):
     grad = question2_grad(w, X, y, indices, lamb, huber)
     for col in range(len(w)):
         # each weight
-        new_w = w[col] + (eta * grad[col])
+        new_w = w[col] - (eta * grad[col])
         updated_w.append(new_w)
     return updated_w
     
@@ -119,15 +119,25 @@ def question4_n_updates(w,X,y,lamb,eta,mbatch,n,huber,shuffle):
     dataset_size = len(X)
     update_count = 0
     while start_index + mbatch <= dataset_size and update_count < n:
-        indices = range(start_index, (start_index + mbatch -1))
+        indices = range(start_index, (start_index + mbatch))
         w = question3_update(w, X, y, indices, lamb, eta, huber)
         update_count += 1
-    if update_count < n:
+        start_index += mbatch
+    if start_index < (dataset_size - 1): # less than mbatch size
+        indices = range(start_index, (dataset_size - start_index))
+        w = question3_update(w, X, y, indices, lamb, eta, huber)
+        update_count += 1
+    if update_count < n: # start a new epoch
         w = question4_n_updates(w, X, y, lamb, eta, mbatch, (n - update_count), huber, shuffle)
     return w
     
 def question5_nepochs(w,X,y,lamb,eta,mbatch,nepochs,huber,shuffle):
-    return question4_n_updates(w, X, y, lamb, eta, mbatch, nepochs, huber, shuffle)
+    for i in range(nepochs):
+        steps = len(X) // mbatch
+        if len(X) % mbatch != 0:
+            steps += 1
+        w = question4_n_updates(w, X, y, lamb, eta, mbatch, steps, huber, shuffle)
+    return w
     
 def question6_sgd(w,X,y,lamb,eta,mbatch,nepochs,epsilon,shuffle):
     def eploss(z):
@@ -136,7 +146,12 @@ def question6_sgd(w,X,y,lamb,eta,mbatch,nepochs,epsilon,shuffle):
         elif z > epsilon:
             return (z - epsilon)**2
         return (z + epsilon)**2
-    return question6_n_updates(w,X,y,lamb,eta,mbatch,nepochs,eploss,epsilon,shuffle)
+    for i in range(nepochs):
+        steps = len(X) // mbatch
+        if len(X) % mbatch != 0:
+            steps += 1
+        w = question6_n_updates(w,X,y,lamb,eta,mbatch,steps,eploss,epsilon,shuffle)
+    return w
 
 def question6_grad(w,X,y,indices,lamb,eploss, epsilon):
     """Calculates the minibatch gradient for epsilon insensitive loss
@@ -169,7 +184,7 @@ def question6_grad(w,X,y,indices,lamb,eploss, epsilon):
             if abs(eploss_input) < epsilon:
                 next_grad_val += 0
             else:
-                next_grad_val += (2 * eploss_input * X[i][col])
+                next_grad_val += (2 * eploss_input * -1 * X[i][col])
             next_grad_val += (2 * lamb * len(indices) / len(X) * w[col]) # gradient from regularization?
         huber_grad.append(next_grad_val)
     return huber_grad
@@ -195,9 +210,9 @@ def question6_update(w,X,y,indices,lamb,eta,eploss, epsilon):
     grad = question6_grad(w, X, y, indices, lamb, eploss, epsilon)
     for col in range(len(w)):
         # each weight
-        new_w = w[col] + (eta * grad[col])
+        new_w = w[col] - (eta * grad[col])
         updated_w.append(new_w)
-    return new_w
+    return updated_w
     
 def question6_n_updates(w,X,y,lamb,eta,mbatch,n,eploss,epsilon,shuffle):
     """Returns the value of the weight vector after n updates.
@@ -227,6 +242,11 @@ def question6_n_updates(w,X,y,lamb,eta,mbatch,n,eploss,epsilon,shuffle):
     update_count = 0
     while start_index + mbatch <= dataset_size and update_count < n:
         indices = range(start_index, (start_index + mbatch -1))
+        w = question6_update(w, X, y, indices, lamb, eta, eploss, epsilon)
+        update_count += 1
+        start_index += mbatch
+    if start_index < (dataset_size - 1): # less than mbatch size
+        indices = range(start_index, (dataset_size - start_index))
         w = question6_update(w, X, y, indices, lamb, eta, eploss, epsilon)
         update_count += 1
     if update_count < n:
