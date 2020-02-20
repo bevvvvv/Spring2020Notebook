@@ -4,10 +4,10 @@ Calculus and Optimization from Scratch
 Author: Joseph Sepich (jps6444)
 """
 
-def question1_loss(w,X,y,indices,lamb,huber):
+def question1_loss(w, X, y, indices, lamb, huber):
     """Calculates minibatch loss for huber loss of linear
     regression: sum(huber(y-yhat)) + lambda||w||^2
-    
+
     Arguments:
         w {list} -- weights for linear regression model
         X {list[list]} -- Matrix of data features
@@ -15,7 +15,7 @@ def question1_loss(w,X,y,indices,lamb,huber):
         indices {list} -- minibatch element indices
         lamb {numeric} -- regularization constant
         huber {function} -- huber loss function
-    
+
     Returns:
         numeric -- minibatch loss
     """
@@ -33,10 +33,10 @@ def question1_loss(w,X,y,indices,lamb,huber):
 
     return huber_loss + reg_contribution
 
-def question2_grad(w,X,y,indices,lamb,huber):
+def question2_grad(w, X, y, indices, lamb, huber):
     """Calculates the minibatch gradient for huber loss
     of linear regression: sum(huber(y-yhat)) + lambda||w||^2
-    
+
     Arguments:
         w {list} -- weight vector
         X {list[list]} -- Data feature matrix
@@ -44,7 +44,7 @@ def question2_grad(w,X,y,indices,lamb,huber):
         indices {list} -- indices of minibatch
         lamb {numeric} -- regulariation constant
         huber {function} -- huber loss function
-    
+
     Returns:
         list -- gradient vector w.r.t w
     """
@@ -65,14 +65,14 @@ def question2_grad(w,X,y,indices,lamb,huber):
                 next_grad_val += (huber_input / abs(huber_input) * -1 * X[i][col])
             else:
                 next_grad_val += (huber_input * -1 * X[i][col])
-            next_grad_val += (2 * lamb * len(indices) / len(X) * w[col]) # gradient from regularization
+        next_grad_val += (2 * lamb * len(indices) / len(X) * w[col]) # gradient from regularization
         huber_grad.append(next_grad_val)
     return huber_grad
-    
-def question3_update(w,X,y,indices,lamb,eta,huber):
+
+def question3_update(w, X, y, indices, lamb, eta, huber):
     """Computes updated weight parameters for our linear
     regression huber loss model.
-    
+
     Arguments:
         w {list} -- weight vector
         X {list[list]} -- matrix of data features
@@ -81,7 +81,7 @@ def question3_update(w,X,y,indices,lamb,eta,huber):
         lamb {numeric} -- regularization coefficient
         eta {numeric} -- MBSGD learning rate
         huber {function} -- huber loss function
-    
+
     Returns:
         list -- updated weight vector
     """
@@ -92,10 +92,10 @@ def question3_update(w,X,y,indices,lamb,eta,huber):
         new_w = w[col] - (eta * grad[col])
         updated_w.append(new_w)
     return updated_w
-    
-def question4_n_updates(w,X,y,lamb,eta,mbatch,n,huber,shuffle):
+
+def question4_n_updates(w, X, y, lamb, eta, mbatch, n, huber, shuffle):
     """Returns the value of the weight vector after n updates.
-    
+
     Arguments:
         w {list} -- weight parameter vector
         X {list[list]} -- data feature matrix
@@ -106,7 +106,7 @@ def question4_n_updates(w,X,y,lamb,eta,mbatch,n,huber,shuffle):
         n {numeric} -- number of updates to perform
         huber {function} -- huber loss function
         shuffle {function} -- shuffling function
-    
+
     Returns:
         list -- update weight parameter vector
     """
@@ -130,33 +130,68 @@ def question4_n_updates(w,X,y,lamb,eta,mbatch,n,huber,shuffle):
     if update_count < n: # start a new epoch
         w = question4_n_updates(w, X, y, lamb, eta, mbatch, (n - update_count), huber, shuffle)
     return w
-    
-def question5_nepochs(w,X,y,lamb,eta,mbatch,nepochs,huber,shuffle):
+
+def question5_nepochs(w, X, y, lamb, eta, mbatch, nepochs, huber, shuffle):
+    """Performs minibatch sgd on a linear regression model
+    with huber loss optimization function.
+
+    Arguments:
+        w {list} -- model weight vector
+        X {list[list]} -- data feature matrix
+        y {list} -- vector of true label values
+        lamb {numeric} -- regularization constant
+        eta {numeric} -- learning rate
+        mbatch {int} -- number of elements in mini batch
+        nepochs {int} -- number of epochs
+        huber {function} -- huber loss function
+        shuffle {function} -- shuffle function
+
+    Returns:
+        list -- updated weight vector for linear model
+    """
     for i in range(nepochs):
         steps = len(X) // mbatch
         if len(X) % mbatch != 0:
             steps += 1
         w = question4_n_updates(w, X, y, lamb, eta, mbatch, steps, huber, shuffle)
     return w
-    
-def question6_sgd(w,X,y,lamb,eta,mbatch,nepochs,epsilon,shuffle):
+
+def question6_sgd(w, X, y, lamb, eta, mbatch, nepochs, epsilon, shuffle):
+    """Performs minibatch sgd on a linear regression model
+    with epsilon-insensitive loss optimization function.
+
+    Arguments:
+        w {list} -- model weight vector
+        X {list[list]} -- data feature matrix
+        y {list} -- vector of true label values
+        lamb {numeric} -- regularization constant
+        eta {numeric} -- learning rate
+        mbatch {int} -- number of elements in mini batch
+        nepochs {int} -- number of epochs
+        eploss {function} -- epsilon insensitive loss function
+        epsilon {numeric} -- eploss epsilon constant
+        shuffle {function} -- shuffle function
+
+    Returns:
+        list -- updated weight vector for linear model
+    """
     def eploss(z):
         if abs(z) <= epsilon:
             return 0
-        elif z > epsilon:
+        if z > epsilon:
             return (z - epsilon)**2
         return (z + epsilon)**2
     for i in range(nepochs):
         steps = len(X) // mbatch
         if len(X) % mbatch != 0:
             steps += 1
-        w = question6_n_updates(w,X,y,lamb,eta,mbatch,steps,eploss,epsilon,shuffle)
+        w = question6_n_updates(w, X, y, lamb, eta, mbatch, steps, eploss, epsilon, shuffle)
     return w
 
-def question6_grad(w,X,y,indices,lamb,eploss, epsilon):
+def question6_grad(w, X, y, indices, lamb, eploss, epsilon):
     """Calculates the minibatch gradient for epsilon insensitive loss
     of linear regression: sum(l(y-yhat)) + lambda||w||^2
-    
+
     Arguments:
         w {list} -- weight vector
         X {list[list]} -- Data feature matrix
@@ -165,7 +200,7 @@ def question6_grad(w,X,y,indices,lamb,eploss, epsilon):
         lamb {numeric} -- regulariation constant
         eploss {function} -- epsilon insensitive loss function
         epsilon {numeric} -- eploss epsilon constant
-    
+
     Returns:
         list -- gradient vector w.r.t w
     """
@@ -188,14 +223,14 @@ def question6_grad(w,X,y,indices,lamb,eploss, epsilon):
                 next_grad_val += (2 * (eploss_input - epsilon) * -1 * X[i][col])
             elif eploss_input < -epsilon:
                 next_grad_val += (2 * (eploss_input + epsilon) * -1 * X[i][col])
-            next_grad_val += (2 * lamb * len(indices) / len(X) * w[col]) # gradient from regularization
+        next_grad_val += (2 * lamb * len(indices) / len(X) * w[col]) # gradient from regularization
         huber_grad.append(next_grad_val)
     return huber_grad
-    
-def question6_update(w,X,y,indices,lamb,eta,eploss, epsilon):
+
+def question6_update(w, X, y, indices, lamb, eta, eploss, epsilon):
     """Computes updated weight parameters for our linear
     regression epsilon insensitive loss model.
-    
+
     Arguments:
         w {list} -- weight vector
         X {list[list]} -- matrix of data features
@@ -205,7 +240,7 @@ def question6_update(w,X,y,indices,lamb,eta,eploss, epsilon):
         eta {numeric} -- MBSGD learning rate
         eploss {function} -- epsilon insensitive loss function
         epsilon {numeric} -- eploss epsilon constant
-    
+
     Returns:
         list -- updated weight vector
     """
@@ -216,10 +251,10 @@ def question6_update(w,X,y,indices,lamb,eta,eploss, epsilon):
         new_w = w[col] - (eta * grad[col])
         updated_w.append(new_w)
     return updated_w
-    
-def question6_n_updates(w,X,y,lamb,eta,mbatch,n,eploss,epsilon,shuffle):
+
+def question6_n_updates(w, X, y, lamb, eta, mbatch, n, eploss, epsilon, shuffle):
     """Returns the value of the weight vector after n updates.
-    
+
     Arguments:
         w {list} -- weight parameter vector
         X {list[list]} -- data feature matrix
@@ -231,7 +266,7 @@ def question6_n_updates(w,X,y,lamb,eta,mbatch,n,eploss,epsilon,shuffle):
         eploss {function} -- epsilon insensitive loss function
         epsilon {numeric} -- eploss epsilon constant
         shuffle {function} -- shuffling function
-    
+
     Returns:
         list -- update weight parameter vector
     """
@@ -256,16 +291,16 @@ def question6_n_updates(w,X,y,lamb,eta,mbatch,n,eploss,epsilon,shuffle):
         w = question6_n_updates(w, X, y, lamb, eta, mbatch, (n - update_count), eploss, epsilon, shuffle)
     return w
 
-def dot_product(u, v):
+def dot_product(left_vec, right_vec):
     """Calculates the dot product between u and v
-    
+
     Arguments:
-        u {list} -- numeric vector
-        v {list} -- numeric vector
-    
+        left_vec {list} -- numeric vector
+        right_vec {list} -- numeric vector
+
     Returns:
         numeric -- scalar dot product of u and v
     """
-    if len(u) != len(v):
+    if len(left_vec) != len(right_vec):
         return None
-    return sum(i[0] * i[1] for i in zip(u, v))
+    return sum(i[0] * i[1] for i in zip(left_vec, right_vec))
