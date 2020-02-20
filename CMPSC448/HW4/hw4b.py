@@ -182,9 +182,11 @@ def question6_grad(w,X,y,indices,lamb,eploss, epsilon):
             y_hat = dot_product(w, X[i])
             # eploss derivative
             eploss_input = (y[i] - y_hat)
-            if eploss_input > epsilon:
+            if abs(eploss_input) <= epsilon:
+                next_grad_val += 0
+            elif eploss_input > epsilon:
                 next_grad_val += (2 * (eploss_input - epsilon) * -1 * X[i][col])
-            elif eploss_input < epsilon:
+            elif eploss_input < -epsilon:
                 next_grad_val += (2 * (eploss_input + epsilon) * -1 * X[i][col])
             next_grad_val += (2 * lamb * len(indices) / len(X) * w[col]) # gradient from regularization
         huber_grad.append(next_grad_val)
