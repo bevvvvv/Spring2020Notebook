@@ -62,8 +62,31 @@ function ps3()
     % Q2a - find left epipole (prime is right)
     % recall Fe = 0
     f = 1;
-    e = [0.2;0.1;f];
-    F * e
+    e_A = [-10;2;f];
+    e_B = [-1;2;f];
+    e_C = [0;-5;f];
+    e_D = [0.2;0.1;f];
+    disp(F * e_D);
+    disp('D is left epipole (Q2a)');
+    
+    % Q2b - find right epipole (prime is right)
+    % recall e''F = 0
+    disp(e_A' * F);
+    disp('A is right epipole (Q2b)');
+    
+    % Q2c - find epipolar line in right
+    % recall l' = Fx
+    p = [0;0;1];
+    disp(F * p);
+    disp('C is the line in the right image (Q2c)');
+    
+    % Q2D - find epipolar line in left
+    % recall l = F'x'
+    disp(F'*p);
+    disp('D is the line in the left image (Q2d)');
+    
+    % Q2e - do any points match (right is prime)
+    % recall x''Fx = 0
 end
 
 function on_line=check_point(p, l)
