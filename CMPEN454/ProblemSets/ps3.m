@@ -41,8 +41,7 @@ function ps3()
     a = a / a;
     b = b / a;
     c = c / a;
-    disp(['l is ',num2str(a),'X + ',num2str(b),'Y + ',num2str(c)]);
-    % Q1e - find p
+    % THIS CALC WAS WRONG
     l1 = [2, 4, -10];
     l2 = [-1, 2, 1];
     l1_normalized = [(-1 * l1(1) / l1(2)), (-1 * l1(3) / l1(2))];
@@ -87,6 +86,75 @@ function ps3()
     
     % Q2e - do any points match (right is prime)
     % recall x''Fx = 0
+    x = [0; 0; f];
+    x_prime_A = [100, 2, f];
+    x_prime_B = [10, 2, f];
+    x_prime_C = [1, 2, f];
+    disp(x_prime_A * F * x);
+    disp(x_prime_B * F * x);
+    disp(x_prime_C * F * x);
+    disp('All of the above might be correspondences (D Q2e)')
+    
+    %%
+    disp('------------QUESTION 3-----------------')
+    % Stereo Calculations
+    % Q3a - Find Essential matrix
+    % cameras are only translated 12 cm in x
+    % R = I, t = [12, 0, 0];
+    % E = ES, S = [0, -Tz, Ty; Tz 0 -Tx; -Ty Tx 0]
+    R = [1, 0, 0;
+        0, 1, 0;
+        0, 0, 1];
+    S = [0, 0, 0;
+        0, 0 -12;
+        0, 12, 0];
+    E = R * S;
+    disp(E);
+    disp('Above is the E (Q3a)');
+    
+    % Q3b - same as previous with rotation
+    % Rotation along y axis
+    beta = deg2rad(90);
+    R = [cos(beta), 0, sin(beta);
+        0, 1, 0;
+        -sin(beta), 0, cos(beta)];
+    S = [0, 0, 0;
+        0, 0 -12;
+        0, 12, 0];
+    E = R * S;
+    disp(E);
+    disp('Above is the new E (Q3b)');
+    
+    %%
+    disp('------------QUESTION 4-----------------')
+    % Stereo rect
+    % Q4a - same as 3b format
+    % two rotations - -90 deg around V(y), -90 deg around U(x)
+    theta = deg2rad(-90);
+    R_y = [cos(theta), 0, sin(theta);
+        0, 1, 0;
+        -sin(theta), 0, cos(theta)];
+    R_x = [1, 0, 0;
+        0, cos(theta), -sin(theta);
+        0, sin(theta), cos(theta)];
+    R = R_x * R_y;
+    S = [0, -2, 12;
+        2, 0 -6;
+        -12, 6, 0];
+    E = R * S;
+    disp(R);
+    disp(S);
+    disp('Q4a E = RS');
+    
+    % Q4b - find epipoles
+    E = R * S;
+    [U,S,V] = svd(E);
+    e = V(:,3);
+    e = e ./ e(3);
+    e_prime = [(1/6) (-1/2) 1];
+    disp(e);
+    disp(e_prime);
+    disp('Q4b e and e prime');
 end
 
 function on_line=check_point(p, l)
