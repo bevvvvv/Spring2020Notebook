@@ -9,7 +9,7 @@ student_name = "Joseph Peter Sepich"
 ############################################################
 
 # Include your imports here, if any are used.
-
+import random
 
 
 ############################################################
@@ -40,14 +40,14 @@ class TilePuzzle(object):
         self.board = board # 2D list
         self.m = len(board) # rows
         self.n = len(board[0]) # cols
+        self.valid_moves = ['up', 'down', 'left', 'right']
 
     def get_board(self):
         return self.board
 
     def perform_move(self, direction):
         success = False
-        valid_moves = ['up', 'down', 'left', 'right']
-        if direction not in valid_moves:
+        if direction not in self.valid_moves:
             return success
         # index of zero
         zero_ind = index_2D(self.board, 0)
@@ -87,20 +87,81 @@ class TilePuzzle(object):
                 return success
 
     def scramble(self, num_moves):
-        pass
+        for i in range(num_moves):
+            direction = random.choice(self.valid_moves)
+            self.perform_move(direction)
 
     def is_solved(self):
-        pass
+        count = 1
+        for row in range(self.m):
+            for col in range(self.n):
+                if row == (self.m-1) and col == (self.n-1):
+                    if self.board[row][col] != 0:
+                        return False
+                else:
+                    if self.board[row][col] != count:
+                        return False
+                count += 1
+        return True
 
     def copy(self):
-        pass
+        new_board = []
+        for row in range(self.m):
+            new_board.append(self.board[row][:])
+        return TilePuzzle(new_board)
 
     def successors(self):
-        pass
+        for move in self.valid_moves:
+            new_puzzle = self.copy()
+            success = new_puzzle.perform_move(move)
+            if success:
+                yield (move, new_puzzle)
 
     # Required
     def find_solutions_iddfs(self):
-        pass
+        # add in zero move check
+        move_limit = 1
+        while True:
+            solutions = self.iddfs_helper(move_limit)
+            slns = list(solutions)
+            if slns == []:
+                move_limit += 1
+                continue
+            for sln in slns:
+                yield sln
+
+    def iddfs_helper(self, move_limit):
+        # stack
+        frontier = []
+        move_frontier = []
+        slns = []
+
+        # initialize
+        frontier.append(self.successors())
+        move_frontier.append([])
+
+        while len(frontier) > 0:
+            expand_puzzle = []
+            expand_move = ''
+            expand_moves = []
+            try:
+                # expand end of frontier (all moves)
+                expand_move, expand_puzzle = next(frontier[len(frontier) - 1]) # get next node
+                expand_moves = move_frontier[len(move_frontier) - 1][:] # get current move list
+                expand_moves.append(expand_move) # add new move to current move list
+            except:
+                frontier.pop()
+                move_frontier.pop()
+                continue
+            # goal check
+            solved = expand_puzzle.is_solved()
+            if solved:
+                yield expand_moves # add move list to solutions
+            # add new to frontier if not in goal (if it doesn't pass limit)
+            if not solved and len(expand_moves) < move_limit:
+                frontier.append(expand_puzzle.successors())
+                move_frontier.append(expand_moves)
+        return None
 
     # Required
     def find_solution_a_star(self):
