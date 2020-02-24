@@ -10,6 +10,7 @@ student_name = "Joseph Peter Sepich"
 
 # Include your imports here, if any are used.
 import random
+import queue
 
 
 ############################################################
@@ -92,16 +93,14 @@ class TilePuzzle(object):
             self.perform_move(direction)
 
     def is_solved(self):
-        count = 1
-        for row in range(self.m):
-            for col in range(self.n):
-                if row == (self.m-1) and col == (self.n-1):
-                    if self.board[row][col] != 0:
-                        return False
-                else:
-                    if self.board[row][col] != count:
-                        return False
-                count += 1
+        for i in range((self.m * self.n)):
+            value = i
+            req_row = (value - 1) // self.m
+            req_col = value - (req_row * self.n) - 1
+            if self.board[req_row][req_col] != value:
+                return False
+        if self.board[self.m - 1][self.n - 1] != 0:
+            return False
         return True
 
     def copy(self):
@@ -120,15 +119,18 @@ class TilePuzzle(object):
     # Required
     def find_solutions_iddfs(self):
         # add in zero move check
-        move_limit = 1
-        while True:
-            solutions = self.iddfs_helper(move_limit)
-            slns = list(solutions)
-            if slns == []:
-                move_limit += 1
-                continue
-            for sln in slns:
-                yield sln
+        if self.is_solved():
+            yield []
+        else:
+            move_limit = 1
+            while True:
+                solutions = self.iddfs_helper(move_limit)
+                slns = list(solutions)
+                if slns == []:
+                    move_limit += 1
+                    continue
+                for sln in slns:
+                    yield sln
 
     def iddfs_helper(self, move_limit):
         # stack
@@ -165,7 +167,53 @@ class TilePuzzle(object):
 
     # Required
     def find_solution_a_star(self):
-        pass
+        # A star with manhattan distance heurtistic
+        moves_frontier = queue.PriorityQueue() # match move sequences to states
+        moves_frontier.put((0, []))
+        frontier = queue.PriorityQueue() # Priority queue
+        frontier.put((0, self))
+        explored = set() # graph search must track explored board states
+        # here explored means expanded or in frontier
+
+        while not frontier.empty():
+            # Get front of queue
+            expand_state = frontier.get()
+            expand_state = expand_state[1]
+            expand_move = moves_frontier.get()
+            expand_move = expand_move[1]
+
+            # expand node
+            next_level = expand_state.successors()
+            for move, new_puzzle in next_level:
+                # check if explored already
+                board = new_puzzle.get_board()
+                if board in explored:
+                    continue # state already found
+
+                # check if solution
+                new_moves = expand_move[:]
+                new_moves.append(move)
+                if new_puzzle.is_solved():
+                    return new_moves
+
+                # calculate heuristic
+                heur = 0
+                for row in range(self.m):
+                    for col in range(self.n):
+                        value = board[row][col]
+                        if value == 0:
+                            heur += abs(self.m - row - 1)
+                            heur += abs(self.n - col - 1)
+                        else:
+                            req_row = (value - 1) // self.m
+                            req_col = value - (req_row * self.n) - 1
+                            heur += abs(req_row - row)
+                            heur += abs(req_col - col)
+                # store move
+                moves_frontier.put((heur, new_moves))
+                # add new state to frontier
+                explored.add(board)
+                frontier.put((heur, new_puzzle))
 
 ############################################################
 # Section 2: Grid Navigation

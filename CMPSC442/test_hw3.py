@@ -84,6 +84,29 @@ class TestHWQuestions(unittest.TestCase):
             sln = next(solutions)
             self.assertEqual(sln, results[i])
 
+        b = [[1,2,3], [4,0,8], [7,6,5]]
+        p = hw.TilePuzzle(b)
+        solutions = p.find_solutions_iddfs()
+        results = [['down', 'right', 'up', 'left', 'down', 'right'],
+                    ['right', 'down', 'left', 'up', 'right', 'down']]
+        for i in range(len(results)):
+            sln = next(solutions)
+            self.assertEqual(sln, results[i])
+        # test already solved
+        b = [[1,2,3], [4,5,6], [7,8,0]]
+        p = hw.TilePuzzle(b)
+        solutions = p.find_solutions_iddfs()
+        results = []
+        for i in range(len(results)):
+            sln = next(solutions)
+            self.assertEqual(sln, results[i])
+
+    def test_find_solution_a_start(self):
+        b = [[4,1,2], [0,5,3], [7,8,6]]
+        p = hw.TilePuzzle(b)
+        solution = p.find_solution_a_star()
+        self.assertEqual(solution, ['up', 'right', 'right', 'down', 'down'])
+
 
 if __name__ == '__main__':
     unittest.main()
