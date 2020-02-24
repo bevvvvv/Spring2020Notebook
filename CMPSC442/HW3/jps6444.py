@@ -176,7 +176,7 @@ class TilePuzzle(object):
                 self.moves = moves
             
             def __lt__(self, other):
-                return (self.heur + len(self.moves)) <= (other.heur + len(self.moves))
+                return (self.heur + len(self.moves)) <= (other.heur + len(other.get_moves()))
             
             def get_puzzle(self):
                 return self.puzzle
@@ -187,7 +187,7 @@ class TilePuzzle(object):
         # A star with manhattan distance heurtistic
         frontier = queue.PriorityQueue() # Priority queue
         frontier.put(PuzzleQueue(0, self, []))
-        explored = set() # graph search must track explored board states
+        explored = {} # graph search must track explored board states
         # here explored means expanded or in frontier
 
         while not frontier.empty():
@@ -199,15 +199,17 @@ class TilePuzzle(object):
             # expand node
             next_level = expand_state.successors()
             for move, new_puzzle in next_level:
+                new_moves = expand_move[:]
+                new_moves.append(move)
                 # check if explored already
                 board = new_puzzle.get_board()
                 board_tuple = tuple(map(tuple, board))
-                if board_tuple in explored:
-                    continue # state already found
+                if board_tuple in explored.keys():
+                    # check if new move list is better
+                    if len(new_moves) > len(explored[board_tuple]):
+                        continue # state already found
 
                 # check if solution
-                new_moves = expand_move[:]
-                new_moves.append(move)
                 if new_puzzle.is_solved():
                     return new_moves
 
@@ -225,9 +227,7 @@ class TilePuzzle(object):
                             heur += abs(req_row - row)
                             heur += abs(req_col - col)
                 # add new state to frontier
-                explored.add(board_tuple)
-                if new_moves == ['right', 'down', 'left', 'left', 'up']:
-                        print(board)
+                explored[board_tuple] = new_moves
                 frontier.put(PuzzleQueue(heur, new_puzzle, new_moves))
 
 ############################################################
