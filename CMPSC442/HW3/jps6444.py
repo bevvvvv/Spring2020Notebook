@@ -522,8 +522,8 @@ class DominoesGame(object):
         move_gen = self.legal_moves(vertical)
         for move in move_gen:
             new_game = self.copy()
-            new_game.perform_move
-            yield new_game
+            new_game.perform_move(move[0], move[1], vertical)
+            yield (move, new_game)
 
     def get_random_move(self, vertical):
         move_gen = self.legal_moves(vertical)

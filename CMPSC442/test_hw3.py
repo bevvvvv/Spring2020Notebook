@@ -168,19 +168,59 @@ class TestHWQuestions(unittest.TestCase):
         self.assertFalse(g.is_legal_move(1,1,True))
 
     def test_legal_moves(self):
-        pass
+        g = hw.create_dominoes_game(3, 3)
+        self.assertEqual(list(g.legal_moves(True)), [(0, 0), (0, 1), (0, 2), (1, 0), (1, 1), (1, 2)])
+        self.assertEqual(list(g.legal_moves(False)), [(0, 0), (0, 1), (1, 0), (1, 1), (2, 0), (2, 1)])
+        b = [[True, False], [True, False]]
+        g = hw.DominoesGame(b)
+        self.assertEqual(list(g.legal_moves(True)), [(0, 1)])
+        self.assertEqual(list(g.legal_moves(False)), [])
 
     def test_perform_moves(self):
-        pass
+        g = hw.create_dominoes_game(3, 3)
+        g.perform_move(0, 1, True)
+        self.assertEqual(g.get_board(), [[False, True,  False], [False, True,  False], [False, False, False]])
+        g = hw.create_dominoes_game(3, 3)
+        g.perform_move(1, 0, False)
+        self.assertEqual(g.get_board(), [[False, False,  False], [True, True,  False], [False, False, False]])
+        g.perform_move(0, 1, True)
+        self.assertEqual(g.get_board(), [[False, False,  False], [True, True,  False], [False, False, False]])
 
     def test_game_over(self):
-        pass
+        g = hw.create_dominoes_game(2, 2)
+        self.assertFalse(g.game_over(True))
+        self.assertFalse(g.game_over(False))
+        b = [[True, False], [True, False]]
+        g = hw.DominoesGame(b)
+        self.assertTrue(g.game_over(False))
+        self.assertFalse(g.game_over(True))
 
     def test_dominoes_copy(self):
-        pass
+        g = hw.create_dominoes_game(4, 4)
+        g2 = g.copy()
+        self.assertEqual(g.get_board(), g2.get_board())
+        g.perform_move(0, 0, True)
+        self.assertNotEqual(g.get_board(), g2.get_board())
 
     def test_dominoes_successors(self):
-        pass
+        g = hw.create_dominoes_game(2, 2)
+        move_results = [(0,0), (0,1)]
+        board_results = [[[True, False], [True, False]], [[False, True], [False, True]]]
+        i = 0
+        for move, new_g in g.successors(True):
+            self.assertEqual(move, move_results[i])
+            self.assertEqual(new_g.get_board(), board_results[i])
+            i += 1
+        b = [[True, False], [True, False]]
+        g = hw.DominoesGame(b)
+        move_results = [(0,1)]
+        board_results = [[[True, True], [True, True]]]
+        i = 0
+        for move, new_g in g.successors(True):
+            self.assertEqual(move, move_results[i])
+            self.assertEqual(new_g.get_board(), board_results[i])
+            i += 1
+        
     
     def test_best_move(self):
         pass
