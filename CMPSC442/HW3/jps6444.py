@@ -11,6 +11,7 @@ student_name = "Joseph Peter Sepich"
 # Include your imports here, if any are used.
 import random
 import queue
+import math
 
 
 ############################################################
@@ -235,7 +236,100 @@ class TilePuzzle(object):
 ############################################################
 
 def find_path(start, goal, scene):
-    pass
+    """Finds a solutions from start to goal using an A* seach
+    with Euclidean distance heuristic.
+    
+    Arguments:
+        start {tuple(int, int)} -- Start point (row, column)
+        goal {tuple(int, int)} -- Goal  point (row, column)
+        scene {list[list]} -- 2D list of booleans (true = obstacle)
+    
+    Returns:
+        list[tuple] -- Move list of optimal solution (move is new spot)
+    """
+    if start == goal:
+        return start
+    elif scene[start[0]][start[1]] or scene[goal[0]][goal[1]]:
+        return None # start or goal on obstacle
+    class SceneQueue():
+        def __init__(self, heur, moves):
+            self.heur = heur
+            self.moves = moves
+        
+        def __lt__(self, other):
+            return (self.heur + len(self.moves)) <= (other.heur + len(other.get_moves()))
+        
+        def get_moves(self):
+            return self.moves
+            
+    # A star with euclidean distance heurtistic
+    frontier = queue.PriorityQueue() # Priority queue
+    frontier.put(SceneQueue(0, [start]))
+    explored = set()
+    # here explored means expanded or in frontier
+
+    while not frontier.empty():
+        # Get front of queue
+        expand_object = frontier.get()
+        expand_move = expand_object.get_moves()
+        current_point = expand_move[len(expand_move) - 1] # last point is current
+
+        # expand node
+        next_level = grid_successors(current_point, scene)
+
+        for next_point in next_level:
+            new_moves = expand_move[:]
+            new_moves.append(next_point)
+
+            if next_point in explored:
+                continue
+
+            # check if solution
+            if next_point == goal:
+                return new_moves
+
+            # calculate heuristic
+            cur_row = next_point[0]
+            cur_col = next_point[1]
+
+            goal_row = goal[0]
+            goal_col = goal[1]
+
+            heur = math.sqrt((goal_row - cur_row)**2 + (goal_col - cur_col)**2)
+
+            # add new move_list to frontier
+            frontier.put(SceneQueue(heur, new_moves))
+            explored.add(next_point)
+            
+    return None
+
+def grid_successors(point, scene):
+    cur_row = point[0]
+    cur_col = point[1]
+    if cur_row > 0: # can go up
+        if scene[cur_row - 1][cur_col] != True:
+            yield (cur_row - 1, cur_col)
+        if cur_col > 0: # can go up/left
+            if scene[cur_row - 1][cur_col - 1] != True:
+                yield (cur_row - 1, cur_col - 1)
+        if cur_col < (len(scene[0])-1): # can go up/right
+            if scene[cur_row - 1][cur_col + 1] != True:
+                yield (cur_row - 1, cur_col + 1)
+    if cur_row < (len(scene) - 1): # can go down
+        if scene[cur_row + 1][cur_col] != True:
+            yield (cur_row + 1, cur_col)
+        if cur_col > 0: # can go down/left
+            if scene[cur_row + 1][cur_col - 1] != True:
+                yield (cur_row + 1, cur_col - 1)
+        if cur_col < (len(scene[0])-1): # can go down/right
+            if scene[cur_row + 1][cur_col + 1] != True:
+                yield (cur_row + 1, cur_col + 1)
+    if cur_col < (len(scene[0]) - 1): # go right
+        if scene[cur_row][cur_col + 1] != True:
+            yield (cur_row, cur_col + 1)
+    if cur_col > 0: # go left
+        if scene[cur_row][cur_col - 1] != True:
+            yield (cur_row, cur_col - 1)
 
 ############################################################
 # Section 3: Linear Disk Movement, Revisited

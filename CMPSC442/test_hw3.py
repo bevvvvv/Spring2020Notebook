@@ -118,6 +118,16 @@ class TestHWQuestions(unittest.TestCase):
         solution = p.find_solution_a_star()
         self.assertEqual(solution, [])
 
+    def test_find_path(self):
+        scene = [[False, False, False], [False, True, False], [False, False, False]]
+        self.assertEqual(hw.find_path((0,0), (2,1), scene), [(0, 0), (1, 0), (2, 1)])
+        scene = [[False, True, False], [False, True, False], [False, True, False]]
+        self.assertEqual(hw.find_path((0,0), (0,2), scene), None)
+        scene = [[False, False, False], [False, True, False], [False, False, False]]
+        self.assertEqual(hw.find_path((1,1), (2,1), scene), None)
+        scene = [[False, False, False], [False, True, False], [False, False, False]]
+        self.assertEqual(hw.find_path((0,0), (1,1), scene), None)
+
 
 if __name__ == '__main__':
     unittest.main()
