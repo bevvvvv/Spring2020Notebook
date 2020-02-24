@@ -300,7 +300,7 @@ def find_path(start, goal, scene):
             # add new move_list to frontier
             frontier.put(SceneQueue(heur, new_moves))
             explored.add(next_point)
-            
+
     return None
 
 def grid_successors(point, scene):
@@ -336,7 +336,124 @@ def grid_successors(point, scene):
 ############################################################
 
 def solve_distinct_disks(length, n):
-    pass
+    """Finds a solution to the disks puzzle such that the list of
+    (from, to) moves results in a valid states. Uses A* search
+    with heuristics that calculates total out of position values.
+
+    :return solution: a list of (from, to) tuple pairs that lead to a solution
+    """
+    # ADD IN FIRST CHECKS
+    class DiskQueue():
+        def __init__(self, heur, state ,moves):
+            self.heur = heur
+            self.state = state
+            self.moves = moves
+        
+        def __lt__(self, other):
+            return (self.heur + len(self.moves)) <= (other.heur + len(other.get_moves()))
+        
+        def get_state(self):
+            return self.state
+
+        def get_moves(self):
+            return self.moves
+            
+    # A star with euclidean distance heurtistic
+    frontier = queue.PriorityQueue() # Priority queue
+    frontier.put(DiskQueue(0, create_disk_puzzle(length, n), []))
+    explored = {} # graph search must track explored board states
+    # here explored means expanded or in frontier
+
+    while not frontier.empty():
+        # Get front of queue
+        expand_object = frontier.get()
+        expand_state = expand_object.get_state()
+        expand_move = expand_object.get_moves()
+
+        # expand node
+        next_level = expand_disk_puzzle(expand_state)
+        for move, new_puzzle in next_level:
+            new_moves = expand_move[:]
+            new_moves.append(move)
+            # check if explored already
+            board_tuple = tuple(new_puzzle)
+            if board_tuple in explored.keys():
+                # check if new move list is better
+                if len(new_moves) > len(explored[board_tuple]):
+                    continue # state already found
+
+            # check if solution
+            if disk_puzzle_solved(new_puzzle, n):
+                return new_moves
+
+            # calculate heuristic
+            heur = 0
+            for i in range(n):
+                current_ind = new_puzzle.index(i+1)
+                goal_ind = length - (i+1)
+                heur += abs(current_ind - goal_ind)
+
+            # add new state to frontier
+            explored[board_tuple] = new_moves
+            frontier.put(DiskQueue(heur, new_puzzle, new_moves))
+    return None
+
+def create_disk_puzzle(length, n):
+    """Creates a list to represent a linear disk puzzle.
+    The list will be of size length and contain n disks.
+
+    :param length: size of puzzle
+    :param n: number of disks in puzzle
+
+    :return puzzle: list of binary values
+    """
+    return [i + 1 if i < n else 0 for i in range(length)] # index + 1 for distinct
+
+
+def expand_disk_puzzle(puzzle):
+    """Generator that will yield all possible successors of the current
+    disk puzzle list.
+
+    :return (move, new_puzzle): a tuple with move as a (from, to) tuple representing
+    the disk moved and new_puzzle a list of the new puzzle
+    """
+    for i in range(len(puzzle)):
+        new_puzzle = puzzle[:]
+        if puzzle[i] == 0:
+            continue
+        if (i + 1) < len(puzzle) and puzzle[i + 1] == 0:
+            # adjacent space open
+            new_puzzle[i + 1] = new_puzzle[i]
+            new_puzzle[i] = 0
+            yield ((i, i + 1), new_puzzle)
+        elif (i + 2) < len(puzzle) and puzzle[i + 2] == 0:
+            # can jump
+            new_puzzle[i + 2] = new_puzzle[i]
+            new_puzzle[i] = 0
+            yield ((i, i + 2), new_puzzle)
+        elif (i - 1) >= 0 and puzzle[i - 1] == 0:
+            # adjacent space open
+            new_puzzle[i - 1] = new_puzzle[i]
+            new_puzzle[i] = 0
+            yield ((i, i - 1), new_puzzle)
+        elif (i - 2) >= 0 and puzzle[i - 2] == 0:
+            # can jump
+            new_puzzle[i - 2] = new_puzzle[i]
+            new_puzzle[i] = 0
+            yield ((i, i - 2), new_puzzle)
+
+def disk_puzzle_solved(puzzle, n):
+    """Checks to see if disk puzzle has been solved.
+
+    :param puzzle: puzzle state to check
+    :param distinct: boolean that determines goal state to check for
+
+    :return is_solved: true if puzzle is solved; false otherwise
+    """
+    length = len(puzzle)
+    # order in distinct matters
+    return puzzle[(length - n):length] == [n - i for i in range(n)]
+    
 
 ############################################################
 # Section 4: Dominoes Game
