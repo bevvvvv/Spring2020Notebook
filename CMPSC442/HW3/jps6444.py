@@ -342,7 +342,9 @@ def solve_distinct_disks(length, n):
 
     :return solution: a list of (from, to) tuple pairs that lead to a solution
     """
-    # ADD IN FIRST CHECKS
+    puzzle = create_disk_puzzle(length, n)
+    if disk_puzzle_solved(puzzle, n): # will never happen
+        return []
     class DiskQueue():
         def __init__(self, heur, state ,moves):
             self.heur = heur
@@ -360,7 +362,7 @@ def solve_distinct_disks(length, n):
             
     # A star with euclidean distance heurtistic
     frontier = queue.PriorityQueue() # Priority queue
-    frontier.put(DiskQueue(0, create_disk_puzzle(length, n), []))
+    frontier.put(DiskQueue(0, puzzle, []))
     explored = {} # graph search must track explored board states
     # here explored means expanded or in frontier
 
@@ -484,9 +486,9 @@ class DominoesGame(object):
             return False
         if self.board[row][col] == True:
             return False
-        elif self.board[row][col + 1] == True and not vertical:
+        elif not vertical and self.board[row][col + 1] == True:
             return False
-        elif self.board[row + 1][col] == True and vertical:
+        elif vertical and self.board[row + 1][col] == True:
             return False
         return True
 
@@ -505,7 +507,8 @@ class DominoesGame(object):
                 self.board[row][col + 1] = True
 
     def game_over(self, vertical):
-        if len(self.legal_moves(vertical)) == 0:
+        move_gen = self.legal_moves(vertical)
+        if len(list(move_gen)) == 0:
             return True
         return False
 
@@ -516,13 +519,19 @@ class DominoesGame(object):
         return DominoesGame(new_board)
 
     def successors(self, vertical):
-        pass
+        move_gen = self.legal_moves(vertical)
+        for move in move_gen:
+            new_game = self.copy()
+            new_game.perform_move
+            yield new_game
 
     def get_random_move(self, vertical):
-        pass
+        move_gen = self.legal_moves(vertical)
+        return random.choice(list(move_gen))
 
     # Required
     def get_best_move(self, vertical, limit):
+        # alpha beta search
         pass
 
 ############################################################

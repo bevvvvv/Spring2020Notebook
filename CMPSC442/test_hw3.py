@@ -4,6 +4,9 @@ import HW3.jps6444 as hw
 
 # create test class
 class TestHWQuestions(unittest.TestCase):
+
+    # TILE PUZZLE SECTION ONE #
+    
     def test_create_tile_puzzle(self):
         """Will test create puzzle, init, and
         get board.
@@ -118,6 +121,7 @@ class TestHWQuestions(unittest.TestCase):
         solution = p.find_solution_a_star()
         self.assertEqual(solution, [])
 
+    # GRID SEARCH SECTION 2 #
     def test_find_path(self):
         scene = [[False, False, False], [False, True, False], [False, False, False]]
         self.assertEqual(hw.find_path((0,0), (2,1), scene), [(0, 0), (1, 0), (2, 1)])
@@ -128,6 +132,8 @@ class TestHWQuestions(unittest.TestCase):
         scene = [[False, False, False], [False, True, False], [False, False, False]]
         self.assertEqual(hw.find_path((0,0), (1,1), scene), None)
 
+    # DISTINCT DISKS SECTION 3 #
+
     def test_solve_distinct_disks(self):
         self.assertEqual(hw.solve_distinct_disks(4, 2), [(0, 2), (2, 3), (1, 2)])
         self.assertEqual(hw.solve_distinct_disks(5, 2), [(0, 2), (1, 3), (2, 4)])
@@ -135,6 +141,49 @@ class TestHWQuestions(unittest.TestCase):
             (3, 2), (1, 3), (0, 1)])
         self.assertEqual(hw.solve_distinct_disks(5, 3), [(2, 3), (0, 2), (2, 4), (3, 2), (1, 3)])
 
+    # DOMINOES ALPHA-BETA SECTION 4 #
+    def test_create_dominoes_game(self):
+        g = hw.create_dominoes_game(2, 2)
+        self.assertEqual(g.get_board(), [[False, False], [False, False]])
+        g = hw.create_dominoes_game(2, 3)
+        self.assertEqual(g.get_board(), [[False, False, False], [False, False, False]])
+
+    def test_reset(self):
+        g = hw.DominoesGame([[False, False], [False, False]])
+        g.reset()
+        self.assertEqual(g.get_board(), [[False, False], [False, False]])
+        g = hw.DominoesGame([[True, False], [True, False]])
+        g.reset()
+        self.assertEqual(g.get_board(), [[False, False], [False, False]])
+
+    def test_is_legal_move(self):
+        b = [[False, False], [False, False]]
+        g = hw.DominoesGame(b)
+        self.assertTrue(g.is_legal_move(0, 0, True))
+        self.assertTrue(g.is_legal_move(0, 0, False))
+        b = [[True, False], [True, False]]
+        g = hw.DominoesGame(b)
+        self.assertFalse(g.is_legal_move(0,0,False))
+        self.assertTrue(g.is_legal_move(0,1,True))
+        self.assertFalse(g.is_legal_move(1,1,True))
+
+    def test_legal_moves(self):
+        pass
+
+    def test_perform_moves(self):
+        pass
+
+    def test_game_over(self):
+        pass
+
+    def test_dominoes_copy(self):
+        pass
+
+    def test_dominoes_successors(self):
+        pass
+    
+    def test_best_move(self):
+        pass
 
 if __name__ == '__main__':
     unittest.main()
