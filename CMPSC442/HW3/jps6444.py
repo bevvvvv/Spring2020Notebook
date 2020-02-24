@@ -167,27 +167,42 @@ class TilePuzzle(object):
 
     # Required
     def find_solution_a_star(self):
+        if self.is_solved():
+            return []
+        class PuzzleQueue():
+            def __init__(self, heur, puzzle, moves):
+                self.heur = heur
+                self.puzzle = puzzle
+                self.moves = moves
+            
+            def __lt__(self, other):
+                return (self.heur + len(self.moves)) <= (other.heur + len(self.moves))
+            
+            def get_puzzle(self):
+                return self.puzzle
+            
+            def get_moves(self):
+                return self.moves
+                
         # A star with manhattan distance heurtistic
-        moves_frontier = queue.PriorityQueue() # match move sequences to states
-        moves_frontier.put((0, []))
         frontier = queue.PriorityQueue() # Priority queue
-        frontier.put((0, self))
+        frontier.put(PuzzleQueue(0, self, []))
         explored = set() # graph search must track explored board states
         # here explored means expanded or in frontier
 
         while not frontier.empty():
             # Get front of queue
-            expand_state = frontier.get()
-            expand_state = expand_state[1]
-            expand_move = moves_frontier.get()
-            expand_move = expand_move[1]
+            expand_object = frontier.get()
+            expand_state = expand_object.get_puzzle()
+            expand_move = expand_object.get_moves()
 
             # expand node
             next_level = expand_state.successors()
             for move, new_puzzle in next_level:
                 # check if explored already
                 board = new_puzzle.get_board()
-                if board in explored:
+                board_tuple = tuple(map(tuple, board))
+                if board_tuple in explored:
                     continue # state already found
 
                 # check if solution
@@ -209,11 +224,11 @@ class TilePuzzle(object):
                             req_col = value - (req_row * self.n) - 1
                             heur += abs(req_row - row)
                             heur += abs(req_col - col)
-                # store move
-                moves_frontier.put((heur, new_moves))
                 # add new state to frontier
-                explored.add(board)
-                frontier.put((heur, new_puzzle))
+                explored.add(board_tuple)
+                if new_moves == ['right', 'down', 'left', 'left', 'up']:
+                        print(board)
+                frontier.put(PuzzleQueue(heur, new_puzzle, new_moves))
 
 ############################################################
 # Section 2: Grid Navigation

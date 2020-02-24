@@ -104,8 +104,19 @@ class TestHWQuestions(unittest.TestCase):
     def test_find_solution_a_start(self):
         b = [[4,1,2], [0,5,3], [7,8,6]]
         p = hw.TilePuzzle(b)
+        #solution = p.find_solution_a_star()
+        #self.assertEqual(solution, ['up', 'right', 'right', 'down', 'down'])
+
+        b = [[1,2,3], [4,0,5], [6,7,8]]
+        p = hw.TilePuzzle(b)
         solution = p.find_solution_a_star()
-        self.assertEqual(solution, ['up', 'right', 'right', 'down', 'down'])
+        self.assertEqual(solution, ['right', 'down', 'left', 'left', 'up', 'right', 'down', 'right', 'up', 'left',
+                                    'left', 'down', 'right', 'right'])
+
+        b = [[1,2,3], [4,5,6], [7,8,0]]
+        p = hw.TilePuzzle(b)
+        solution = p.find_solution_a_star()
+        self.assertEqual(solution, [])
 
 
 if __name__ == '__main__':
