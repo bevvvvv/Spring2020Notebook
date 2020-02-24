@@ -460,34 +460,60 @@ def disk_puzzle_solved(puzzle, n):
 ############################################################
 
 def create_dominoes_game(rows, cols):
-    pass
+    board = [[False for j in range(cols)] for i in range(rows)]
+    return DominoesGame(board)
 
 class DominoesGame(object):
 
     # Required
     def __init__(self, board):
-        pass
+        self.board = board
+        self.m = len(board) # row
+        self.n = len(board[0]) # col
 
     def get_board(self):
-        pass
+        return self.board
 
     def reset(self):
-        pass
+        self.board = [[False for j in range(self.n)] for i in range(self.m)]
 
     def is_legal_move(self, row, col, vertical):
-        pass
+        if row == self.m - 1 and vertical:
+            return False
+        if col == self.n - 1 and not vertical:
+            return False
+        if self.board[row][col] == True:
+            return False
+        elif self.board[row][col + 1] == True and not vertical:
+            return False
+        elif self.board[row + 1][col] == True and vertical:
+            return False
+        return True
 
     def legal_moves(self, vertical):
-        pass
+        for i in range(self.m):
+            for j in range(self.n):
+                if self.is_legal_move(i, j, vertical):
+                    yield((i, j))
 
     def perform_move(self, row, col, vertical):
-        pass
+        if self.is_legal_move(row, col, vertical):
+            self.board[row][col] = True
+            if vertical:
+                self.board[row + 1][col] = True
+            else:
+                self.board[row][col + 1] = True
 
     def game_over(self, vertical):
-        pass
+        if len(self.legal_moves(vertical)) == 0:
+            return True
+        return False
 
     def copy(self):
-        pass
+        new_board = []
+        for i in range(self.m):
+            new_board.append(self.board[i][:])
+        return DominoesGame(new_board)
 
     def successors(self, vertical):
         pass
