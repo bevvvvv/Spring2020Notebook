@@ -568,7 +568,7 @@ class DominoesGame(object):
         # are we done?
         if game.game_over(min_player):
             num_leafs += 1
-            return (game.get_score(min_player), num_leafs)
+            return (game.get_score(not min_player), num_leafs)
         # expand board
         value = sys.maxsize
         result = ((), value, num_leafs) # (action, alpha, num_leafs)
