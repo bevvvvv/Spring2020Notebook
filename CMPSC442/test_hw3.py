@@ -220,10 +220,11 @@ class TestHWQuestions(unittest.TestCase):
             self.assertEqual(move, move_results[i])
             self.assertEqual(new_g.get_board(), board_results[i])
             i += 1
-        
     
     def test_best_move(self):
-        pass
+        g = hw.create_dominoes_game(3,3)
+        self.assertEqual(g.get_best_move(True, 1), ((0, 1), 2, 6))
+        self.assertEqual(g.get_best_move(True, 2), ((0, 1), 3, 10))
 
 if __name__ == '__main__':
     unittest.main()

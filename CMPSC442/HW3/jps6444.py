@@ -12,6 +12,7 @@ student_name = "Joseph Peter Sepich"
 import random
 import queue
 import math
+import sys
 
 
 ############################################################
@@ -532,7 +533,59 @@ class DominoesGame(object):
     # Required
     def get_best_move(self, vertical, limit):
         # alpha beta search
-        pass
+        # return (action, value, num_leafs)
+        return self.max_value(self.copy(), -sys.maxsize, sys.maxsize, vertical, 0, True)
+
+    def max_value(self, game, alpha, beta, max_player, num_leafs, first=False):
+        # are we done?
+        if game.game_over(max_player):
+            num_leafs += 1
+            return ((), game.get_score(max_player), num_leafs)
+        # expand board
+        value = -sys.maxsize
+        result = ((), value, num_leafs) # (action, alpha, num_leafs)
+        move_out = {}
+        successors = game.successors(max_player)
+        for move, new_game in successors:
+            (min_value, num_leafs) = self.min_value(new_game, alpha, beta, not max_player, num_leafs)
+            value = max(value, min_value)
+            if first: # keep track of move we want to make (in top function)
+                if value not in move_out.keys():
+                    move_out[value] = move
+            if value >= beta:
+                num_leafs += 1
+                if first:
+                    return (move_out[value], value, num_leafs)
+                else:
+                    return ((), value, num_leafs)
+            alpha = max(alpha, value)
+        if first:
+            return (move_out[value], value, num_leafs)
+        else:
+            return ((), value, num_leafs)
+
+    def min_value(self, game, alpha, beta, min_player, num_leafs):
+        # are we done?
+        if game.game_over(min_player):
+            num_leafs += 1
+            return (game.get_score(min_player), num_leafs)
+        # expand board
+        value = sys.maxsize
+        result = ((), value, num_leafs) # (action, alpha, num_leafs)
+        successors = game.successors(min_player)
+        for move, new_game in successors:
+            (useless_move, max_value, num_leafs) = self.max_value(new_game, alpha, beta, not min_player, num_leafs)
+            value = min(value, max_value)
+            if value <= alpha:
+                num_leafs += 1
+                return (value, num_leafs)
+            beta = min(beta, value)
+        return (value, num_leafs)
+
+    def get_score(self, vertical):
+        my_moves = len(list(self.legal_moves(vertical)))
+        their_moves = len(list(self.legal_moves(not vertical)))
+        return my_moves - their_moves
 
 ############################################################
 # Section 5: Feedback
