@@ -1,0 +1,98 @@
+---
+title: "CMPSC 448 Midterm 1 Review"
+subtitle: "Joseph Sepich Feb 25"
+output:
+  pdf_document:
+    toc: false
+    toc_depth: 2
+    number_sections: true
+    keep_tex: false
+---
+
+# What is Machine Learning
+
+## Types of Machine Learning
+
+* Supervised Learning
+    + Labeled training data, make a **generalization** predication with labels
+    + Regression: Predict a number
+    + Classification: Predict a class (element from finite set)
+* Unsupervised Learning
+    + Unlabeled training data, assume x are iid
+    + Clustering
+    + Outlier detection
+* Semi-supervised Learning
+    + Mix of labled and unlabeled
+    + Unlabeled data is cheap
+    + Labeling images
+* Online Learning
+    + **Batch** learning we get all data at once
+    + Online learning = on the job training (one at a time)
+    + Spam detection
+* Active Learning
+    + Learning with a teacher
+    + Learner asks for correct answer (only ask for unsure answers)
+* Transfer Learning
+    + Reuse a model for a different task
+    + Universal Approximation
+* Reinforcement Learning
+    + Agents that act in an environment
+    + Playing games
+    
+### Polynomial Regression
+
+Polynomial regression is an example of supervised learning. We build a **regression** model to predict t values from x values. The first step in this model is Feature Engineering, where we can create a polynomial of degree k, by doing $x^a$ for any $a \in[0,k]$. We would then multiply each of those values by a weight vector, which is a parameter for our model. This is a linear model, because the parameters are linear.
+
+**Overfitting** occurrs when a model fits noisy data very closely. This happens when you have very low bias, but very high variance. Bias is the model distance from the true valules, and variance is the randomness that can occurr in the resulting model.
+
+**Expected error** for a model is composed of noise (**Bayes error**), bias, and variance. We can improve performance by restricting number of parameters, increasing our training set or using regularization.
+
+## Regularization
+
+L2 regularization (w is weight vector):
+
+\[\lambda\Sigma_{j=1}^kw_j^2\]
+
+L1 regularization:
+
+\[\lambda\Sigma_{j=1}^k|w_j|\]
+
+Modern practice is to make models complex enough to overfit and then add in regularization.
+
+```{r, out.width = "400px", echo=FALSE}
+knitr::include_graphics("./Photos/DoubleDescenCurve.png")
+```
+
+# Model Selection and Evaluation
+
+# Basic Building Blocks
+
+# Inference and Decision Theory
+
+# Randomization
+
+## Simulation
+
+## Permutation
+
+## Bootstrapping
+
+# Optimization
+
+## Unconstrained Optimization with Calculus
+
+## Convex Optimization
+
+## Gradient Descent
+
+# Matrices and Matrix Calculus
+
+# Universal Approximation
+
+## Nearest Neighbors
+
+# Linear Regression
+
+# Logistic Regression
+
+# Perceptron
