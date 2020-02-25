@@ -1,7 +1,7 @@
 import sys
 import tkinter
 
-import homework3
+import jps6444 as homework3
 
 class Grid(tkinter.Canvas):
 
@@ -128,7 +128,7 @@ def load_scene(scene_path):
             for col, char in enumerate(line.strip(), start=1):
                 if char == ".":
                     scene[-1].append(False)
-                elif char == "X":
+                elif char == "x":
                     scene[-1].append(True)
                 else:
                     print ("Unrecognized character '%s' at line %d, column %d" %

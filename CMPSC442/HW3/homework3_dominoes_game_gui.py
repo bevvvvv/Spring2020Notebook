@@ -1,7 +1,7 @@
 import sys
 import tkinter as Tkinter
 
-import homework3  # change this to filename
+import jps6444 as homework3  # change this to filename
 
 class Square(Tkinter.Canvas):
 

@@ -226,5 +226,10 @@ class TestHWQuestions(unittest.TestCase):
         self.assertEqual(g.get_best_move(True, 1), ((0, 1), 2, 6))
         self.assertEqual(g.get_best_move(True, 2), ((0, 1), 3, 10))
 
+        g = hw.create_dominoes_game(3,3)
+        g.perform_move(0, 1, True)
+        self.assertEqual(g.get_best_move(False, 1), ((2, 0), -3, 2))
+        self.assertEqual(g.get_best_move(False, 2), ((2, 0), -2, 5))
+
 if __name__ == '__main__':
     unittest.main()

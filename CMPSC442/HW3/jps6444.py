@@ -534,11 +534,11 @@ class DominoesGame(object):
     def get_best_move(self, vertical, limit):
         # alpha beta search
         # return (action, value, num_leafs)
-        return self.max_value(self.copy(), -sys.maxsize, sys.maxsize, vertical, 0, True)
+        return self.max_value(self.copy(), -sys.maxsize, sys.maxsize, vertical, 0, limit, True)
 
-    def max_value(self, game, alpha, beta, max_player, num_leafs, first=False):
+    def max_value(self, game, alpha, beta, max_player, num_leafs, depth_limit, first=False):
         # are we done?
-        if game.game_over(max_player):
+        if game.game_over(max_player) or depth_limit == 0:
             num_leafs += 1
             return ((), game.get_score(max_player), num_leafs)
         # expand board
@@ -547,7 +547,7 @@ class DominoesGame(object):
         move_out = {}
         successors = game.successors(max_player)
         for move, new_game in successors:
-            (min_value, num_leafs) = self.min_value(new_game, alpha, beta, not max_player, num_leafs)
+            (min_value, num_leafs) = self.min_value(new_game, alpha, beta, not max_player, num_leafs, depth_limit - 1)
             value = max(value, min_value)
             if first: # keep track of move we want to make (in top function)
                 if value not in move_out.keys():
@@ -564,9 +564,9 @@ class DominoesGame(object):
         else:
             return ((), value, num_leafs)
 
-    def min_value(self, game, alpha, beta, min_player, num_leafs):
+    def min_value(self, game, alpha, beta, min_player, num_leafs, depth_limit):
         # are we done?
-        if game.game_over(min_player):
+        if game.game_over(min_player) or depth_limit == 0:
             num_leafs += 1
             return (game.get_score(not min_player), num_leafs)
         # expand board
@@ -574,10 +574,9 @@ class DominoesGame(object):
         result = ((), value, num_leafs) # (action, alpha, num_leafs)
         successors = game.successors(min_player)
         for move, new_game in successors:
-            (useless_move, max_value, num_leafs) = self.max_value(new_game, alpha, beta, not min_player, num_leafs)
+            (useless_move, max_value, num_leafs) = self.max_value(new_game, alpha, beta, not min_player, num_leafs, depth_limit - 1)
             value = min(value, max_value)
             if value <= alpha:
-                num_leafs += 1
                 return (value, num_leafs)
             beta = min(beta, value)
         return (value, num_leafs)
@@ -592,19 +591,19 @@ class DominoesGame(object):
 ############################################################
 
 feedback_question_1 = """
-Type your response here.
-Your response may span multiple lines.
-Do not include these instructions in your response.
+I spent approximately six hours on this assignment.
 """
 
 feedback_question_2 = """
-Type your response here.
-Your response may span multiple lines.
-Do not include these instructions in your response.
+I found the alpha-beta search task the most challenging.
+I had a hard time visualizing the algorithm in lecutre, and
+I had to rely heavily on the pseudocode from the book.
 """
 
 feedback_question_3 = """
-Type your response here.
-Your response may span multiple lines.
-Do not include these instructions in your response.
+I really liked bringing back up the distinct disks
+task and showing tasking us to come up the heuristic.
+This was a good way to show how A* search improves on
+some uninformed searches and it gave us the task of designing
+a heuristic for a problem we already made a search algorithm for.
 """
