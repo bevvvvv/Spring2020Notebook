@@ -260,6 +260,8 @@ knitr::include_graphics("./Photos/MatrixCalcDerivs.png")
 knitr::include_graphics("./Photos/MatrixCalcRules.png")
 ```
 
+# Inductive Bias
+
 # Universal Approximation
 
 ## Nearest Neighbors
