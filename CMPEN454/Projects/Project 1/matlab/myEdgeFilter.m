@@ -23,7 +23,8 @@ function [img1] = myEdgeFilter(img0, sigma)
     imgy = myImageFilter(smooth_img, sobel);
 
     % magnitude of gradient - sqrt(x^2 + y^2)
-    img1 = (imgx .^2 + imgy .^ 2) .^ 0.5;
+    img_max = (imgx .^2 + imgy .^ 2) .^ 0.5;
+    img1 = img_max;
 
     % NMS
     % vector angle -> atan(y/x) (range is -90 to 90)
@@ -35,23 +36,23 @@ function [img1] = myEdgeFilter(img0, sigma)
                 angle = angle * -1;
             end
             if angle < 22.5 % 0 degree mapping
-               if (col > 1 && img1(row, col-1) > img1(row, col)) || ...
-                   (col < size(img1,2) && img1(row, col+1) > img1(row, col))
+               if (col > 1 && img_max(row, col-1) > img_max(row, col)) || ...
+                   (col < size(img1,2) && img_max(row, col+1) > img_max(row, col))
                    img1(row,col) = 0;
                end
             elseif angle < 67.5 % 45 degree mapping
-               if (row > 1 && col < size(img1,2) && img1(row -1, col+1) > img1(row, col)) ||  ...
-                       (row < size(img1,1) && col > 1 && img1(row+1, col-1) > img1(row, col))
+               if (row > 1 && col < size(img1,2) && img_max(row -1, col+1) > img_max(row, col)) ||  ...
+                       (row < size(img1,1) && col > 1 && img_max(row+1, col-1) > img_max(row, col))
                    img1(row,col) = 0;
                end
             elseif angle < 112.5 % 90 degree mapping
-                if (row > 1 && img1(row-1, col) > img1(row, col)) || ...
-                        (row < size(img1,1) && img1(row+1, col) > img1(row, col))
+                if (row > 1 && img_max(row-1, col) > img_max(row, col)) || ...
+                        (row < size(img1,1) && img_max(row+1, col) > img_max(row, col))
                    img1(row,col) = 0;
                end
             else % 135 degree mapping
-                if (row < size(img1,1) && col > 1 && img1(row+1, col-1) > img1(row, col)) || ...
-                        (row > 1 && col < size(img1,2) && img1(row-1, col+1) > img1(row, col))
+                if (row < size(img1,1) && col > 1 && img_max(row+1, col-1) > img_max(row, col)) || ...
+                        (row > 1 && col < size(img1,2) && img_max(row-1, col+1) > img_max(row, col))
                    img1(row,col) = 0;
                end
             end
