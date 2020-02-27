@@ -35,12 +35,11 @@ function [H, rhoScale, thetaScale] = myHoughTransform(Im, threshold, rhoRes, the
     for i = 1:size(x,1)
         for j = 1:thetaPixels % go through each theta
             rho_val = rho(i,j);
-            if rho_val < 0
+            if rho_val <= 0
                 continue % don't count neg rho
             end
             rho_val = rho_val / rhoRes; % adjust for res
             rho_val = ceil(rho_val);
-            %rho_val = (2*rhoPixels) - floor(rho_val); % should be reverse
             H(rho_val, j) = H(rho_val, j) + 1; % cast your vote!
         end
     end

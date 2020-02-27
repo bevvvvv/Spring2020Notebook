@@ -133,6 +133,87 @@ df %>%
 ```
 
 
+# Implementation Images
 
+```{r, out.width = "200px", echo=FALSE}
+knitr::include_graphics("./reportimages/img01_01edge.png")
+```
 
+```{r, out.width = "200px", echo=FALSE}
+knitr::include_graphics("./reportimages/img01_02threshold.png")
+```
 
+```{r, out.width = "200px", echo=FALSE}
+knitr::include_graphics("./reportimages/img01_03hough.png")
+```
+
+```{r, out.width = "200px", echo=FALSE}
+knitr::include_graphics("./reportimages/img01_04lines.png")
+```
+
+# Experimentation
+
+Logically if we use a higher sigma on our Gaussian filter we will smooth out more noise. This combined with
+an increased "MinLength" parameter in hough lines puts a heavy emphasis on only displaying
+longer and more distinct edges. This can be seen below where the first image has a lower sigma
+and "MinLength" and the second has higher values.
+
+```{r, out.width = "200px", echo=FALSE}
+knitr::include_graphics("./reportimages/img05_04lines.png")
+```
+
+```{r, out.width = "200px", echo=FALSE}
+knitr::include_graphics("./reportimages/img05_sighigh.png")
+```
+
+Having a high threshold value made the biggest difference if you only desired very distinct
+line. This can be seen in the transition from the above images to the image below.
+The image below has the same Gaussian filter as the first box image, but a higher
+threshold.
+
+```{r, out.width = "200px", echo=FALSE}
+knitr::include_graphics("./reportimages/img05_thresh.png")
+```
+
+You can also see how shadows will show up in edge detection. The transition from a bright
+area of light to the dark shadow will appear as one of the top lines when there is a very
+distinct separation between the bright and dark regions. This can be seen in the following
+images.
+
+```{r, out.width = "200px", echo=FALSE}
+knitr::include_graphics("./reportimages/img03_04lines.png")
+```
+
+```{r, out.width = "200px", echo=FALSE}
+knitr::include_graphics("./reportimages/img06_04lines.png")
+```
+
+The step of the algorithm with the largest problem is definitely choosing the peaks
+to use to display your lines that are considered edges. Non-maximum suppression and
+thresholding are vital tools in obtaining a Hough transform accumulator with good peaks.
+
+The parameter that made a huge impact from image to image was actually the resolution
+of the Hough Transform accumulator. Since each image is a different resolution, the
+range for rho changed, and if the resolution was too low, then the voting for different
+lines got merged from multiple into a single point, but if the resolution was too
+fine then really distinct lines had their votes turn from a single point into multiple points.
+In this way a fine resolution sort of acts like a threshold in and of itself. You can
+see this below through differing resolutions.
+
+```{r, out.width = "200px", echo=FALSE}
+knitr::include_graphics("./reportimages/img03_lowres.png")
+```
+
+```{r, out.width = "200px", echo=FALSE}
+knitr::include_graphics("./reportimages/img03_fineres.png")
+```
+
+There was no set of parameters that was optimal for all the images. Each image is
+a different resolution with a different amount of noise and edges with differing
+degrees of magnitude. For example, the checkerboard and pot on book images have
+really extreme values on their edges, so the optimal set of parameters for these images
+cause a lot of hough lines in the floor, grass, and other noiser areas of the other images.
+The images with less defined lines required higher thresholding and more stringent
+criteria for the houghlines "MinLength" function.
+
+# My Images
