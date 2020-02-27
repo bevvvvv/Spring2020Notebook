@@ -38,7 +38,7 @@ for i = 1:numel(imglist)
     %imwrite(Im > threshold, fname);
     %fname = sprintf('%s/%s_03hough.png', resultsdir, imgname);
     %imwrite(H/max(H(:)), fname);
-    %fname = sprintf('%s/%s_04lines.png', resultsdir, imgname);
+    %fname = sprintf('%s/%s_04lines.png', resultsdir, imgname);s
     
     img2 = img;
     for j=1:numel(lines)
