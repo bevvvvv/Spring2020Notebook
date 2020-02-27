@@ -156,10 +156,32 @@ knitr::include_graphics("./reportimages/img01_04lines.png")
 Logically if we use a higher sigma on our Gaussian filter we will smooth out more noise. This combined with
 an increased "MinLength" parameter in hough lines puts a heavy emphasis on only displaying
 longer and more distinct edges. This can be seen below where the first image has a lower sigma
-and "MinLength" and the second has higher values.
+and "MinLength" and the second has higher values. Included are the intermediate images. These intermediate
+images really illustrate how smoothing removes "noise". The higher the smoothing, the more restrictive the edge
+magnitudes appear.
+
+```{r, out.width = "150px", echo=FALSE}
+knitr::include_graphics("./reportimages/5regparam_01edge.png")
+```
+```{r, out.width = "150px", echo=FALSE}
+knitr::include_graphics("./reportimages/5regparam_02threshold.png")
+```
+```{r, out.width = "150px", echo=FALSE}
+knitr::include_graphics("./reportimages/5regparam_03hough.png")
+```
 
 ```{r, out.width = "200px", echo=FALSE}
 knitr::include_graphics("./reportimages/img05_04lines.png")
+```
+
+```{r, out.width = "150px", echo=FALSE}
+knitr::include_graphics("./reportimages/5highgauss_01edge.png")
+```
+```{r, out.width = "150px", echo=FALSE}
+knitr::include_graphics("./reportimages/5highgauss_02threshold.png")
+```
+```{r, out.width = "150px", echo=FALSE}
+knitr::include_graphics("./reportimages/5highgauss_03hough.png")
 ```
 
 ```{r, out.width = "200px", echo=FALSE}
@@ -217,3 +239,105 @@ The images with less defined lines required higher thresholding and more stringe
 criteria for the houghlines "MinLength" function.
 
 # My Images
+
+The inefficiencies due to lack of vectorization in parts of my algorithm were highlighted when running the hough transform functions on my own images, since these images have a much higher resolution than the given images. In order to save computational time and only focus on large gradients, I also scaled the images I took down by 4 times. If you do not do this, you must heavily adjust the other parameters (especially number of lines) to get a result to display. Interestingly, the landscapes did much better with a larger smoothing effect and higher threshold, and the other two pictures did worse. This is likely due to landscapes having a lot of noise, but the main edges are still very different, whereas in the Allen street image the white paint is really outlined when high smoothing occurs.
+
+```{r, out.width = "300px", echo=FALSE}
+knitr::include_graphics("./ec/img1.jpg")
+```
+
+```{r, out.width = "300px", echo=FALSE}
+knitr::include_graphics("./ec/img1_01edge.png")
+```
+
+```{r, out.width = "300px", echo=FALSE}
+knitr::include_graphics("./ec/img1_02threshold.png")
+```
+
+```{r, out.width = "100px", echo=FALSE}
+knitr::include_graphics("./ec/img1_03hough.png")
+```
+
+```{r, out.width = "300px", echo=FALSE}
+knitr::include_graphics("./ec/img1_04lines.png")
+```
+
+```{r, out.width = "300px", echo=FALSE}
+knitr::include_graphics("./ec/img2.jpg")
+```
+
+```{r, out.width = "300px", echo=FALSE}
+knitr::include_graphics("./ec/img2_01edge.png")
+```
+
+```{r, out.width = "300px", echo=FALSE}
+knitr::include_graphics("./ec/img2_02threshold.png")
+```
+
+```{r, out.width = "100px", echo=FALSE}
+knitr::include_graphics("./ec/img2_03hough.png")
+```
+
+```{r, out.width = "300px", echo=FALSE}
+knitr::include_graphics("./ec/img2_04lines.png")
+```
+
+```{r, out.width = "300px", echo=FALSE}
+knitr::include_graphics("./ec/img3.jpg")
+```
+
+```{r, out.width = "300px", echo=FALSE}
+knitr::include_graphics("./ec/img3_01edge.png")
+```
+
+```{r, out.width = "300px", echo=FALSE}
+knitr::include_graphics("./ec/img3_02threshold.png")
+```
+
+```{r, out.width = "100px", echo=FALSE}
+knitr::include_graphics("./ec/img3_03hough.png")
+```
+
+```{r, out.width = "300px", echo=FALSE}
+knitr::include_graphics("./ec/img3_04lines.png")
+```
+
+```{r, out.width = "300px", echo=FALSE}
+knitr::include_graphics("./ec/img4.jpg")
+```
+
+```{r, out.width = "300px", echo=FALSE}
+knitr::include_graphics("./ec/img4_01edge.png")
+```
+
+```{r, out.width = "300px", echo=FALSE}
+knitr::include_graphics("./ec/img4_02threshold.png")
+```
+
+```{r, out.width = "100px", echo=FALSE}
+knitr::include_graphics("./ec/img4_03hough.png")
+```
+
+```{r, out.width = "300px", echo=FALSE}
+knitr::include_graphics("./ec/img4_04lines.png")
+```
+
+```{r, out.width = "300px", echo=FALSE}
+knitr::include_graphics("./ec/img5.jpg")
+```
+
+```{r, out.width = "300px", echo=FALSE}
+knitr::include_graphics("./ec/img5_01edge.png")
+```
+
+```{r, out.width = "300px", echo=FALSE}
+knitr::include_graphics("./ec/img5_02threshold.png")
+```
+
+```{r, out.width = "100px", echo=FALSE}
+knitr::include_graphics("./ec/img5_03hough.png")
+```
+
+```{r, out.width = "300px", echo=FALSE}
+knitr::include_graphics("./ec/img5_04lines.png")
+```
