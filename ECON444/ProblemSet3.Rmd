@@ -1,0 +1,205 @@
+---
+title: "ECON 444 Problem Set 2"
+subtitle: "Joseph Sepich Feb 14"
+output:
+  pdf_document:
+    toc: false
+    toc_depth: 2
+    number_sections: true
+    keep_tex: false
+---
+
+```{r include=FALSE}
+library(tidyverse)
+```
+
+# Problem 1
+
+The premise of this question is how a car dealer negotiates prices. The assumption is that high prices are listed on cars with the actual sale price being determined upon negotion at time of sale.
+
+Arbitrage ability
+Infer willingness to pay
+Firm must have market power to influence price
+
+## Part a
+
+The first factor we must consider is how the dealer would negotiate with a customer wearing fancy and expensive clothes. This directly affects a firm's (the dealer's) ability to infer a customers willingness to pay, which is one of the factors of price discrimination. If a customer is wearing fancy and expensive clothes, then the dealer could infer that the customer has a relatively higher level of income and therefore willing to pay more than someone wearing less expensive clothes. The dealer would ultimately try to sell a car at a higher price (not necessarilly the list price).
+
+## Part b
+
+The second factor we must consider is how the dealer would negotiate with a customer who is willing to negotiate for a very long time. This also directly affects the firm's (or dealer's) ability to infer a customers willingness to pay. If the dealer knows a customer is willing to spend a lengthy amount of time to negotiate a price, then they know the customer is willing to pay a higher transaction cost for a lower monetary price. This allows the dealer to infer that the customer is not willing to pay a high price, and would ultimately try to give this customer a lower price than the customer from part a.
+
+## Part c
+
+The third factor we must consider is how the dealer would negotiate with a customer with a price report from Consumer Reports. This affects the firm's price setting power and consumers willingness to pay. If the prices paid by the firm are transparent, then the markup prices are dictated more by what the consumer's are willing to pay than what the firm wants to sell at, since the consumer knows exactly what the pricing situation is. In this situation the final sale price will be definitely be less than the customer is part a, but could be either higher or lower than the customer in part b.
+
+# Problem 2
+
+What we know:
+
+* $P_u^0 = P_c^0= 15000$
+* $Q^0 = Q^1 = 1000000$
+* $P_u^1 = 16000$
+* $P_c^1 = 13000$
+* $C^0 = C^1$
+* $TR^0 < TR^1$
+
+Since costs and total quanitiy produced stayed the same, but revenue went up we can infer that profit for the firm (GM) increased in 2014. This implies that producer suprlus had to increase, since total quantity sold stayed constant. The total surplus and consumer surplus will decrease in this situation. We know this, because we know Canada must have a lower demand curve than the US. This means the cars that they purchase in this case will not give them as much CS, since the price is still close to their demand curve. In summary TS and CS will decrease while PS increases. This can been seen in the plot below where there is a a surplus area that is lost in 2014 pricing scheme.
+
+```{r echo=FALSE}
+Q <- seq(0, 2000000, 100)
+demand <- 50000 - 0.035 * Q
+demand_c <- 50000 - 0.037 * Q
+mc <- rep(7000, length(Q))
+data <- data.frame(Q = Q, p = demand, label = rep("Demand", length(Q)))
+data <- data %>%
+  rbind(data.frame(Q = Q, p = mc, label = rep("MC", length(Q))))
+data <- data %>%
+  rbind(data.frame(Q = Q, p = demand_c, label = rep("CA Demand Only", length(Q))))
+
+start_ps <- data.frame(Q = Q, mc = mc, demand = rep(15000, length(Q))) %>%
+  filter(0 <= Q & Q <= 1000000)
+start_cs <- data.frame(Q = Q, mc = demand, demand = rep(15000, length(Q))) %>%
+  filter(0 <= Q & Q <= 1000000)
+us_ps <- data.frame(Q = Q, mc = mc, demand = rep(16000, length(Q))) %>%
+  filter(0 <= Q & Q <= 971421)
+us_cs <- data.frame(Q = Q, mc = demand, demand = rep(16000, length(Q))) %>%
+  filter(0 <= Q & Q <= 971421)
+ca_ps <- data.frame(Q = Q, mc = mc, demand = rep(13000, length(Q))) %>%
+  filter(971421 <= Q & Q <= 1000000)
+ca_cs <- data.frame(Q = Q, mc = demand_c, demand = rep(13000, length(Q))) %>%
+  filter(971421 <= Q & Q <= 1000000)
+data %>%
+  ggplot() +
+  geom_ribbon(data=start_ps, aes(x = Q, ymin = mc, ymax = demand, fill = "PS Prior"), inherit.aes = FALSE) +
+  geom_ribbon(data=start_cs, aes(x = Q, ymin = demand, ymax = mc, fill = "CS Prior"), inherit.aes = FALSE) +
+  geom_ribbon(data=us_ps, aes(x = Q, ymin = mc, ymax = demand, fill = "US PS After"), inherit.aes = FALSE) +
+  geom_ribbon(data=us_cs, aes(x = Q, ymin = demand, ymax = mc, fill = "US CS After"), inherit.aes = FALSE) +
+  geom_ribbon(data=ca_ps, aes(x = Q, ymin = mc, ymax = demand, fill = "CA PS After"), inherit.aes = FALSE) +
+  geom_ribbon(data=ca_cs, aes(x = Q, ymin = demand, ymax = mc, fill = "CA CS After"), inherit.aes = FALSE) +
+  geom_line(aes(x = Q, y = p, color = label)) +
+  ylim(0, 20000) + xlim(900000, 1100000)
+```
+
+# Problem 3
+
+Problem Constraints
+
+* $MC = 50$
+* $N_u = N_c = 2000$
+* $D_u$: $q_u = 2000 - 1.5 * p$
+* $C_u$: $q_c = 2000 - 5 * p$
+
+## Part a
+
+Suppose the publisher must charge the same price to all schools. What will it charge? What are profits?
+
+To understand how pricing will operate under no price discrimination, we must first get an overall market demand function:
+
+\[Q = 4000 - 6.5 * p\]
+\[p = \frac1{6.5}(4000 - Q)\]
+
+Now let's compute optimal pricing by setting MR equal to MC.
+
+\[\text{MR} = \frac{d(p*Q)}{dQ} = \frac{d(\frac1{6.5}(4000Q - Q^2))}{dQ} = \frac1{6.5}(4000 - 2Q)\]
+\[\frac1{6.5}(4000 - 2Q) = 50\]
+\[325 = 4000 - 2Q\]
+\[2Q = 3675\]
+\[Q = 1837.5\]
+\[p = \frac1{6.5}(4000 - 1837.5) \approx 332.7\]
+
+\[\pi = (p - MC) * Q = (332.7 - 50) * 1837.5 = 519461.25\]
+
+If the publisher is charging one price, it will be **332.7** and profit will be **519461.25**
+
+```{r echo=FALSE}
+Q <- seq(0, 2000, 0.1)
+demand <- (1 / 6.5) * (4000 - Q)
+mc <- rep(50, length(Q))
+mr <- (1 / 6.5) * (4000 - 2 * Q)
+data <- data.frame(Q = Q, p = demand, label = rep("Demand", length(Q)))
+data <- data %>%
+  rbind(data.frame(Q = Q, p = mc, label = rep("MC", length(Q))))
+data <- data %>%
+  rbind(data.frame(Q = Q, p = mr, label = rep("MR", length(Q))))
+data %>%
+  ggplot(aes(x = Q, y = p, color = label)) +
+  geom_line() +
+  geom_vline(xintercept = 1837.5) +
+  geom_hline(yintercept = 332.7) + 
+  ylim(0, 500)
+```
+
+## Part b
+
+If the publisher can price discriminate between the two types of schools, what will be the two prices? How will profit differ?
+
+Assume MR is demand with twice the slope, since we have standard linear functions.
+
+\[p_u = \frac{1}{1.5}(2000 - q_u)\]
+\[p_c = \frac{1}{5.5}(2000 - q_c)\]
+
+\[MR_u = MC\]
+\[\frac{1}{1.5}(2000 - 2q_u) = 50\]
+\[2000 - 2q_u = 75\]
+\[2q_u = 1925\]
+\[q_u = 962.5\]
+\[p_u = \frac{1}{1.5}(2000 - 962.5) = 691.67\]
+\[\pi_u = (p_u - MC) * q_u = (691.67 - 50) * 962.5 = 617607.38\]
+
+\[MR_c = MC\]
+\[\frac{1}{5}(2000 - 2q_c) = 50\]
+\[2000 - 2q_c = 250\]
+\[2q_c = 1750\]
+\[q_c = 875\]
+\[p_c = \frac{1}{5}(2000 - 875) = 225\]
+\[\pi_c = (p_c - MC) * q_c = (225 - 50) * 875 = 153125\]
+
+In this new setup the firm will charge universities **691.67** and colleges **225**. This will result in a profit of $617607.38+153125 = 770732.38$. This is **251271.13** more than the profits in part a.
+
+```{r echo=FALSE}
+Q <- seq(0, 2000, 0.1)
+demand_u <- (1 / 1.5) * (2000 - Q)
+mc <- rep(50, length(Q))
+mr_u <- (1 / 1.5) * (2000 - 2 * Q)
+demand_c <- (1 / 5) * (2000 - Q)
+mr_c <- (1 / 5) * (2000 - 2 * Q)
+data <- data.frame(Q = Q, p = demand_u, label = rep("Demand Uni", length(Q)))
+data <- data %>%
+  rbind(data.frame(Q = Q, p = mc, label = rep("MC", length(Q))))
+data <- data %>%
+  rbind(data.frame(Q = Q, p = mr_u, label = rep("MR Uni", length(Q))))
+data <- data %>%
+  rbind(data.frame(Q = Q, p = demand_c, label = rep("Demand Col", length(Q))))
+data <- data %>%
+  rbind(data.frame(Q = Q, p = mr_c, label = rep("MR Col", length(Q))))
+data %>%
+  ggplot(aes(x = Q, y = p, color = label)) +
+  geom_line() +
+  geom_vline(xintercept = 962.5) +
+  geom_hline(yintercept = 691.67) +
+  geom_vline(xintercept = 875) +
+  geom_hline(yintercept = 225) + ylim(0, 700)
+```
+
+## Part c
+
+In this case it is less socially efficient to price disciminate. Since the quantity sold does not change we actually have the same situation that ocurred in question two where the producer surplus increases, but consumer surplus and total surplus will decrease. The same amount of subscriptions are sold.
+
+## Part d
+
+If universities and colleges could costlessly resell journals, then there is no reason why colleges, who have a lower price in part b, would **not** resell their journal subscriptions to universities, which would hurt producer surplus and profits. If this were the case, then the publishers would not price discriminate and would follow the pricing scheme in part a.
+
+# Problem 4
+
+## Part a
+
+## Part b
+
+## Part c
+
+# Problem 5
+
+
+
+
