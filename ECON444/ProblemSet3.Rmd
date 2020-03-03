@@ -192,14 +192,80 @@ If universities and colleges could costlessly resell journals, then there is no 
 
 # Problem 4
 
+Problem Constraints
+
+* $n^H = 200$ high income
+* $V^H = 200$ max amount of high income value
+* $n^L = 300$ low income
+* $V^L = 80$ max amount of low income value
+
 ## Part a
+
+The higher income group is willing to each pay at most $200 dollars, so there is a horizontal curve at 200 from 0 to 200 (number of high income). Since both low income and high income consumers are willing to pay 80 dollars, if priced at 80, then possibly 800 total consumers will purchase the product.
+
+```{r echo=FALSE}
+Q <- seq(0, 200, 0.1)
+demand <- rep(200, length(Q))
+data <- data.frame(Q = Q, p = demand, label = rep("Demand (H)", length(Q)))
+Q <- seq(400, 800, 0.1)
+demand <- rep(80, length(Q))
+data_low <- data.frame(Q = Q, p = demand, label = rep("Demand (L)", length(Q)))
+
+data %>%
+  ggplot(aes(x = Q, y = p, color = label)) +
+  geom_line() +
+  geom_line(data=data_low, aes(x = Q, y = p, color = label))
+```
 
 ## Part b
 
+If the monopoly is not able to price disciminate then they will charge **80 or 200**. Both prices would yield profits of **32,000**.
+
+\[\pi = 800 (80 - 40) = 32000 \]
+\[\pi = 200 * 160 = 32000\]
+
 ## Part c
+
+If the monopoly can price discriminate, then they will charge high income consumers **200** and low income consumers **80**. This will result in higher profits at **44,000** or 12,000 higher than without price discrimination.
+
+\[\pi = 200 * 160 + 300 * 40 = 44000\]
 
 # Problem 5
 
+Problem Constraints
+
+* Nonstudent demand $q_N = 4320 (p_N)^{-3}$
+* Student deamnd $q_S = 100000(p_S)^{-5}$
+* Cost function $p = 4Q;Q = q_S + q_N$
+* Price discrimination possible
+
+To find MR, let's first set each demand to be inverse demand.
+
+\[p_N^3 = 4320(q_N)^{-1}\]
+\[p_N = (4320(q_N)^{-1})^{\frac{1}{3}}\]
+\[p_S = (100000(q_N)^{-1})^{\frac{1}{5}}\]
+
+For each group let's set MR equal to MC to determine the price.
+
+\[\text{MR} = \frac{dTR}{dQ} = \frac{pq}{dq}\]
+\[MR_N = \frac{d(((4320(q_N)^{-1})^{\frac{1}{3}})q_N)}{dq_N} = \frac23(4320^{\frac{1}{3}})q_N^{\frac{-1}3}\]
+\[MR_S = \frac45(100000^{\frac{1}{5}})q_S^{\frac{-1}5}\]
+
+\[MR_N = MC\]
+\[\frac23(4320^{\frac{1}{3}})q_N^{\frac{-1}3} = q_S + q_N\]
+\[10.858q_N^{\frac{-1}3} = q_S + q_N\]
+\[MR_S = MC\]
+\[\frac45(100000^{\frac{1}{5}})q_S^{\frac{-1}5} = q_S + q_N\]
+\[8q_S^{\frac{-1}5} = q_S + q_N\]
+\[q_N = 8q_S^{\frac{-1}5} - q_S\]
+
+Let's solve the system.
+
+\[10.858(8q_S^{\frac{-1}5} - q_S)^{\frac{-1}3} = q_S + 8q_S^{\frac{-1}5} - q_S\]
+\[10.858(8q_S^{\frac{-1}5} - q_S)^{\frac{-1}3} = 8q_S^{\frac{-1}5}\]
+\[\frac{1}{8q_S^{\frac{-1}5}}(8q_S^{\frac{-1}5} - q_S)^{\frac{-1}3} = \frac{1}{10.858}\]
+\[\frac{1}{8q_S^{\frac{3}5}}(8q_S^{\frac{-1}5} - q_S) = (\frac{1}{10.858})^{-3}\]
+\[\frac{1}{8q_S} - q_S = (\frac{1}{10.858})^{-3}\]
 
 
 
