@@ -1,0 +1,38 @@
+---
+title: "CMLIT 191M Midterm 2 Study Guide"
+subtitle: "Josepeh Sepich Mar 17 2020"
+output:
+  pdf_document:
+    toc: true
+    toc_depth: 2
+    number_sections: false
+    keep_tex: false
+---
+
+# Metaculture
+
+# Middle 80s
+
+# Japan/Nintendo
+
+# Theory Concepts (Interaction, motivation, paratext, etc.)
+
+# System Dynamics History (Builder)
+
+# Molyneux
+
+# Early 90s
+
+# Fighting Games
+
+# Rise of FPS
+
+# McGongial (Reality is Broken)
+
+# "Addiction"
+
+# Will Wright
+
+# CD-ROM
+
+# Day 15 (Narratology)
