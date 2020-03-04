@@ -9,13 +9,29 @@ student_name = "Joseph Sepich"
 ############################################################
 
 # Include your imports here, if any are used.
+import email
 
 ############################################################
 # Section 1: Spam Filter
 ############################################################
 
 def load_tokens(email_path):
-    pass
+    """Loads all text tokens from email at file path
+    into a list.
+    
+    Arguments:
+        email_path {string} -- path to email file on disk
+    
+    Returns:
+        list[string] -- list of text tokens
+    """
+    # read message from file
+    message = email.message_from_file(email_path)
+    # create list of tokens
+    tokens = []
+    for line in email.iterators.body_line_iterator(message):
+        [tokens.append(token) for token in line.strip().split(' ')]
+    return tokens
 
 def log_probs(email_paths, smoothing):
     pass
