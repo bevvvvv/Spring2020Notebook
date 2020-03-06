@@ -11,13 +11,50 @@ output:
 
 # Metaculture
 
+Metaculture is a form of culture that responds to an already existing cultural artifact such as a game. Metacultural activity is just one of the many factors that determines a cultural artifacts meaning. This metacultural activity is parasitic or symbiotic with the existing culture.
+
 ## Aesthetic Metaculture
+
+There are two forms of culture that games generate:
+
+* Instrumental
+    + Walkthroughs
+    + Object/Location Databases
+    + Cheat Code Listings
+* Expressive
+    + Fan Fiction
+    + Machinima
+    + Poems
+    + Skins
+* Both
+    + Mods
+    + Patches
+    + Forums
+    
+Another example of metaculture comes from films and Eric's example of Europeans buying Chinese procelain. The procelain they bought were manufactured in response to their demand and were not authentic Chinese porcelain. Other art also have examples of metaculture such as review, cover music, fan films, etc.
 
 ## Gaming Metaculture
 
+Forms of gaming metaculture are listed above. In class Eric showed an example of machinima with "Red vs. Blue." This video series is essentially films made using the perspective found in the game Halo.
+
 ## Metacultures of Labor
 
+1. Play can resemble labor (like crafting/grind in MMORPG)
+2. Some literal labor takes place in game space (like gold farming, prositution)
+3. There are professional game players (e-sports, streamers)
+4. Results of play/labour are not usually copywrightable
+    + Usually you sign over any ownership rights in EULA in order to play game
+5. There is sometimes a real money market for in game currencies. This shows no economic barrier between games and reality.
+    + Everquest GDP per capita reached $4,200, which would be 72nd highest among countries
+
 ## Bigger Theory of Culture
+
+1. Sometimes culture is like a mirror
+    + Artifacts reflect structures of reality or our desires
+2. Sometimes culture is a seismograph (detects tectonic movement)
+    + Artifacts detect vibrations we cannot feel
+    + Three types of cultural activity: dominant, residual, and emerging (like present, past, and future)
+    + Culture can be thought of as an instrument to measure life
 
 # Middle 80s
 
@@ -37,9 +74,17 @@ Nintendo dominates the Japanese and US markets while Europe stayes focused on PC
 
 # Japan/Nintendo
 
-## Gaming Culture
+In Japan one aspect of gaming culture that arose was "Bishojo", which is roughly translated to pretty young girl. This was connected to Otaku culture. Japan has been one of the few countries to retain a national gaming culture.
+
+## Gaming Culture becomes Mainstream
+
+Nintendo makes a move to only allow access to its hardware through licenses. This enables them to make money from unsuccessful games and control controversial games from being released. Note that around this time Limbaugh ruled that games are not forms of expression, allowing places to ban certain games from being allowed in places like arcades.
+
+The first academic research began on games as well. In 1991 a paper was published called Video Kids. Just like most of the early research, it took a strongly negative position on the impact of video games in childhood development. Nevertheless the industry in 1991 was back to $4 billion a year from the low point of 100 million in 1986.
 
 ## International Anxiety
+
+As Japan's economy made its big boom while Nintendo became a gaming powerhouse, the US had similar worries about Japan as they do today about China. Recall that this international competition helps drive meaning from context surrounding cultural artifacts. An example shown in class was the movie Gung Ho!
 
 # Theory Concepts (Interaction, motivation, paratext, etc.)
 
