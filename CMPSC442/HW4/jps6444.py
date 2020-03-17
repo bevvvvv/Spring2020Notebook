@@ -97,10 +97,28 @@ class SpamFilter(object):
         return False
 
     def most_indicative_spam(self, n):
-        pass
+        indications = {}
+        for key in self.cond_spam.keys():
+            if key in self.cond_ham.keys():
+                indications[key] = self.cond_spam[key] - math.log(math.exp(self.cond_spam[key]) + math.exp(self.cond_ham[key]))
+        top = []
+        for key, value in sorted(indications.items(), key=lambda kv: kv[1], reverse=True):
+            top.append(key)
+            if len(top) == n:
+                return top
+        return top
 
     def most_indicative_ham(self, n):
-        pass
+        indications = {}
+        for key in self.cond_ham.keys():
+            if key in self.cond_spam.keys():
+                indications[key] = self.cond_ham[key] - math.log(math.exp(self.cond_spam[key]) + math.exp(self.cond_ham[key]))
+        top = []
+        for key, value in sorted(indications.items(), key=lambda kv: kv[1], reverse=True):
+            top.append(key)
+            if len(top) == n:
+                return top
+        return top
 
 ############################################################
 # Section 2: Feedback

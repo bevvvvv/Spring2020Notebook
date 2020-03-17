@@ -20,8 +20,8 @@ class TestHWQuestions(unittest.TestCase):
     def test_log_probs(self):
         paths = [self.ham_dir+"ham%d" % i for i in range(1, 11)]
         p = hw.log_probs(paths, 1e-5)
-        #self.assertEqual(p['the'], -3.6080194731874062)
-        #self.assertEqual(p['line'], -4.272995709320345)
+        self.assertEqual(p['the'], -3.6080194731874062)
+        self.assertEqual(p['line'], -4.272995709320345)
         paths = [self.spam_dir+"spam%d" % i for i in range(1, 11)]
         p = hw.log_probs(paths, 1e-5)
         self.assertEqual(p['Credit'], -5.837004641921745)
@@ -34,6 +34,14 @@ class TestHWQuestions(unittest.TestCase):
         sf = hw.SpamFilter(self.spam_dir, self.ham_dir, 1e-5)
         self.assertFalse(sf.is_spam(self.ham_dir + 'ham1'))
         self.assertFalse(sf.is_spam(self.ham_dir + 'ham2'))
+
+    def test_most_indicative_spam(self):
+        sf = hw.SpamFilter(self.spam_dir, self.ham_dir, 1e-5)
+        self.assertEqual(sf.most_indicative_spam(5), ['<a', '<input', '<html>', '<meta', '</head>'])
+
+    def test_most_indicative_spam(self):
+        sf = hw.SpamFilter(self.spam_dir, self.ham_dir, 1e-5)
+        self.assertEqual(sf.most_indicative_ham(5), ['Aug', 'ilug@linux.ie', 'install', 'spam.', 'Group:'])
 
 if __name__ == '__main__':
     unittest.main()
