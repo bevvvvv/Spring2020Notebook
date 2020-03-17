@@ -7,8 +7,8 @@ import HW4.jps6444 as hw
 
 class TestHWQuestions(unittest.TestCase):
     def setUp(self):
-        self.ham_dir = 'train/ham/'
-        self.spam_dir = 'train/spam/'
+        self.ham_dir = './CMPSC442/HW4/train/ham/'
+        self.spam_dir = './CMPSC442/HW4/train/spam/'
 
     def test_load_tokens(self):
         # given tests

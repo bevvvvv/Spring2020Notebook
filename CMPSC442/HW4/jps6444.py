@@ -25,12 +25,14 @@ def load_tokens(email_path):
     Returns:
         list[string] -- list of text tokens
     """
+    email_file = open(email_path, 'r')
     # read message from file
-    message = email.message_from_file(email_path)
+    message = email.message_from_file(email_file)
     # create list of tokens
     tokens = []
     for line in email.iterators.body_line_iterator(message):
-        [tokens.append(token) for token in line.strip().split(' ')]
+        [tokens.append(token) for token in line.strip().split(' ') if token is not '']
+    email_file.close()
     return tokens
 
 def log_probs(email_paths, smoothing):
