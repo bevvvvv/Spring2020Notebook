@@ -39,7 +39,8 @@ def load_tokens(email_path):
     return tokens
 
 def log_probs(email_paths, smoothing):
-    """[summary]
+    """Determines the log probability of a each word/token appearing
+    in the given set of emails.
     
     Arguments:
         email_paths {list[string]} -- list of paths to email files
@@ -125,19 +126,18 @@ class SpamFilter(object):
 ############################################################
 
 feedback_question_1 = """
-Type your response here.
-Your response may span multiple lines.
-Do not include these instructions in your response.
+I spent approximately 4 hours on this assignment.
 """
 
 feedback_question_2 = """
-Type your response here.
-Your response may span multiple lines.
-Do not include these instructions in your response.
+I found the log probability part the most challenging.
+At first I did not know the proper equation, because the image of the
+formula is not visible on the Canvas description. I also was able to only get half of the
+test cases working, not including my own.
 """
 
 feedback_question_3 = """
-Type your response here.
-Your response may span multiple lines.
-Do not include these instructions in your response.
+I really liked the last question. Although it gave us the formula
+to determine what was most indicative, it did not help us breakdown how to
+use the formula. I liked having to write out the math on paper to figure this out.
 """
