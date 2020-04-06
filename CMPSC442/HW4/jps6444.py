@@ -70,8 +70,8 @@ class SpamFilter(object):
     def __init__(self, spam_dir, ham_dir, smoothing):
         spam_files = os.listdir(spam_dir)
         ham_files = os.listdir(ham_dir)
-        spam_files = [spam_dir + f for f in spam_files]
-        ham_files = [ham_dir + f for f in ham_files]
+        spam_files = [spam_dir + '/' + f for f in spam_files]
+        ham_files = [ham_dir + '/' +  f for f in ham_files]
         self.cond_spam = log_probs(spam_files, smoothing)
         self.cond_ham = log_probs(ham_files, smoothing)
         self.p_spam = math.log(len(spam_files) / (len(spam_files) + len(ham_files)))
