@@ -11,6 +11,7 @@ student_name = "Joseph Sepich"
 # Include your imports here, if any are used.
 import string
 import re
+import collections
 
 
 ############################################################
@@ -29,8 +30,8 @@ def tokenize(text):
     Returns:
         list[string] -- list of tokens
     """
+    text = text.strip() + ' '
     text = re.sub(' +', ' ', text)
-    text = text.strip()
     tokens = []
     start = 0
     end = 0
@@ -72,13 +73,33 @@ def ngrams(n, tokens):
 class NgramModel(object):
 
     def __init__(self, n):
-        pass
+        self.order = n
+        self.contexts = collections.defaultdict(int)
+        self.seqs = collections.defaultdict(int)
 
     def update(self, sentence):
-        pass
+        """Updates counts of sequences.
+        
+        Arguments:
+            sentence {string} -- string to add to language model
+        """
+        new_grams = ngrams(self.order, tokenize(sentence))
+        for gram in new_grams:
+            self.contexts[gram[0]] += 1
+            self.seqs[gram] += 1
+
 
     def prob(self, context, token):
-        pass
+        """Calculates probability of token given context.
+        
+        Arguments:
+            context {tuple(string)} -- tuple of strings length n
+            token {string} -- word of interest
+        
+        Returns:
+            double -- probaility of token given context
+        """
+        return self.seqs[(context, token)] / self.contexts[context]
 
     def random_token(self, context):
         pass
