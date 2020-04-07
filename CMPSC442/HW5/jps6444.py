@@ -2,14 +2,15 @@
 # CMPSC 442: Homework 5
 ############################################################
 
-student_name = "Type your full name here."
+student_name = "Joseph Sepich"
 
 ############################################################
 # Imports
 ############################################################
 
 # Include your imports here, if any are used.
-
+import string
+import re
 
 
 ############################################################
@@ -17,7 +18,37 @@ student_name = "Type your full name here."
 ############################################################
 
 def tokenize(text):
-    pass
+    """Extracts token from input string.
+    A token is any contiguous sequence of non-whitespace
+    characters, with the exception that any punctuation mark
+    be considered its own token.
+    
+    Arguments:
+        text {string} -- string to tokenize
+    
+    Returns:
+        list[string] -- list of tokens
+    """
+    text = re.sub(' +', ' ', text)
+    text = text.strip()
+    tokens = []
+    start = 0
+    end = 0
+    while end < len(text):
+        if text[start] == ' ':
+            start += 1
+            end = start
+            continue
+        if text[end] == ' ' and abs(end - start) > 0: # end of non-white
+            tokens.append(text[start:end])
+            start = end + 1
+        elif text[end] in string.punctuation:
+            if abs(end - start) > 0:
+                tokens.append(text[start:end])
+            tokens.append(text[end:end + 1])
+            start = end + 1
+        end += 1
+    return tokens
 
 def ngrams(n, tokens):
     pass
