@@ -51,7 +51,23 @@ def tokenize(text):
     return tokens
 
 def ngrams(n, tokens):
-    pass
+    """Given a list of tokens, returns a list of n-grams.
+    
+    Arguments:
+        n {integer} -- size of token plus context
+        tokens {list[string]} -- list of tokens
+    
+    Returns:
+        list[tuple(tuple(), string)] -- list of tokens with context
+    """
+    # add padding
+    for i in range(n-1):
+        tokens.insert(0, '<START>')
+    tokens.append('<END>')
+    grams = []
+    for i in range(n-1,len(tokens)):
+        grams.append((tuple(tokens[i-n+1:i]), tokens[i]))
+    return grams
 
 class NgramModel(object):
 
