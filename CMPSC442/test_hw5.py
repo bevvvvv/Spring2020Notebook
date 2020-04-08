@@ -53,6 +53,18 @@ class TestHWQuestions(unittest.TestCase):
         result = [m.random_token(('b',)) for i in range(6)]
         self.assertEqual(result, ['c', '<END>', 'a', 'a', 'a', '<END>'])
 
+    def test_random_text(self):
+        m = hw.NgramModel(1)
+        m.update('a b c d')
+        m.update('a b a b')
+        random.seed(1)
+        self.assertEqual(m.random_text(13), '<END> c b a a a b b <END> <END> c a b')
+
+        m = hw.NgramModel(2)
+        m.update('a b c d')
+        m.update('a b a b')
+        random.seed(2)
+        self.assertEqual(m.random_text(15), 'a b <END> a b c d <END> a b a b a b c')
 
 if __name__ == '__main__':
     unittest.main()

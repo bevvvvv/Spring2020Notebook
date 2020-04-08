@@ -126,7 +126,29 @@ class NgramModel(object):
                 return prob[1]
 
     def random_text(self, token_count):
-        pass
+        """Creates random sentence from ngram model.
+        
+        Arguments:
+            token_count {int} -- number of tokens in sentence
+        
+        Returns:
+            string -- new sentence
+        """
+        start_context = ['<START>' for i in range(self.order - 1)]
+        context = start_context[:]
+        count = 0
+        output = ''
+        while count < token_count:
+            new_token = self.random_token(tuple(context))
+            output += new_token + ' '
+            count += 1
+            # update context
+            if new_token == '<END>' or self.order == 1:
+                context = start_context[:]
+            else:
+                context.pop(0)
+                context.append(new_token)
+        return output.strip()
 
     def perplexity(self, sentence):
         pass
