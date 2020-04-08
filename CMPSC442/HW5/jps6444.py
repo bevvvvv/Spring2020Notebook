@@ -12,6 +12,7 @@ student_name = "Joseph Sepich"
 import string
 import re
 import collections
+import random
 
 
 ############################################################
@@ -74,8 +75,9 @@ class NgramModel(object):
 
     def __init__(self, n):
         self.order = n
-        self.contexts = collections.defaultdict(int)
-        self.seqs = collections.defaultdict(int)
+        self.contexts = collections.defaultdict(int) # count of contexts
+        self.seqs = collections.defaultdict(int) # count of token and context
+        self.tokens = collections.defaultdict(list) # tokens associated with context
 
     def update(self, sentence):
         """Updates counts of sequences.
@@ -86,6 +88,8 @@ class NgramModel(object):
         new_grams = ngrams(self.order, tokenize(sentence))
         for gram in new_grams:
             self.contexts[gram[0]] += 1
+            if gram[1] not in self.tokens[gram[0]]: # track tokens of context
+                self.tokens[gram[0]].append(gram[1])
             self.seqs[gram] += 1
 
 
@@ -102,7 +106,24 @@ class NgramModel(object):
         return self.seqs[(context, token)] / self.contexts[context]
 
     def random_token(self, context):
-        pass
+        """Returns a random token associated with the given context.
+        
+        Arguments:
+            context {tuple(string)} -- sequence of tokens
+        
+        Returns:
+            string -- a token associated with the given context
+        """
+        r = random.random()
+        probs = [(self.prob(context, token), token) for token in self.tokens[context]]
+        probs.sort(key = lambda tup: tup[1]) # sort by token
+        prob_sum = 0
+        for prob in probs:
+            prob_sum += prob[0]
+            if prob_sum <= r:
+                continue
+            else:
+                return prob[1]
 
     def random_text(self, token_count):
         pass
