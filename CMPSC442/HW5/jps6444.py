@@ -13,6 +13,7 @@ import string
 import re
 import collections
 import random
+import math
 
 
 ############################################################
@@ -151,9 +152,34 @@ class NgramModel(object):
         return output.strip()
 
     def perplexity(self, sentence):
-        pass
+        """Calculates the perplexity of the given sentence according
+        to the NgramModel
+        
+        Arguments:
+            sentence {string} -- sentence of tokens
+        
+        Returns:
+            double -- perplexity value of sentence
+        """
+        grams = ngrams(self.order, tokenize(sentence))
+        inner = 0
+        exponent = 0
+        for gram in grams:
+            prob = self.prob(gram[0], gram[1])
+            inner += math.log(1 / prob)
+            exponent += 1 # count number of terms
+        return math.exp(inner) ** (1 / exponent)
 
 def create_ngram_model(n, path):
+    """Creates an ngram model from the text in the given file.
+    
+    Arguments:
+        n {int} -- order of the ngram model
+        path {string} -- path to text file
+    
+    Returns:
+        NgramModel -- NgramModel of given text data
+    """
     model = NgramModel(n)
     with open(path, 'r') as text:
         lines = text.readlines()
@@ -166,19 +192,18 @@ def create_ngram_model(n, path):
 ############################################################
 
 feedback_question_1 = """
-Type your response here.
-Your response may span multiple lines.
-Do not include these instructions in your response.
+I spent approximately ten hours on this assignment.
 """
 
 feedback_question_2 = """
-Type your response here.
-Your response may span multiple lines.
-Do not include these instructions in your response.
+I found the random token method the most challenging. At first I did not
+understand the formula, because I didn't realize that the probabilities
+had to sum to one. I also found perplexity difficult due to the high degree
+of precision.
 """
 
 feedback_question_3 = """
-Type your response here.
-Your response may span multiple lines.
-Do not include these instructions in your response.
+I liked how this assignment was broke down into appropriate sized functions
+for creating this first order Markov Model. It seems like this homework will
+be invaluable for creating the HMM in the next asssignment.
 """

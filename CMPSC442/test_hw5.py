@@ -78,5 +78,16 @@ class TestHWQuestions(unittest.TestCase):
         m = hw.create_ngram_model(4, path)
         self.assertEqual(m.random_text(15), 'Seek happiness in tranquillity and avoid ambition , even if it be all true ,')
 
+    def test_perplexity(self):
+        m = hw.NgramModel(1)
+        m.update('a b c d')
+        m.update('a b a b')
+        self.assertAlmostEqual(m.perplexity('a b'), 3.815714141844439, 5)
+
+        m = hw.NgramModel(2)
+        m.update('a b c d')
+        m.update('a b a b')
+        self.assertAlmostEqual(m.perplexity('a b'), 1.4422495703074083, 5)
+
 if __name__ == '__main__':
     unittest.main()
