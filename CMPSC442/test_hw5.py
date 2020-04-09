@@ -66,5 +66,17 @@ class TestHWQuestions(unittest.TestCase):
         random.seed(2)
         self.assertEqual(m.random_text(15), 'a b <END> a b c d <END> a b a b a b c')
 
+    def test_create_ngram_model(self):
+        path = './CMPSC442/HW5/frankenstein.txt'
+        m = hw.create_ngram_model(1, path)
+        random.seed(1)
+        self.assertEqual(m.random_text(15), '<END> the see after have few nor southern . , the excellent sea ! feel')
+        m = hw.create_ngram_model(2, path)
+        self.assertEqual(m.random_text(15), 'She followed the two and I look towards my ears . " <END> I hope')
+        m = hw.create_ngram_model(3, path)
+        self.assertEqual(m.random_text(15), 'Chapter 14 <END> I found , with pleasure and pain alone . <END> He showed')
+        m = hw.create_ngram_model(4, path)
+        self.assertEqual(m.random_text(15), 'Seek happiness in tranquillity and avoid ambition , even if it be all true ,')
+
 if __name__ == '__main__':
     unittest.main()

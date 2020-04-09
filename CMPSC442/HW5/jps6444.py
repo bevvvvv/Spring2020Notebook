@@ -154,7 +154,12 @@ class NgramModel(object):
         pass
 
 def create_ngram_model(n, path):
-    pass
+    model = NgramModel(n)
+    with open(path, 'r') as text:
+        lines = text.readlines()
+        for line in lines:
+            model.update(line)
+    return model
 
 ############################################################
 # Section 2: Feedback
