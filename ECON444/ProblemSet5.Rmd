@@ -43,6 +43,24 @@ Best Response for firm 2:
 
 ## Part b
 
+To find equilibrium we must solve our system of best response equations.
+
+\[4q_1 = 8 - 2 (\frac14(6 - 2q_1))\]
+\[16q_1 = 32 - 2(6 - q_1)\]
+\[16q_1 = 32 - 12 + 2q_1\]
+\[14q_1 = 20\]
+\[q_1^* = \frac{20}{14} = \frac{10}7\]
+
+We can plug this back in to solve for firm 2.
+
+\[q_2 = \frac14(6 - 2\frac{20}{14})\]
+\[56q_2 = 84 - 40\]
+\[56q_2 = 44\]
+\[q_2* = \frac{11}{14}\]
+
+\[Q^* = q_1^* + q_2^* = \frac{20 + 11}{14} = \frac{31}{14}\]
+\[P^* = 10 - 2Q^* = 10 - \frac{31}{7} = \frac{39}{7} \approx 5.57\]
+
 ## Part c
 
 ## Part d
