@@ -1,0 +1,83 @@
+---
+title: "ECON 444 Problem Set 5"
+subtitle: "Joseph Sepich April 19"
+output:
+  pdf_document:
+    toc: false
+    toc_depth: 2
+    number_sections: true
+    keep_tex: false
+---
+
+# Problem 1
+
+Problem Constrains:
+
+* Cournot Competition (quantity static)
+* Market Demand: $P = 10 - 2Q$
+* $\text{MC}_1 = 2$
+* $\text{MC}_2 = 4$
+* $Q = q_1 + q_2$
+
+## Part a
+
+To find best response behavior of each firm, we acknowledge that the firms wish to set MR equal to MC to optimize profits.
+
+\[MR = p*q\]
+\[MR_1 = \frac{d((10 - 2(q_1 + q_2)) * q_1)}{dq_1} = \frac{d(10q_1 - 2q_1^2-2q_1q_2)}{dq_1} = 10 - 4q_1 - 2q_2\]
+\[MR_2 = \frac{d((10 - 2(q_1 + q_2)) * q_2)}{dq_2} = \frac{d(10q_2 - 2q_2^2-2q_2q_1)}{dq_2} = 10 - 4q_2 - 2q_1\]
+
+Best Response for firm 1:
+
+\[MR_1 = MC_1\]
+\[10 - 4q_1 - 2q_2 = 2\]
+\[4q_1 = 10 - 2q_2 - 2\]
+\[q_1^* = \frac14(8 - 2q_2)\]
+
+Best Response for firm 2:
+
+\[MR_2 = MC_2\]
+\[10 - 4q_2 - 2q_1 = 4\]
+\[4q_2 = 10 - 2q_1 - 4\]
+\[q_2^* = \frac14(6 - 2q_1)\]
+
+## Part b
+
+## Part c
+
+## Part d
+
+## Part e
+
+## Part f
+
+# Problem 2
+
+# Problem 3
+
+## Part a
+
+## Part b
+
+# Problem 4
+
+## Part a
+
+## Part b
+
+## Part c
+
+# Problem 5
+
+## Part a
+
+## Part b
+
+
+
+
+
+
+
+
+
