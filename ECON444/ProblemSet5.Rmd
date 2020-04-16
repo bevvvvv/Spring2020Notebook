@@ -63,11 +63,45 @@ We can plug this back in to solve for firm 2.
 
 ## Part c
 
+\[\text{Markup:}\frac{p-c}{p}\]
+
+\[m_1 = \frac{p-MC_1}{p} = \frac{5.57 - 2}{5.57} \approx 0.64\]
+\[m_1 = \frac{p-MC_2}{p} = \frac{5.57 - 4}{5.57} \approx 0.28\]
+
+The markup in equilibrium for firm 1 is **0.64** and **0.28** for firm 2.
+
 ## Part d
+
+\[P = 10-2Q = 10-2(q_1 + q_2)\]
+
+Firm 1 residual demand according to best response:
+
+\[P = 10-2(q_1 + q_2*) = 10 - 2q_1 - 2(\frac{11}{14}) = 10 - \frac{11}{7} - 2q_1\]
+\[q_1 = \frac12(8.43 - P)\]
+
+Firm 2 residual demand according to best response:
+
+\[P = 10-2(q_2 + \frac{20}{14}) = 10 - \frac{20}{7}-2q_2\]
+\[q_2 = \frac12(7.14 - P)\]
+
+The slope of residual demand is **-2** for both firm 1 and 2. (Inverse market demand curve)
 
 ## Part e
 
+Recall the elasticity of demand.
+
+\[\epsilon = \frac{dQ}{dP}\frac{P}{Q}\]
+
+\[\epsilon = \frac{-P}{2Q} = \frac{-5.57}{2(q)}\]
+
+\[\epsilon_1 = \frac{-5.57}{2(1.43)} = -1.95\]
+\[\epsilon_2 = \frac{-5.57}{2(0.786)} = -3.54\]
+
+The residual demand elasticity for firm 1 is **-1.95** and **-3.54** for firm 2. The firm with the smaller market share has larger residual demand elasticity. If the firm supplying less decides to supply more, then there will be a greater effect on decrease in prices.
+
 ## Part f
+
+The markup does not equal the inverse of residual demand elasticity for either firm.
 
 # Problem 2
 
