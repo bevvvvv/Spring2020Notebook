@@ -140,23 +140,112 @@ data %>%
 
 # Problem 3
 
+Problem Constraints
+
+* 3 firm cournot competition
+* Market Demand: $P = 10 - 2Q$
+* $\text{MC}_1 = 3$
+* $\text{MC}_2 = 3$
+* $\text{MC}_3 = 2$
+* $Q = q_1 + q_2 + q_3$
+
 ## Part a
 
+To find best response curves we can use the knowledge that firms will set marginal revenue equal to marginal cost.
+
+\[MR = \frac{d(pq)}{dq}\]
+\[MR = \frac{d(10 - 2q_1 - 2q_2 - 2q_3)q}{dq}\]
+
+\[MR_1 = 10 - 4q_1 - 2q_2 - 2q_3\]
+\[MR_2 = 10 - 2q_1 - 4q_2 - 2q_3\]
+\[MR_3 = 10 - 2q_1 - 2q_2 - 4q_3\]
+
+We know that firms 1 and 2 will have the same behavior.
+
+\[10 - 4q_1 - 2q_2 - 2q_3 = 3\]
+\[4q_1 = 7 - 2q_2 - 2q_3\]
+
+Firm 2 will behave the same:
+
+\[4q_2 = 7 - 2q_1 - 2q_3\]
+
+Firm 3 will have a different constant due to marginal cost:
+
+\[10 - 4q_1 - 2q_2 - 2q_3 = 2\]
+\[4q_3 = 8 - 2q_2 - 2q_1\]
+
+These are the three best response curves (without dividing by four). We can reduce these three curves to two equations by recognizing that firms 1 and 2 have identical behavior $q_1 = q_2$.
+
+\[4q_1 = 7 - 2q_1 - 2q_3\]
+\[6q_1 = 7 - 2q_3\]
+
+This gives us our final two best response curves:
+
+\[BR_1(q_3) = BR_2(q_3) = \frac16(7-2q_3)\]
+\[BR_3(q_1 = q_2) = 2 - q_1\]
+
 ## Part b
+
+To find the Cournot NE we need to solve the system of equations. We know that firms 1 and 2 have identical behavior, so they will have the same output quantity $q_1 = q_2$.
+
+\[q_1 = \frac16(7-2q_3) = \frac16(7-2(2 - 2q_1)) = \frac16(3+4q_1)\]
+\[6q_1 = 3 + 4q_1\]
+\[2q_1 = 3\]
+\[q_1^* = q_2^* = 1.5\]
+\[q_3^* = 2 - 1.5 = 0.5\]
 
 # Problem 4
 
+Problem Constraints
+
+* Betrand competition (price static)
+* Demand: $Q = 5000 - 200P$
+* $\text{MC}_1 = 6$
+* $\text{MC}_2 = 10$
+
 ## Part a
 
+To find Bertrand Nash equilirbium we know that firm 1 has the cost advantage, so we should look at their monopoly price.
+
+\[P = \frac1{200}(5000 - Q)\]
+\[MR = 25 - 0.01Q\]
+
+\[25 - 0.01Q = 6\]
+\[q_1^m = 1900\]
+\[p_1^m = 25 - 0.005(1900) = 15.5\]
+
+Since the monopoly price for firm 1 is higher than cost for firm 2, the Bertrand Nash equilibrium outcome with have $p_1^* = 10 - \epsilon$ and $p_2^* = 10$. Each firm will cut prices until they are beating the other, but firm 2 will not go below their marginal cost of 10 per unit. This gives firm 1 the full quantity $q_1^* = Q^* = 5000 - 200(10) = 5000 - 2000 = 3000$ while leaving firm 2 with $q_2^* = 0$.
+
 ## Part b
+
+\[\pi_1^* = q_1^* (p_1^* - MC_1) = 3000 (10 - 6) = 3000(4) = 12000\]
+\[\pi_2^* = 0\]
 
 ## Part c
 
+This outcome is not efficient. There is lost sales between the competitive pricing of 6 and the actual pricing of $10 - \epsilon$ where the firm gains surplus, but overall surplus goes down.
+
 # Problem 5
+
+Problem Constraints
+
+* Cost to develop: 100 million
+* Free to copy
+* $\text{MC} = 0.01$
+* worth 10
 
 ## Part a
 
+If pharmaceuticals cannot be patented then the neither firm will want to develop. If one firm pays the 100 million to develop the drugs, then the other can gain this knowledge for free with no patenting. With both markets in a price war the price will drop to cost of just one cent. While the firm who reverse engineered the technology for free will earn a net zero profit, the firm that spent the money to develop has a negative profit of 100 million, due to the sunk cost of developing.
+
 ## Part b
+
+Potential profits:
+
+\[\pi = pq - cq - TFC = (p - c)q - TFC = (9.99)50000000 - 100000000 \approx 400 \text{million} \]
+
+With potential profits of 400 million dollars for developing a new drugs and owning the entire market, then the firms will want to develop new drugs. This is under the assumption that the patent implies a monopoly.
+
 
 
 
