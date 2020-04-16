@@ -9,6 +9,10 @@ output:
     keep_tex: false
 ---
 
+```{r include=FALSE}
+library(tidyverse)
+```
+
 # Problem 1
 
 Problem Constrains:
@@ -104,6 +108,35 @@ The residual demand elasticity for firm 1 is **-1.95** and **-3.54** for firm 2.
 The markup does not equal the inverse of residual demand elasticity for either firm.
 
 # Problem 2
+
+Using the equations from derivation we can create the sample demand curves:
+
+\[BR_1(q_2) = \frac{a - c_1 - bq_2}{2b} = q_1^m - \frac12q_2\]
+\[BR_2(q_1) = \frac{a - c_2 - bq_1}{2b} = q_2^m - \frac12q_1\]
+
+The $q_1$ intercept for firm 1's BR curve would be $q_1^m$ and for firm two would be $2q_2^m$. The $q_2$ intercept for each curve would be $2q_1^m$ and $q_2^m$ respectively. Firm 2 will never produce if their best response curve lies under the best response curve for firm 1. This means that the monopoly quantity amount of firm 1 must be more than double the equilibrium quntity of firm 2. An example can be seen below with a = 10, b = 1, c1 = 2, c2 = 8.
+
+```{r echo=FALSE}
+a <- 10
+b <- 1
+c1 <- 2
+c2 <- 8
+
+q1m <- (a - c1) / (2*b)
+q2m <- (a - c2) / (2*b)
+
+q1 <- seq(0, 5, 0.1)
+BR1 <- 2*q1m - 2*q1
+BR2 <- q2m - q1 / 2
+
+data <- data.frame(q1 = q1, br = BR1, label = rep("BR1", length(q1)))
+data <- data %>%
+  rbind(data.frame(q1 = q1, br = BR2, label = rep("BR2", length(q1))))
+
+data %>%
+  ggplot(aes(x = q1, y = br, color = label)) +
+  geom_line() + ylim(0,8)
+```
 
 # Problem 3
 
