@@ -23,11 +23,17 @@ test_df = pd.read_csv(test_data, sep=',',header=0)
 keys = test_df.key
 
 # split data
-X_train, X_valid, y_train, y_valid = train_test_split(train_df, train_cats, test_size=0.3, random_state=75)
+X_train, X_valid, y_train, y_valid = train_test_split(train_df, train_cats, test_size=0.2)
 
 # train model
-model = XGBClassifier()
+model = XGBClassifier(objective='multi:softprob',
+                        learning_rate = 0.01, # eta
+                        max_depth = 6, # max tree depth
+                        subsample = 0.8, #ratio of training data to use
+                        colsample_bytree = 0.5, # use less than all 93 features
+                        n_estimators = 300) # num of trees
 model.fit(X_train, y_train,
+            early_stopping_rounds = 5, # help prevent overfit
             eval_set = [(X_train, y_train), (X_valid, y_valid)],
             eval_metric = 'mlogloss')
 
@@ -43,3 +49,18 @@ pred_df = pred_df.rename(columns={0: 'group_01', 1: 'group_02', 2: 'group_03', 3
 
 # write prediction to file
 pred_df.to_csv(sub_path, index=False)
+
+# review
+from matplotlib import pyplot
+
+results = model.evals_result()
+epochs = len(results['validation_0']['mlogloss'])
+x_axis = range(0, epochs)
+# plot log loss
+fig, ax = pyplot.subplots()
+ax.plot(x_axis, results['validation_0']['mlogloss'], label='Train')
+ax.plot(x_axis, results['validation_1']['mlogloss'], label='Test')
+ax.legend()
+pyplot.ylabel('Log Loss')
+pyplot.title('XGBoost Log Loss')
+pyplot.show()
