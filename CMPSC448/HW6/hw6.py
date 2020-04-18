@@ -32,6 +32,7 @@ model = XGBClassifier(objective='multi:softprob',
                         subsample = 0.8, #ratio of training data to use
                         colsample_bytree = 0.3, # use less than all 93 features
                         gamma = 5, # tree metric -> larger is stricter
+                        reg_lambda = 1.5,
                         n_estimators = 300) # num of trees
 
 """ hyper param tuning
@@ -43,7 +44,6 @@ parameters = {"learning_rate": [0.1, 0.01],
                "subsample": [0.2, 0.4, 0.5, 0.6, 0.7],
                "reg_alpha": [0, 0.5, 1],
                "reg_lambda": [1, 1.5, 2, 3, 4.5],
-               "min_child_weight": [1, 3, 5, 7],
                "n_estimators": [100, 250, 500]}
 
 # Create RandomizedSearchCV Object
@@ -57,11 +57,9 @@ print("Learning Rate: ", model_xgboost.best_estimator_.get_params()["learning_ra
 print("Gamma: ", model_xgboost.best_estimator_.get_params()["gamma"])
 print("Max Depth: ", model_xgboost.best_estimator_.get_params()["max_depth"])
 print("Subsample: ", model_xgboost.best_estimator_.get_params()["subsample"])
-print("Max Features at Split: ", model_xgboost.best_estimator_.get_params()["colsample_bytree"])
+print("Column Count: ", model_xgboost.best_estimator_.get_params()["colsample_bytree"])
 print("Alpha: ", model_xgboost.best_estimator_.get_params()["reg_alpha"])
 print("Lamda: ", model_xgboost.best_estimator_.get_params()["reg_lambda"])
-print("Minimum Sum of the Instance Weight Hessian to Make a Child: ",
-      model_xgboost.best_estimator_.get_params()["min_child_weight"])
 print("Number of Trees: ", model_xgboost.best_estimator_.get_params()["n_estimators"])
 """
 
