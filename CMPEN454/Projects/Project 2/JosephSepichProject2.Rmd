@@ -1,0 +1,25 @@
+---
+title: "CMPEN 454 Project 2"
+subtitle: "Joseph Sepich April 19"
+output:
+  pdf_document:
+    toc: false
+    toc_depth: 2
+    number_sections: true
+    keep_tex: false
+---
+
+# Exploring Data
+
+## Camera Calibration
+
+* What are the internal parameters?
+* Which are the external parameters?
+* Which internal parameters combine to form Kmat?
+* Which external parameters combine to form Pmat?
+* What is location of the camera?
+* Verify that location and Rmat combine to form Pmat.
+
+
+
+
