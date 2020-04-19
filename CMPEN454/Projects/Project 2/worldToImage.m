@@ -20,6 +20,5 @@ for i = 1:size(imageCoords, 2)
 end
 % remove "z"
 imageCoords(3,:) = [];
-imageCoords = floor(imageCoords);
 end
 

@@ -42,3 +42,10 @@ image(vid2Frame)
 imageCoords = worldToImage([x; y; z], vue2);
 hold on;
 scatter(imageCoords(1,:), imageCoords(2,:), 5, 'red');
+
+%% Test triangulate
+imageCoords1 = worldToImage([x; y; z], vue2);
+imageCoords2 = worldToImage([x; y; z], vue4);
+worldCoords = triangulate(imageCoords1, imageCoords2,  vue2, vue4);
+disp('Reconstruction error');
+disp(averageL2([x; y; z], worldCoords));
