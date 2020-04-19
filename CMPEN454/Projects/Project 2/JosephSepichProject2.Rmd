@@ -14,12 +14,36 @@ output:
 ## Camera Calibration
 
 * What are the internal parameters?
+    + foclen
+    + prinpoint
+    + Kmat
 * Which are the external parameters?
+    + orientation
+    + position
+    + Pmat
+    + Rmat
 * Which internal parameters combine to form Kmat?
+    + foclen
+    + prinpoint
 * Which external parameters combine to form Pmat?
+    + position
+    + Rmat
 * What is location of the camera?
+    + position
 * Verify that location and Rmat combine to form Pmat.
 
+Structure:
+
+* foclen: focal length, intrinsic
+* orientation: direction camera principal axis is facing, extrinsic
+* position: location of camera in world coordinates, extrinsic
+* prinpoint: origin shift from principal axis (px, py in K) , intrinsic
+* radial: dunno
+* aspectratio: dunno
+* skew: dunno
+* Pmat: extrinsinc transform (world to camera coords) -> combination of position and Rmat
+* Rmat: rotation matrix
+* Kmat: composed of focal length and principal points (origin shift) -> intrinsic transform (camera to image plane)
 
 
 
