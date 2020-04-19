@@ -18,8 +18,27 @@ y = mocapJoints(mocapFnum,:,2);
 % Y coordinates
 z = mocapJoints(mocapFnum,:,3);
 % Z coordinates
-conf = mocapJoints(mocapFnum,:,4);
+%conf = mocapJoints(mocapFnum,:,4);
 %confidence values -> ignore frames without all 1 confidence
 
 %% Camera Param Example
-vue2
+% vue2
+
+%% Load mp4/check projection translation
+
+%initialization of VideoReader for the vue video.
+%YOU ONLY NEED TO DO THIS ONCE AT THE BEGINNING
+filenamevue2mp4 = 'Subject4-Session3-24form-Full-Take4-Vue2.mp4';
+vue2video = VideoReader(filenamevue2mp4);
+
+%now we can read in the video for any mocap frame mocapFnum.
+%the (50/100) factor is here to account for the difference in frame
+%rates between video (50 fps) and mocap (100 fps).
+vue2video.CurrentTime = (mocapFnum-1)*(50/100)/vue2video.FrameRate;
+vid2Frame = readFrame(vue2video);
+image(vid2Frame)
+
+%% Test worldToImage
+imageCoords = worldToImage([x; y; z], vue2);
+hold on;
+scatter(imageCoords(1,:), imageCoords(2,:), 5, 'red');
