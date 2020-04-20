@@ -9,6 +9,7 @@ load('vue2CalibInfo.mat');
 % load vue4 structure
 load('vue4CalibInfo.mat');
 % dims: frame X joint X coords
+mp4Path = ['Subject4-Session3-24form-Full-Take4-Vue2.mp4'; 'Subject4-Session3-24form-Full-Take4-Vue4.mp4'];
 
 %% Point Extraction Example
 mocapFnum = 1000; %mocap frame number 1000
@@ -28,7 +29,7 @@ z = mocapJoints(mocapFnum,:,3);
 
 %initialization of VideoReader for the vue video.
 %YOU ONLY NEED TO DO THIS ONCE AT THE BEGINNING
-filenamevue2mp4 = 'Subject4-Session3-24form-Full-Take4-Vue2.mp4';
+filenamevue2mp4 = mp4Path(1,:);
 vue2video = VideoReader(filenamevue2mp4);
 
 %now we can read in the video for any mocap frame mocapFnum.
@@ -42,6 +43,7 @@ image(vid2Frame)
 imageCoords = worldToImage([x; y; z], vue2);
 hold on;
 scatter(imageCoords(1,:), imageCoords(2,:), 5, 'red');
+hold off;
 
 %% Test triangulate
 imageCoords1 = worldToImage([x; y; z], vue2);
@@ -49,3 +51,6 @@ imageCoords2 = worldToImage([x; y; z], vue4);
 worldCoords = triangulate(imageCoords1, imageCoords2,  vue2, vue4);
 disp('Reconstruction error');
 disp(averageL2([x; y; z], worldCoords));
+
+%% Epipolar Geometry
+    frameEpipolarViz(imageCoords1, imageCoords2, mocapFnum, vue2, vue4, mp4Path(1,:), mp4Path(2,:));

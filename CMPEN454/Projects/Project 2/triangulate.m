@@ -6,10 +6,11 @@ function [worldCoords] = triangulate(imageCoords1,imageCoords2, cam1, cam2)
 %   cam2 - camera 2 calibration struct
 camInfo1 = cam1;
 camInfo2 = cam2;
-if nargin == 2
+if nargin == 3
     camInfo1 = load('vue2CalibInfo.mat');
-elseif nargin == 3
+elseif nargin == 2
     camInfo2 = load('vue4CalibInfo.mat');
+    camInfo1 = load('vue2CalibInfo.mat');
 end
 P = camInfo1.Kmat * camInfo1.Pmat;
 P_prime = camInfo2.Kmat * camInfo2.Pmat;
