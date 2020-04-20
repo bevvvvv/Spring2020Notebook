@@ -50,7 +50,82 @@ imageCoords1 = worldToImage([x; y; z], vue2);
 imageCoords2 = worldToImage([x; y; z], vue4);
 worldCoords = triangulate(imageCoords1, imageCoords2,  vue2, vue4);
 disp('Reconstruction error');
-disp(averageL2([x; y; z], worldCoords));
+disp(mean(L2([x; y; z], worldCoords)));
 
 %% Epipolar Geometry
-    frameEpipolarViz(imageCoords1, imageCoords2, mocapFnum, vue2, vue4, mp4Path(1,:), mp4Path(2,:));
+frameEpipolarViz(imageCoords1, imageCoords2, mocapFnum, vue2, vue4, mp4Path(1,:), mp4Path(2,:));
+
+    
+%% Quantitative Eval
+
+% Calculate L2 error for each pair
+% load data for all frames with confidence of 1
+x = zeros(1,size(mocapJoints,2));
+y = zeros(1,size(mocapJoints,2));
+z = zeros(1,size(mocapJoints,2));
+totalError = zeros(1);
+for frame = 1:size(mocapJoints,1)
+    if sum(mocapJoints(mocapFnum,:,4)) == 12
+        x(frame,:) = mocapJoints(mocapFnum,:,1);
+        y(frame,:) = mocapJoints(mocapFnum,:,2);
+        z(frame,:) = mocapJoints(mocapFnum,:,3);
+    end
+    worldCoords = [x(frame); y(frame); z(frame)];
+    imageCoords1 = worldToImage(worldCoords, vue2);
+    imageCoords2 = worldToImage(worldCoords, vue4);
+    recovered = triangulate(imageCoords1, imageCoords2, vue2, vue4);
+    totalError(frame) = sum(L2(recovered, worldCoords));
+end
+
+% each joint stats
+for i = 1:size(mocapJoints,2)
+    worldCoords = [x(:,i)'; y(:,i)'; z(:,i)'];
+    imageCoords1 = worldToImage(worldCoords, vue2);
+    imageCoords2 = worldToImage(worldCoords, vue4);
+    recovered = triangulate(imageCoords1, imageCoords2, vue2, vue4);
+    values = L2(recovered, worldCoords);
+    fprintf('Joint: %d\n',i);
+    fprintf('Mean: %d\n',mean(values));
+    fprintf('Stdev: %d\n',std(values));
+    fprintf('Minimum: %d\n',min(values));
+    fprintf('Median: %d\n',median(values));
+    fprintf('Maximum: %d\n\n',max(values));
+end
+
+% all joint stats
+worldCoords = [reshape(x(:,:),1,[]); reshape(y(:,:),1,[]); reshape(z(:,:),1,[])];
+imageCoords1 = worldToImage(worldCoords, vue2);
+imageCoords2 = worldToImage(worldCoords, vue4);
+recovered = triangulate(imageCoords1, imageCoords2, vue2, vue4);
+values = L2(recovered, worldCoords);
+disp('Entire dataset L2 error stats');
+fprintf('Mean: %d\n',mean(values));
+fprintf('Stdev: %d\n',std(values));
+fprintf('Minimum: %d\n',min(values));
+fprintf('Median: %d\n',median(values));
+fprintf('Maximum: %d\n\n',max(values));
+
+figure(3)
+plot(1:1:size(mocapJoints,1), totalError);
+
+%% Qualitative Eval
+% one input 3D skeleton
+figure(4)
+mocapFnum = 1000; %mocap frame number 1000
+x = mocapJoints(mocapFnum,:,1);
+y = mocapJoints(mocapFnum,:,2);
+z = mocapJoints(mocapFnum,:,3);
+skel = [x; y; z];
+skel = constructSkeleton(skel);
+plot3(skel(1,:), skel(2,:), skel(3,:));
+
+% min error, max error indicies 2D plots
+
+% one output 3D skeleton
+worldCoords = [x; y; z];
+imageCoords1 = worldToImage(worldCoords, vue2);
+imageCoords2 = worldToImage(worldCoords, vue4);
+recovered = triangulate(imageCoords1, imageCoords2, vue2, vue4);
+skel = constructSkeleton(recovered);
+figure(5)
+plot3(skel(1,:), skel(2,:), skel(3,:));
