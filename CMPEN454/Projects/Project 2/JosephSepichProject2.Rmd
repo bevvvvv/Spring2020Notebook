@@ -9,7 +9,10 @@ output:
     keep_tex: false
 ---
 
-# Exploring Data
+# Project Summary
+
+
+# Matlab Implementation
 
 ## Camera Calibration
 
@@ -44,6 +47,14 @@ Structure:
 * Pmat: extrinsinc transform (world to camera coords) -> combination of position and Rmat
 * Rmat: rotation matrix
 * Kmat: composed of focal length and principal points (origin shift) -> intrinsic transform (camera to image plane)
+
+# Evaluation
+
+## Quantitative
+
+## Qualitative
+
+## Efficiency
 
 
 
