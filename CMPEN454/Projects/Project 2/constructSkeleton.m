@@ -5,9 +5,14 @@ function skel = constructSkeleton(coordinates)
 skel = coordinates;
 x = skel(1,:);
 y = skel(2,:);
-z = skel(3,:);
-skel(:,13) = [mean([x(1),x(4)]);mean([y(1),y(4)]);mean([z(1),z(4)])];
-skel(:,14) = [mean([x(7),x(10)]);mean([y(7),y(10)]);mean([z(7),z(10)])];
+if size(skel,1) == 3
+    z = skel(3,:);
+    skel(:,13) = [mean([x(1),x(4)]);mean([y(1),y(4)]);mean([z(1),z(4)])];
+    skel(:,14) = [mean([x(7),x(10)]);mean([y(7),y(10)]);mean([z(7),z(10)])];
+else
+    skel(:,13) = [mean([x(1),x(4)]);mean([y(1),y(4)])];
+    skel(:,14) = [mean([x(7),x(10)]);mean([y(7),y(10)])];
+end
 temp = skel;
 skel(:,1) = temp(:,3);
 skel(:,3) = temp(:,1);

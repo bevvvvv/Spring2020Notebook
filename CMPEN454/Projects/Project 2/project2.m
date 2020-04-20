@@ -1,15 +1,15 @@
-%% Clear and load
-% clear existing variables
-clear
+function project2(mocapJointPath, cam1Path, cam2Path, cam1mp4, cam2mp4)
+
+%% Load
 
 % load mocapJoints data
-load('Subject4-Session3-Take4_mocapJoints.mat');
+load(mocapJointPath);
 % load vue2 structure
-load('vue2CalibInfo.mat');
+load(cam1Path);
 % load vue4 structure
-load('vue4CalibInfo.mat');
+load(cam2Path);
 % dims: frame X joint X coords
-mp4Path = ['Subject4-Session3-24form-Full-Take4-Vue2.mp4'; 'Subject4-Session3-24form-Full-Take4-Vue4.mp4'];
+mp4Path = [cam1mp4; cam2mp4];
 
 %% Point Extraction Example
 mocapFnum = 1000; %mocap frame number 1000
@@ -64,17 +64,21 @@ x = zeros(1,size(mocapJoints,2));
 y = zeros(1,size(mocapJoints,2));
 z = zeros(1,size(mocapJoints,2));
 totalError = zeros(1);
+errFrames = zeros(1);
+ind = 1;
 for frame = 1:size(mocapJoints,1)
-    if sum(mocapJoints(mocapFnum,:,4)) == 12
-        x(frame,:) = mocapJoints(mocapFnum,:,1);
-        y(frame,:) = mocapJoints(mocapFnum,:,2);
-        z(frame,:) = mocapJoints(mocapFnum,:,3);
+    if sum(mocapJoints(frame,:,4)) == 12
+        x(ind,:) = mocapJoints(frame,:,1);
+        y(ind,:) = mocapJoints(frame,:,2);
+        z(ind,:) = mocapJoints(frame,:,3);
+        worldCoords = [x(ind,:); y(ind,:); z(ind,:)];
+        imageCoords1 = worldToImage(worldCoords, vue2);
+        imageCoords2 = worldToImage(worldCoords, vue4);
+        recovered = triangulate(imageCoords1, imageCoords2, vue2, vue4);
+        totalError(ind) = sum(L2(recovered, worldCoords));
+        errFrames(ind) = frame;
+        ind = ind + 1;
     end
-    worldCoords = [x(frame); y(frame); z(frame)];
-    imageCoords1 = worldToImage(worldCoords, vue2);
-    imageCoords2 = worldToImage(worldCoords, vue4);
-    recovered = triangulate(imageCoords1, imageCoords2, vue2, vue4);
-    totalError(frame) = sum(L2(recovered, worldCoords));
 end
 
 % each joint stats
@@ -106,26 +110,66 @@ fprintf('Median: %d\n',median(values));
 fprintf('Maximum: %d\n\n',max(values));
 
 figure(3)
-plot(1:1:size(mocapJoints,1), totalError);
+plot(1:size(totalError,2), totalError);
 
 %% Qualitative Eval
-% one input 3D skeleton
+% min error, max error indicies 2D plots
+[val, frameNumMin] = min(totalError); % min error frame
+vidFrameMin = errFrames(frameNumMin);
+[val, frameNumMax] = max(totalError); % max error frame
+vidFrameMax = errFrames(frameNumMax);
+
+% min error
+h = figure(4);
+vue2video.CurrentTime = (vidFrameMin-1)*(50/100)/vue2video.FrameRate;
+vid2FrameMin = readFrame(vue2video);
+image(vid2FrameMin)
+
+x_s = x(frameNumMin,:);
+y_s = y(frameNumMin,:);
+z_s = z(frameNumMin,:);
+skelMin = [x_s; y_s; z_s];
+imageCoords = worldToImage(skelMin, vue2);
+skelMin = constructSkeleton(imageCoords);
+hold on;
+plot(skelMin(1,:), skelMin(2,:));
+hold off;
+
+waitfor(h);
 figure(4)
+% max error
+vue2video.CurrentTime = (vidFrameMax-1)*(50/100)/vue2video.FrameRate;
+vid2FrameMax = readFrame(vue2video);
+image(vid2FrameMax)
+
+x_s = x(frameNumMax,:);
+y_s = y(frameNumMax,:);
+z_s = z(frameNumMax,:);
+skelMax = [x_s; y_s; z_s];
+imageCoords = worldToImage(skelMax, vue2);
+skelMax = constructSkeleton(imageCoords);
+hold on;
+plot(skelMax(1,:), skelMax(2,:));
+hold off;
+
+% one input 3D skeleton
+figure(7)
 mocapFnum = 1000; %mocap frame number 1000
-x = mocapJoints(mocapFnum,:,1);
-y = mocapJoints(mocapFnum,:,2);
-z = mocapJoints(mocapFnum,:,3);
-skel = [x; y; z];
+x_s = mocapJoints(mocapFnum,:,1);
+y_s = mocapJoints(mocapFnum,:,2);
+z_s = mocapJoints(mocapFnum,:,3);
+skel = [x_s; y_s; z_s];
 skel = constructSkeleton(skel);
 plot3(skel(1,:), skel(2,:), skel(3,:));
 
-% min error, max error indicies 2D plots
-
 % one output 3D skeleton
-worldCoords = [x; y; z];
+worldCoords = [x_s; y_s; z_s];
 imageCoords1 = worldToImage(worldCoords, vue2);
 imageCoords2 = worldToImage(worldCoords, vue4);
 recovered = triangulate(imageCoords1, imageCoords2, vue2, vue4);
 skel = constructSkeleton(recovered);
-figure(5)
+hold on;
+figure(8);
 plot3(skel(1,:), skel(2,:), skel(3,:));
+
+end
