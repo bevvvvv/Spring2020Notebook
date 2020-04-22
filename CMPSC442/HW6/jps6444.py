@@ -2,7 +2,7 @@
 # CMPSC 442: Homework 6
 ############################################################
 
-student_name = "Type your full name here."
+student_name = "Joseph Sepich"
 
 ############################################################
 # Imports
@@ -17,7 +17,37 @@ student_name = "Type your full name here."
 ############################################################
 
 def load_corpus(path):
-    pass
+    """Loads corpus at the given path. Must have token=POS format.
+    
+    Arguments:
+        path {string} -- path to corpus text file
+    
+    Returns:
+        list(tuple(string, string)) -- list of corpus sentences
+    """
+    # init output list
+    sentences = [] 
+
+    # read file
+    f = open(path, 'r')
+    corpus_sentences = f.read().splitlines()
+    # parse each line as a sentence
+    for sentence in corpus_sentences:
+        # init single sentence list
+        parsed_sentence = []
+        # pairs seperated by white space
+        corpus_pairs = sentence.split(' ')
+        for corpus_pair in corpus_pairs:
+            # convert token=POS to tuple
+            pair = corpus_pair.split('=')
+            # add pair to output
+            parsed_sentence.append(tuple(pair))
+        # add sentence to output
+        sentences.append(parsed_sentence)
+
+    # close file an return list
+    f.close()
+    return sentences
 
 class Tagger(object):
 
