@@ -15,6 +15,12 @@ class TestHWQuestions(unittest.TestCase):
         self.assertEqual(c[1402], [('It', 'PRON'), ('made', 'VERB'), ('him', 'PRON'), ('human', 'NOUN'), ('.', '.')])
         self.assertEqual(c[1799], [('The', 'DET'), ('prospects', 'NOUN'), ('look', 'VERB'), ('great', 'ADJ'), ('.', '.')])
 
+    def test_most_probable_tags(self):
+        c = hw.load_corpus(self.corpus)
+        t = hw.Tagger(c)
+        self.assertEqual(t.most_probable_tags(["The", "man", "walks", "."]), ['DET', 'NOUN', 'VERB', '.'])
+        self.assertEqual(t.most_probable_tags(["The", "blue", "bird", "sings"]), ['DET', 'ADJ', 'NOUN', 'VERB'])
+
 
 if __name__ == '__main__':
     unittest.main()
