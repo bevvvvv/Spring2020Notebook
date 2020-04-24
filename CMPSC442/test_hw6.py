@@ -21,6 +21,15 @@ class TestHWQuestions(unittest.TestCase):
         self.assertEqual(t.most_probable_tags(["The", "man", "walks", "."]), ['DET', 'NOUN', 'VERB', '.'])
         self.assertEqual(t.most_probable_tags(["The", "blue", "bird", "sings"]), ['DET', 'ADJ', 'NOUN', 'VERB'])
 
+    def test_viterbi_tags(self):
+        c = hw.load_corpus(self.corpus)
+        t = hw.Tagger(c)
+        s = "I am waiting to reply".split()
+        self.assertEqual(t.most_probable_tags(s), ['PRON', 'VERB', 'VERB', 'PRT', 'NOUN'])
+        self.assertEqual(t.viterbi_tags(s), ['PRON', 'VERB', 'VERB', 'PRT', 'VERB'])
+        s = "I saw the play".split()
+        self.assertEqual(t.most_probable_tags(s), ['PRON', 'VERB', 'DET', 'VERB'])
+        self.assertEqual(t.viterbi_tags(s), ['PRON', 'VERB', 'DET', 'NOUN'])
 
 if __name__ == '__main__':
     unittest.main()
