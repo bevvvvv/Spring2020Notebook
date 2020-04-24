@@ -69,15 +69,39 @@ def question2Part3():
     return result, pathverdict
 
 def question3Part1(a,b,c,d, bn):
-  pass
+    p_a = bn.a(a)
+    p_b = bn.b(b)
+    p_c = bn.c(c, a, b)
+    p_d = bn.d(d, c)
+
+    return p_a * p_b * p_c * p_d
+
 def question3Part2(a,b,c, bn):
-  pass
+    p_a = bn.a(a)
+    p_b = bn.b(b)
+    p_c = bn.c(c, a, b)
+
+    return p_a * p_b * p_c
+
 def question3Part3(d, bn):
-  pass
+    a_vals = [i for i in range(2)]
+    b_vals = [i for i in range(2)]
+    c_vals = [i for i in range(2)]
+
+    return sum([question3Part1(a, b, c, d, bn) for a in a_vals for b in b_vals for c in c_vals])
+
 def question3Part4(a,b,c, bn):
-  pass
+    numerator = question3Part2(a, b, c, bn)
+    denonm = sum([question3Part2(i, j, c, bn) for i in range(2) for j in range(2)]) # p(c)
+
+    return numerator / denonm
+
 def question3Part4(c, d, bn):
-  pass
+    numerator = bn.d(d, c) * sum([question3Part2(i, j, c, bn) for i in range(2) for j in range(2)])
+    denom = question3Part3(d, bn)
+
+    return numerator / denom
+
 def question4Part1(b,c,d, bn):
   pass
 def question4Part2(c, d, bn):

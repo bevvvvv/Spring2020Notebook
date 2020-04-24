@@ -12,47 +12,53 @@ import HW7.hw7 as hw7
 ################# REQUIRED DATA STRUCTURE ####################################
 ##############################################################################
 
-class BayesNet1 :
-    def __init__ ( self , seed , k =10) :
-        prng = np . random . RandomState ( seed )
-        prob_a = frac ( prng . randint (1 , 2** k ) , 2** k ) # P ( a =1)
-        prob_b = {(1 ,) : frac ( prng . randint (1 , 2** k ) , 2** k ) , # P ( b =1 | a =1)
-                (0 ,) : frac ( prng . randint (1 , 2** k ) , 2** k ) # P ( b =1 | a =0)
+class BayesNet3: # Problem 3 hw bayes net
+    def __init__ (self, seed, k =10) :
+        prng = np.random.RandomState(seed)
+        prob_a = frac(prng.randint(1, 2**k), 2**k) # P ( a =1)
+        prob_b = frac(prng.randint(1, 2**k), 2**k) # P ( b =1)
+        prob_c = {(0, 0): frac(prng.randint(1, 2**k), 2**k), # P ( c =1 | a =0, b =0)
+                (0, 1): frac(prng.randint(1, 2**k ), 2**k), # P ( c =1 | a =0, b=1)
+                (1, 0): frac(prng.randint(1, 2**k ), 2**k), # P ( c =1 | a =0, b=1)
+                (1, 1): frac(prng.randint(1, 2**k ), 2**k) # P ( c =1 | a =0, b=1)
                 }
-        prob_c = {(1 ,) : frac ( prng . randint (1 , 2** k ) , 2** k ) , # P ( c =1 | a =1)
-                (0 ,) : frac ( prng . randint (1 , 2** k ) , 2** k ) # P ( c =1 | a =0)
+        prob_d = {(0,): frac(prng.randint(1, 2**k), 2**k), # P ( d =1 | c =0)
+                (1,): frac(prng.randint(1, 2**k ), 2**k), # P ( d =1 | c =1)
                 }
-        prob_d = {(0 , 0) : frac ( prng . randint (1 , 2** k ) , 2** k ) , # P ( d =1 | b =0 ,
-                (0 , 1) : frac ( prng . randint (1 , 2** k ) , 2** k ) , # P ( d =1 | b =0 ,
-                (1 , 0) : frac ( prng . randint (1 , 2** k ) , 2** k ) , # P ( d =1 | b =1 ,
-                (1 , 1) : frac ( prng . randint (1 , 2** k ) , 2** k ) , # P ( d =1 | b =1 ,
+        prob_e = {(0,): frac(prng.randint(1, 2**k), 2**k), # P ( e =1 | c =0)
+                (1,): frac(prng.randint(1, 2**k ), 2**k), # P ( e =1 | c =1)
                 }
-        def a ( value ) : # returns P ( a = value )
-            if value == 1:
-                return prob_a
-            else :
-                return 1 - prob_a
 
-        def b ( value , a ) : # returns P ( b = value | a )
-            tmp = prob_b [( a ,) ]
-            if value == 1:
-                return tmp
-            else :
-                return 1 - tmp
+    def a(self, value): # returns P(a=value)
+        if value == 1:
+            return self.prob_a
+        else:
+            return 1 - self.prob_a
+    
+    def b(self, value): # returns P(b=value)
+        if value == 1:
+            return self.prob_b
 
-        def c ( value , a ) : # returns P ( c = value | a )
-            tmp = prob_c [( a ,) ]
-            if value == 1:
-                return tmp
-            else :
-                return 1 - tmp
+    def c(self, value, a, b): # returns P(c=value | a,b)
+        tmp = self.prob_c[(a,b)]
+        if value == 1:
+            return tmp
+        else:
+            return 1 - tmp
 
-        def d ( value , b , c ) : # returns P ( d = value | b , c )
-            tmp = prob_d [( b , c ) ]
-            if value == 1:
-                return tmp
-            else:
-                return 1 - tmp
+    def d(self, value, c): # returns P(d=value | c)
+        tmp = self.prob_d[(c,)]
+        if value == 1:
+            return tmp
+        else:
+            return 1 - tmp
+    
+    def e(self, value, c): # returns P(e=value | c)
+        tmp = self.prob_e[(c,)]
+        if value == 1:
+            return tmp
+        else:
+            return 1 - tmp
 
 
 ##############################################################################
