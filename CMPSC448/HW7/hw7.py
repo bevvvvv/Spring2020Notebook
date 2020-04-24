@@ -103,8 +103,16 @@ def question3Part4(c, d, bn):
     return numerator / denom
 
 def question4Part1(b,c,d, bn):
-  pass
+    p_d = bn.d(d, b, c)
+
+    return sum([bn.a(a) * bn.b(b, a) * bn.c(c, a) * p_d for a in range(2)])
+
 def question4Part2(c, d, bn):
-  pass
+    return sum([bn.d(d, b, c) * bn.b(b, a) for b in range(2) for a in range(2)])
+
 def question4Part3(d, e, bn):
-  pass
+    p_ed = bn.e(e, d)
+    numerator = p_ed * sum([bn.d(b, c) * bn.b(b, a) * bn.c(c, a) * bn.a(a) for a in range(2) for b in range(2) for c in range(2)])
+    denom = sum([bn.e(e, d) * bn.d(b, c) * bn.b(b, a) * bn.c(c, a) * bn.a(a) for a in range(2) for b in range(2) for c in range(2)])
+
+    return numerator / denom
