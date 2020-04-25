@@ -22,7 +22,8 @@ def question1Part2():
     pathverdict = [
         (('a', 'b', 'd', 'c', 'g'), False), # none
         (('a', 'b', 'e', 'f', 'g'), True), # HT blockage
-        (('a', 'e', 'f', 'g'), True) # HT blockage
+        (('a', 'e', 'f', 'g'), True), # HT blockage
+        (('a', 'e', 'd', 'c', 'g'), True) # HT blockage
     ]
     result = False
     return result, pathverdict
@@ -31,7 +32,8 @@ def question1Part3():
     pathverdict = [
         (('a', 'b', 'd', 'c', 'g'), False), # none
         (('a', 'b', 'e', 'f', 'g'), True), # HT blockage
-        (('a', 'e', 'f', 'g'), True) # HT blockage
+        (('a', 'e', 'f', 'g'), True), # HT blockage
+        (('a', 'e', 'd', 'c', 'g'), False) # none
     ]
     result = False
     return result, pathverdict
@@ -40,9 +42,10 @@ def question1Part4():
     pathverdict = [
         (('a', 'b', 'd', 'c', 'g'), True), # HT blockage
         (('a', 'b', 'e', 'f', 'g'), True), # HT blockage
-        (('a', 'e', 'f', 'g'), False) # none
+        (('a', 'e', 'f', 'g'), True), # HH blockage
+        (('a', 'e', 'd', 'c', 'g'), True) # HH blcokage
     ]
-    result = False
+    result = True
     return result, pathverdict
 
 def question2Part1():
@@ -56,7 +59,7 @@ def question2Part1():
 def question2Part2():
     pathverdict = [
         (('a', 'b', 'c', 'd'), False), # none
-        (('a', 'b', 'e', 'f', 'g', 'd'), True) # TT blockage
+        (('a', 'b', 'e', 'f', 'g', 'd'), False) # none
     ]
     result = False
     return result, pathverdict
@@ -109,11 +112,11 @@ def question4Part1(b,c,d, bn):
     return sum([bn.a(value=a) * bn.b(value=b, a=a) * bn.c(value=c, a=a) * p_d for a in range(2)])
 
 def question4Part2(c, d, bn):
-    return sum([bn.d(value=d, b=b, c=c) * bn.b(value=b, a=a) for b in range(2) for a in range(2)])
+    return sum([bn.d(value=d, b=b, c=c) for b in range(2) for a in range(2)])
 
 def question4Part3(d, e, bn):
     p_ed = bn.e(value=e, d=d)
     numerator = p_ed * sum([bn.d(value=d, b=b, c=c) * bn.b(value=b, a=a) * bn.c(value=c, a=a) * bn.a(value=a) for a in range(2) for b in range(2) for c in range(2)])
-    denom = sum([bn.e(value=e, d=d) * bn.d(value=d, b=b, c=c) * bn.b(value=b, a=a) * bn.c(value=c, a=a) * bn.a(value=a) for a in range(2) for b in range(2) for c in range(2)])
+    denom = sum([bn.e(value=e, d=d) * bn.d(value=d_val, b=b, c=c) * bn.b(value=b, a=a) * bn.c(value=c, a=a) * bn.a(value=a) for a in range(2) for b in range(2) for c in range(2) for d_val in range(2)])
 
     return numerator / denom
